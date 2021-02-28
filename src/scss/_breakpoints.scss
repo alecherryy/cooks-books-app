@@ -1,0 +1,28 @@
+// @file
+// Breakpoints
+$screen-mobile: rem(320px);
+$screen-mobile-lg: rem(480px);
+$screen-tablet: rem(640px);
+$screen-tablet-lg: rem(880px);
+$screen-desktop: rem(1024px);
+$screen-desktop-lg: rem(1200px);
+$screen-widescreen: rem(1400px);
+
+
+// Min-width breakpoints
+@mixin bp-mobile { @media (min-width: #{$screen-mobile}) {@content;} } // Tiny devices
+@mixin bp-mobile-lg { @media (min-width: #{$screen-mobile-lg}) {@content;} } // Small devices
+@mixin bp-tablet { @media (min-width: #{$screen-tablet}) {@content;} } // Medium devices
+@mixin bp-tablet-lg { @media (min-width: #{$screen-tablet-lg}) {@content;} } // Large devices
+@mixin bp-desktop { @media (min-width: #{$screen-desktop}) {@content;} } // Extra large devices
+@mixin bp-desktop-lg { @media (min-width: #{$screen-desktop-lg}) {@content;} } // Extra extra large devices
+@mixin bp-widescreen { @media (min-width: #{$screen-widescreen}) {@content;} } // Extra extra large devices
+
+// Min-width breakpoints
+@mixin bp-max-mobile { @media (max-width: #{$screen-mobile}) {@content;} } // Tiny devices
+@mixin bp-max-mobile-lg { @media (max-width: #{$screen-mobile-lg}) {@content;} } // Small devices
+@mixin bp-max-tablet { @media (max-width: #{$screen-tablet}) {@content;} } // Medium devices
+@mixin bp-max-tablet-lg { @media (max-width: #{$screen-tablet-lg}) {@content;} } // Large devices
+@mixin bp-max-desktop { @media (max-width: #{$screen-desktop}) {@content;} } // Extra large devices
+@mixin bp-max-desktop-lg { @media (max-width: #{$screen-desktop-lg}) {@content;} } // Extra extra large devices
+@mixin bp-max-widescreen { @media (max-width: #{$screen-widescreen}) {@content;} } // Extra extra large devices
