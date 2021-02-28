@@ -56,3 +56,16 @@
   $url: $image-location + $image-name + '.svg';
   background-image: url($url);
 }
+
+// Hide text, while keeping it accessible
+// can be used with svg-background mixin to create
+// icon links
+@mixin image-replace($width, $height) {
+  color: transparent;
+  display: inline-block;
+  font: 0/0 a;
+  height: $height;
+  position: relative;
+  text-shadow: none;
+  width: $width;
+}
