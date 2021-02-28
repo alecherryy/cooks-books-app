@@ -7,15 +7,15 @@
   @include button-clear;
 
   background-color: $black;
+  border-radius: 50px;
   color: $white;
   display: inline-block;
   font-size: $font-size-sm;
-  font-weight: 700;
   line-height: $line-height-loose;
+  min-width: rem(100px);
   padding: $spacing-1 $spacing-4;
   text-align: center;
   text-decoration: none;
-  text-transform: capitalize;
 
   &:visited {
     color: $white;
@@ -23,7 +23,7 @@
 
   &:hover,
   &:focus {
-    background-color: $gray-4;
+    background-color: $orange;
   }
 
   &:active {
@@ -33,20 +33,119 @@
   @include bp-tablet {
     font-size: $font-size-md;
   }
+
+  &--red,
+  &--blue,
+  &--purple {
+    @extend %arrow-button;
+  }
 }
 
-// Secondary button
-.button--secondary {
-  background-color: $gray-3;
-  color: $black;
+// Red button
+.button--red {
+  &::before {
+    background-color: $orange;
+  }
+}
+
+// Blue button
+.button--blue {
+  &::before {
+    background-color: $blue;
+  }
+}
+
+// Purple button
+.button--purple {
+  &::before {
+    background-color: $purple;
+  }
+}
+
+// Arrow button common styles
+$height: 178px;
+$width: 118px;
+
+%arrow-button {
+  background-color: transparent;
+  display: inline-flex;
+  flex-direction: column;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  height: $height;
+  justify-content: center;
+  letter-spacing: 1px;
+  padding: 0 $spacing-3;
+  position: relative;
+  text-align: left;
+  width: $width;
+
+  &::before,
+  &::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  }
+
+  &::before {
+    border-radius: 100%;
+    display: block;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  &::after {
+    @include image-replace(44px, 32px);
+    @include svg-background(icon-arrow-right);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px 21px;
+    bottom: $spacing-4;
+    left: $spacing-3;
+    position: absolute;
+  }
 
   &:hover,
   &:focus {
-    background-color: $black;
-    color: $white;
+    background-color: transparent;
+
+    &::before {
+      transform: scale(1.05);
+    }
+
+    &::after {
+      animation: 1s escape-right cubic-bezier(0.25, 0.75, 0.5, 1.25) 0.2s forwards;
+    }
   }
 
   &:active {
-    color: $black;
+    color: $white;
+  }
+}
+
+// arrow animation
+@keyframes escape-right {
+  25% {
+    transform: translateX(40px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  60% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
