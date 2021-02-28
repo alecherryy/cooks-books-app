@@ -1,0 +1,52 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Button
+
+.button {
+  @include button-clear;
+
+  background-color: $black;
+  color: $white;
+  display: inline-block;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  line-height: $line-height-loose;
+  padding: $spacing-1 $spacing-4;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  &:visited {
+    color: $white;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $gray-4;
+  }
+
+  &:active {
+    color: $white;
+  }
+
+  @include bp-tablet {
+    font-size: $font-size-md;
+  }
+}
+
+// Secondary button
+.button--secondary {
+  background-color: $gray-3;
+  color: $black;
+
+  &:hover,
+  &:focus {
+    background-color: $black;
+    color: $white;
+  }
+
+  &:active {
+    color: $black;
+  }
+}
