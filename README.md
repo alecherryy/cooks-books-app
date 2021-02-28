@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 1. __Owner__: [@alecherryy](https://github.com/alecherryy)
-2. __Contributors__: [@looper-m](https://github.com/Looper-m)
+2. __Contributors__: [@looper-m](https://github.com/looper-m), [@rileyhgrant](https://github.com/rileyhgrant)
 
 The repo contains development work for the CooksBooks web-based application. This product is implemented using a combination of languages and development tools such as: React, Node.js, public APIs, MongoDB, Storybook and Jest.
 
