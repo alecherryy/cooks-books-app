@@ -1,0 +1,25 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Constrain
+
+.constrain {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: rem(1200px);
+  padding: 0 1rem;
+
+  @include bp-tablet {
+    padding: 0 2rem;
+  }
+}
+
+// wide constrain
+.constrain--wide {
+  max-width: rem(1580px);
+}
+
+// small constrain
+.constrain--narrow {
+  max-width: rem(600px);
+}
