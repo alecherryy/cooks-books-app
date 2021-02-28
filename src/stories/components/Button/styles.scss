@@ -33,38 +33,10 @@
   @include bp-tablet {
     font-size: $font-size-md;
   }
-
-  &--red,
-  &--blue,
-  &--purple {
-    @extend %arrow-button;
-  }
-}
-
-// Red button
-.button--red {
-  &::before {
-    background-color: $orange;
-  }
-}
-
-// Blue button
-.button--blue {
-  &::before {
-    background-color: $blue;
-  }
-}
-
-// Purple button
-.button--purple {
-  &::before {
-    background-color: $purple;
-  }
 }
 
 // Arrow button common styles
-$height: 178px;
-$width: 118px;
+$size: 178px;
 
 %arrow-button {
   background-color: transparent;
@@ -72,13 +44,13 @@ $width: 118px;
   flex-direction: column;
   font-size: $font-size-sm;
   font-weight: 700;
-  height: $height;
+  height: $size;
   justify-content: center;
   letter-spacing: 1px;
   padding: 0 $spacing-3;
   position: relative;
   text-align: left;
-  width: $width;
+  width: $size;
 
   &::before,
   &::after {
@@ -124,6 +96,33 @@ $width: 118px;
 
   &:active {
     color: $white;
+  }
+}
+
+// Red button
+.button--red {
+  @extend %arrow-button;
+
+  &::before {
+    background-color: $orange;
+  }
+}
+
+// Blue button
+.button--blue {
+  @extend %arrow-button;
+
+  &::before {
+    background-color: $blue;
+  }
+}
+
+// Purple button
+.button--purple {
+  @extend %arrow-button;
+
+  &::before {
+    background-color: $purple;
   }
 }
 

@@ -1,0 +1,23 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Sidebar
+$sidebar-width: rem(300px);
+
+.sidebar {
+  @include bp-tablet-lg {
+    display: grid;
+    grid-template-columns: $sidebar-width auto;
+    gap: calc(#{$spacing-5} / 2);
+  }
+
+  @include bp-desktop {
+    gap: $spacing-5;
+  }
+}
+
+.sidebar--reverse {
+  @include bp-tablet-lg {
+    grid-template-columns: auto $sidebar-width;
+  }
+}
