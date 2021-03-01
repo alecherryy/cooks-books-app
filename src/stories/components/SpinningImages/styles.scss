@@ -1,0 +1,47 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Spinning Images
+
+.spinning-images {
+  animation: rotation 7s infinite cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  transform-origin: bottom center;
+  position: absolute;
+
+  @include bp-desktop {
+    height: rem(400px);
+    width: rem(600px);
+  }
+}
+
+.spinninng-images__image {
+  left: 0;
+  position: absolute;
+
+  &:first-child {
+    bottom: 0;
+  }
+
+  &:last-child {
+    top: 100%;
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes rotation {
+  25% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-180deg);
+  }
+
+  75% {
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    transform: rotate(-359deg);
+  }
+}
