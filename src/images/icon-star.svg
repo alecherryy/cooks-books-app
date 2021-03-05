@@ -1,11 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Shape</title>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Card-Hover" transform="translate(-237.000000, -18.000000)" fill="#030303" fill-rule="nonzero">
-            <g id="Card-Favorites-Hover">
-                <path d="M265,28.6694737 L254.934,27.7557895 L251,18 L247.066,27.7705263 L237,28.6694737 L244.644,35.64 L242.348,46 L251,40.5031579 L259.652,46 L257.37,35.64 L265,28.6694737 Z M251,37.7473684 L245.736,41.0926316 L247.136,34.7852632 L242.488,30.5410526 L248.62,29.9810526 L251,24.0421053 L253.394,29.9957895 L259.526,30.5557895 L254.878,34.8 L256.278,41.1073684 L251,37.7473684 Z" id="Shape"></path>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 0 30 30" width="30"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#030303" /></svg>

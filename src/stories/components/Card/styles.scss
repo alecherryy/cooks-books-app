@@ -37,9 +37,12 @@
 
 .card__favorite {
   @include button-clear();
-  @include image-replace(28px, 27px);
-  @include svg-background(icon-star);
+  @include image-replace(30px, 30px);
+  @include svg-background(icon-star-empty);
 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px;
   right: $spacing-2;
   top: $spacing-2;
   transition: transform 0.1s ease-in;
