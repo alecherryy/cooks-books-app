@@ -16,7 +16,7 @@ const Template = (args) => <Card {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   isFavorite: false,
-  image: 'https://picsum.photos/200/405',
+  image: 'https://picsum.photos/400/600',
   url: '#',
   title: 'This is a recipe title',
   description: 'Lorem ipsum dolor sit amet, errem postulant' +
