@@ -1,8 +1,6 @@
 import './styles.scss';
 import Artwork1 from '../../../images/artwork-1.svg';
 import Artwork2 from '../../../images/artwork-2.svg';
-// import Artwork3 from '../../../images/artwork-3.svg';
-// import Artwork4 from '../../../images/artwork-4.svg';
 import React from 'react';
 
 /**

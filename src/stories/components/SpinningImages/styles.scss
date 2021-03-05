@@ -4,7 +4,7 @@
 // Spinning Images
 
 .spinning-images {
-  animation: rotation 7s infinite cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  animation: rotation 10s infinite cubic-bezier(0.25, 0.75, 0.5, 1.25);
   transform-origin: bottom center;
   position: absolute;
 
@@ -23,6 +23,7 @@
   }
 
   &:last-child {
+    // margin-top: -2px;
     top: 100%;
     transform: rotate(-180deg);
   }
