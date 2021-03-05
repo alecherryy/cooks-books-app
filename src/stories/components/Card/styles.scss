@@ -29,6 +29,8 @@
   font-family: $header-font-family;
   font-size: $font-size-h4;
   font-weight: 700;
+  line-height: $line-height-normal;
+  margin-bottom: $spacing-1;
 
   .card__back & {
     color: $black;
@@ -37,19 +39,62 @@
 
 .card__favorite {
   @include button-clear();
-  @include image-replace(30px, 30px);
-  @include svg-background(icon-star-empty);
+  @include image-replace(34px, 34px);
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 30px;
+  position: absolute;
   right: $spacing-2;
   top: $spacing-2;
-  transition: transform 0.1s ease-in;
-  position: absolute;
 
   &:hover {
-    transform: scale(1.5);
+    &::before {
+      transform: scale(1.45);
+    }
+
+    .card--favorite & {
+      &::after {
+        transform: scale(1.45);
+      }
+    }
+  }
+
+  &::before,
+  &::after {
+    @include image-replace(34px, 34px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 34px;
+    content: '';
+    display: block;
+    position: absolute;
+    transition: all 0.1s ease-in;
+    right: 0;
+    top: 0;
+  }
+
+  &::before {
+    @include svg-background(icon-star-empty);
+
+    opacity: 1;
+  }
+
+  &::after {
+    @include svg-background(icon-star);
+
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .card--favorite & {
+    &::before {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    &::after {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 
@@ -62,10 +107,10 @@
   flex-direction: column;
   height: 100%;
   justify-content: flex-end;
-  padding: $spacing-3 $spacing-2 $spacing-6;
+  padding: $spacing-2 $spacing-2 $spacing-4;
   position: absolute;
   width: 100%;
-  transition: transform 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .card__front {
@@ -96,13 +141,50 @@
   background-color: $gray-1;
   color: $black;
   transform: rotateY(180deg);
+
+  .card--favorite & {
+    background-color: $sand-dark;
+  }
 }
 
 .card__info {
   display: grid;
+  font-size: $font-size-xs;
+  font-weight: 700;
   gap: $spacing-1;
   grid-template-columns: repeat(3, 1fr);
+  letter-spacing: 1px;
   margin-top: $spacing-3;
   text-align: center;
 }
 
+.card__icon {
+  &::before {
+    @include image-replace(26px, 26px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 26px;
+    content: '';
+    display: block;
+    margin: 0 auto $spacing-1;
+  }
+
+  &.card__icon--portions {
+    &::before {
+      @include svg-background(icon-people);
+    }
+  }
+
+  &.card__icon--time {
+    &::before {
+      @include svg-background(icon-time);
+    }
+  }
+
+  &.card__icon--rating {
+    &::before {
+      @include svg-background(icon-star-empty);
+    }
+  }
+}

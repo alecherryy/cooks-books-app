@@ -36,7 +36,7 @@ export const Card = ({
   return (
     <a className={[
       'card',
-      `${isFavorite && 'card--favorite'}`].join(' ').trim()
+      `${favorite ? 'card--favorite' : ''}`].join(' ').trim()
     } url={url}>
       <Front title={title} description={description} image={image}/>
       <Back title={title} description={description} portions={portions}
