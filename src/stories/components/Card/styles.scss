@@ -1,0 +1,64 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Card
+
+.card {
+  background-color: $gray-1;
+  border-radius: 20px;
+  display: block;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: 400;
+  max-width: rem(280px);
+  min-height: rem(385px);
+  overflow: hidden;
+  position: relative;
+}
+
+.card__title {
+  color: $white;
+  font-family: $header-font-family;
+  font-size: $font-size-h4;
+  font-weight: 700;
+}
+
+.card__favorite {
+  @include button-clear();
+  @include image-replace(28px, 27px);
+  @include svg-background(icon-star);
+}
+
+.card__front,
+.card__back {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.card__front {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: $spacing-3 $spacing-2 $spacing-6;
+
+  &::before {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
