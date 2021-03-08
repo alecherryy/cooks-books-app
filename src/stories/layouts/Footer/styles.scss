@@ -4,6 +4,13 @@
 // Footer
 
 .footer {
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   padding: $spacing-2 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+
+  @include bp-tablet {
+    font-size: $font-size-md;
+  }
 }
