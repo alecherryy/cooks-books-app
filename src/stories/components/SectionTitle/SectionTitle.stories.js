@@ -2,13 +2,10 @@ import React from 'react';
 import { SectionTitle } from './SectionTitle';
 
 /**
- * Sample SectionTitle component
+ * Sample SectionTitle component.
  */
 export default {
   title: 'Example/SectionTitle',
-  imagePath: 'brokenfornow.png',
-  paragraph: 'lorem ipsum et cetera',
-  svgPath: 'brokenalsofornow.png',
   component: SectionTitle,
 };
 
@@ -19,8 +16,10 @@ export const Default = Template.bind({});
 Default.args = {
   modifierClasses: '',
   url: '#',
-  title: 'Default Title',
-  imagePath: '',
-  paragraph: '',
-  svgPath: '',
+  title: 'This is a Section Title',
+  imagePath: 'https://picsum.photos/id/249/425/200',
+  paragraph:
+    `Type almpedit praesent honestatis mea ad
+    nemore referrentur est ei, usu no omnium
+    partiendo rationibus.`,
 };
