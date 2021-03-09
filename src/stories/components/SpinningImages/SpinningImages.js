@@ -20,7 +20,7 @@ export const SpinningImages = () => {
   return (
     <div className="spinning-images">
       { imageArray.map((image, i) =>
-        <img className="spinninng-images__image"
+        <img className="spinning-images__image"
           key={i} src={image} alt="Decorative Artwork" />)
       }
     </div>
