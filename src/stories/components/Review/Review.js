@@ -30,6 +30,12 @@ export const Review = ({
 }) => {
   const classes = ['review', `${modifierClasses}`].join(' ').trim();
 
+  // Kind of hacky way to turn number of stars into array to use map on
+  const stars = [];
+  for (let i = 0; i < rating; i++) {
+    stars.push({ type: 'star', key: i });
+  }
+
   return (
     <Fragment>
       <div className={classes}>
@@ -43,14 +49,10 @@ export const Review = ({
 
         <div className="review__sub-header">
           <span className="review__sub-header-item">
-            {/* This is awful, I know - eek. I need to chat about how to
-              do this right. */}
-            <i className="review__icon review__icon--star"></i>
-            <i className="review__icon review__icon--star"></i>
-            <i className="review__icon review__icon--star"></i>
-            <i className="review__icon review__icon--star"></i>
-            <i className="review__icon review__icon--star"></i>
-            {/* {rating} */}
+            {/* I have it as number of stars rendering, not number colored */}
+            {stars.map((star) =>
+              <i key={star.key}
+                className="review__icon review__icon--star"></i>)}
           </span>
           <span className="review__sub-header-item">{date}</span>
           {!isUserVariant && <span className="review__sub-header-item">
