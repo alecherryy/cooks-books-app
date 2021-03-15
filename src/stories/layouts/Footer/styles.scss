@@ -11,6 +11,6 @@
   position: fixed;
 
   @include bp-tablet {
-    font-size: $font-size-md;
+    font-size: $font-size-sm;
   }
 }
