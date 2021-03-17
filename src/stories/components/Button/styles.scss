@@ -11,7 +11,7 @@
   color: $white;
   display: inline-block;
   font-size: $font-size-sm;
-  line-height: $line-height-loose;
+  line-height: $line-height-normal;
   min-width: rem(100px);
   padding: $spacing-1 $spacing-4;
   text-align: center;
@@ -36,7 +36,8 @@
 }
 
 // Arrow button common styles
-$size: 178px;
+$size-mobile: 148px;
+$size-desktop: 178px;
 
 %arrow-button {
   background-color: transparent;
@@ -44,13 +45,13 @@ $size: 178px;
   flex-direction: column;
   font-size: $font-size-sm;
   font-weight: 700;
-  height: $size;
+  height: $size-mobile;
   justify-content: center;
   letter-spacing: 1px;
-  padding: 0 $spacing-3;
+  padding: 0 $spacing-2;
   position: relative;
   text-align: left;
-  width: $size;
+  width: $size-mobile;
 
   &::before,
   &::after {
@@ -76,8 +77,8 @@ $size: 178px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 28px 21px;
-    bottom: $spacing-4;
-    left: $spacing-3;
+    bottom: $spacing-3;
+    left: $spacing-1;
     position: absolute;
   }
 
@@ -96,6 +97,17 @@ $size: 178px;
 
   &:active {
     color: $white;
+  }
+
+  @include bp-tablet {
+    height: $size-desktop;
+    padding: 0 $spacing-3;
+    width: $size-desktop;
+
+    &::after {
+      bottom: $spacing-4;
+      left: $spacing-3;
+    }
   }
 }
 
