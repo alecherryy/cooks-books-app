@@ -19,5 +19,4 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   modifierClasses: '',
-  content: 'Footer content goes here',
 };

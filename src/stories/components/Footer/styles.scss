@@ -14,3 +14,13 @@
     font-size: $font-size-sm;
   }
 }
+
+.footer__pipe {
+  padding-left: $spacing-1;
+  padding-right: $spacing-1;
+
+  @include bp-tablet {
+    padding-left: $spacing-2;
+    padding-right: $spacing-2;
+  }
+}
