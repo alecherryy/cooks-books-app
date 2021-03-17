@@ -4,17 +4,27 @@
 // Spinning Images
 
 .spinning-images {
-  animation: rotation 10s infinite cubic-bezier(0.25, 0.75, 0.5, 1.25);
-  transform-origin: bottom center;
+  animation: rotation 10s 1s cubic-bezier(0.25, 0.75, 0.5, 1.25) infinite;
+  height: 300px;
+  left: 5%;
   position: absolute;
+  transform-origin: bottom center;
+  width: 90%;
+
+  @include bp-tablet {
+    height: 400px;
+    left: calc((100% - #{rem(500px)}) / 2);
+    width: rem(500px);
+  }
 
   @include bp-desktop {
-    height: rem(400px);
+    height: rem(500px);
+    left: calc((100% - #{rem(600px)}) / 2);
     width: rem(600px);
   }
 }
 
-.spinninng-images__image {
+.spinning-images__image {
   left: 0;
   position: absolute;
 
@@ -23,7 +33,6 @@
   }
 
   &:last-child {
-    // margin-top: -2px;
     top: 100%;
     transform: rotate(-180deg);
   }
