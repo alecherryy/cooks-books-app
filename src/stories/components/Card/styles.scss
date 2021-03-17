@@ -1,0 +1,190 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Card
+
+.card {
+  display: block;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: 400;
+  max-width: rem(280px);
+  min-height: rem(385px);
+  perspective: rem(8155px);
+  position: relative;
+
+  &:hover {
+    .card__front {
+      transform: rotateY(-180deg);
+    }
+
+    .card__back {
+      transform: rotateY(0deg);
+    }
+  }
+}
+
+.card__title {
+  color: $white;
+  font-family: $header-font-family;
+  font-size: $font-size-h4;
+  font-weight: 700;
+  line-height: $line-height-normal;
+  margin-bottom: $spacing-1;
+
+  .card__back & {
+    color: $black;
+  }
+}
+
+.card__favorite {
+  @include button-clear();
+  @include image-replace(34px, 34px);
+
+  position: absolute;
+  right: $spacing-2;
+  top: $spacing-2;
+
+  &:hover {
+    &::before {
+      transform: scale(1.45);
+    }
+
+    .card--favorite & {
+      &::after {
+        transform: scale(1.45);
+      }
+    }
+  }
+
+  &::before,
+  &::after {
+    @include image-replace(34px, 34px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 34px;
+    content: '';
+    display: block;
+    position: absolute;
+    transition: all 0.1s ease-in;
+    right: 0;
+    top: 0;
+  }
+
+  &::before {
+    @include svg-background(icon-star-empty);
+
+    opacity: 1;
+  }
+
+  &::after {
+    @include svg-background(icon-star);
+
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .card--favorite & {
+    &::before {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    &::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.card__front,
+.card__back {
+  border-radius: 20px;
+  backface-visibility: hidden;
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  padding: $spacing-2 $spacing-2 $spacing-4;
+  position: absolute;
+  width: 100%;
+  transition: all 0.4s ease-in-out;
+}
+
+.card__front {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color: $white;
+
+  &::before {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    border-radius: 20px;
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.card__back {
+  background-color: $gray-1;
+  color: $black;
+  transform: rotateY(180deg);
+
+  .card--favorite & {
+    background-color: $sand-dark;
+  }
+}
+
+.card__info {
+  display: grid;
+  font-size: $font-size-xs;
+  font-weight: 700;
+  gap: $spacing-1;
+  grid-template-columns: repeat(3, 1fr);
+  letter-spacing: 1px;
+  margin-top: $spacing-3;
+  text-align: center;
+}
+
+.card__icon {
+  &::before {
+    @include image-replace(26px, 26px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 26px;
+    content: '';
+    display: block;
+    margin: 0 auto $spacing-1;
+  }
+
+  &.card__icon--portions {
+    &::before {
+      @include svg-background(icon-people);
+    }
+  }
+
+  &.card__icon--time {
+    &::before {
+      @include svg-background(icon-time);
+    }
+  }
+
+  &.card__icon--rating {
+    &::before {
+      @include svg-background(icon-star-empty);
+    }
+  }
+}
