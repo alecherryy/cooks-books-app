@@ -1,0 +1,157 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Featured Card
+
+.featured-card {
+  position: relative;
+  max-width: rem(800px);
+}
+
+.featured-card__link {
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 15% $spacing-2;
+  position: relative;
+  text-decoration: none;
+
+  &::before {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &:hover,
+  &:focus {
+    .featured-card__image {
+      transition: transform 3s cubic-bezier(0.25, 0.75, 0.5, 1);
+      transform: scale(1.05);
+    }
+
+    .featured-card__button {
+      &::before {
+        transform: scale(1.05);
+      }
+
+      &::after {
+        animation: 1s escape-right cubic-bezier(0.25, 0.75, 0.5, 1.25) 0.2s forwards;
+      }
+    }
+  }
+
+  @include bp-tablet {
+    padding: 20% $spacing-2;
+  }
+}
+
+.featured-card__image {
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.25, 0.75, 0.5, 1);
+  width: 100%;
+  z-index: -1;
+}
+
+.featured-card__content {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $spacing-4;
+  position: relative;
+  max-width: rem(400px);
+  z-index: 1;
+}
+
+.featured-card__eyebrow {
+  font-family: $header-font-family;
+  font-size: $font-size-xs;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.featured-card__title {
+  font-family: $header-font-family;
+  font-size: $font-size-h3;
+  font-weight: 700;
+  line-height: $line-height-tight;
+
+  @include bp-tablet {
+    font-size: $font-size-h2;
+  }
+
+  @include bp-desktop {
+    font-size: $font-size-h1;
+  }
+}
+
+$size-mobile: 148px;
+$size-desktop: 178px;
+
+.featured-card__button {
+  background-color: transparent;
+  display: inline-flex;
+  flex-direction: column;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  height: $size-mobile;
+  justify-content: center;
+  left: -#{$spacing-4};
+  letter-spacing: 1px;
+  padding: 0 $spacing-3;
+  position: absolute;
+  text-align: left;
+  top: 30%;
+  width: $size-mobile;
+
+  &::before,
+  &::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  }
+
+  &::before {
+    background-color: $blue;
+    border-radius: 100%;
+    display: block;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  &::after {
+    @include image-replace(44px, 32px);
+    @include svg-background(icon-arrow-right);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px 21px;
+    bottom: $spacing-4;
+    left: $spacing-3;
+    position: absolute;
+  }
+
+  @include bp-tablet {
+    height: $size-desktop;
+    padding: 0 $spacing-3;
+    top: 50%;
+    width: $size-desktop;
+
+    &::after {
+      bottom: $spacing-4;
+      left: $spacing-3;
+    }
+  }
+}
