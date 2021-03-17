@@ -3,14 +3,13 @@ import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Constrain } from '../Constrain/Constrain';
+import { Constrain } from '../../layouts/Constrain/Constrain';
 
 /**
  * Component for footer element.
  *
  * @component
  * @param {string} modifierClasses Class modifiers of the component.
- * @param {node} content content of the component.
  * @return {object} (
  *   <Footer modifierClasses={modifierClasses} />
  *      {content}
@@ -18,13 +17,22 @@ import { Constrain } from '../Constrain/Constrain';
  * )
  */
 
-export const Footer = ({ modifierClasses, content }) => {
+export const Footer = ({ modifierClasses }) => {
   return (
     <div
       className={['footer', `${modifierClasses}`].join(' ').trim()}
     >
       <Constrain modifierClasses="constrain--wide">
-        {content}
+        <a href="#">
+          Privacy
+        </a>
+        <span className="footer__pipe">
+          |
+        </span>
+        Follow this project on&nbsp;
+        <a href="https://github.com/alecherryy/cooks-books-app">
+          GitHub
+        </a>
       </Constrain>
     </div>
   );
@@ -35,13 +43,8 @@ Footer.propTypes = {
    * Footer's modifier classes
    */
   modifierClasses: PropTypes.string,
-  /**
-   * Footer's content
-   */
-  content: PropTypes.node,
 };
 
 Footer.defaultProps = {
   modifierClasses: '',
-  content: 'Content goes here.',
 };
