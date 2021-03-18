@@ -12,8 +12,6 @@ import { Constrain } from '../../layouts/Constrain/Constrain';
  * @param {string} modifierClasses Class modifiers of the component.
  * @return {object} (
  *   <Footer modifierClasses={modifierClasses} />
- *      {content}
- *   </Footer>
  * )
  */
 
@@ -23,14 +21,12 @@ export const Footer = ({ modifierClasses }) => {
       className={['footer', `${modifierClasses}`].join(' ').trim()}
     >
       <Constrain modifierClasses="constrain--wide">
-        <a href="#">
+        <Link className="footer__link" to="/privacy">
           Privacy
-        </a>
-        <span className="footer__pipe">
-          |
-        </span>
+        </Link>
         Follow this project on&nbsp;
-        <a href="https://github.com/alecherryy/cooks-books-app">
+        <a href="https://github.com/alecherryy/cooks-books-app"
+          rel="noreferrer" target="_blank">
           GitHub
         </a>
       </Constrain>
