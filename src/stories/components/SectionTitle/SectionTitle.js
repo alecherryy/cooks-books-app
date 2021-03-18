@@ -2,7 +2,6 @@ import './styles.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 
 /**
  * Component for Section Title element.
@@ -27,22 +26,19 @@ export const SectionTitle = ({
   const svgClasses = ['section-title__icon', `${svgClass}`].join(' ').trim();
 
   return (
-    <Fragment>
-      <div className={classes} url={url}>
-        <img className="section-title__img"
-          src={imagePath} alt="title-img"></img>
-        <div className="section-title__blurb">
-          <span
-            className={svgClasses}>
-          </span>
-          <div className="section-title__text">
-            <div className="section-title__title">{title}</div>
-            <div className="section-title__paragraph">{paragraph}</div>
-          </div>
+    <div className={classes} url={url}>
+      <img className="section-title__img"
+        src={imagePath} alt="title-img"></img>
+      <div className="section-title__blurb">
+        <span
+          className={svgClasses}>
+        </span>
+        <div className="section-title__text">
+          <div className="section-title__title">{title}</div>
+          <div className="section-title__paragraph">{paragraph}</div>
         </div>
       </div>
-
-    </Fragment>
+    </div>
   );
 };
 
