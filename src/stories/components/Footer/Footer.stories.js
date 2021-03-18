@@ -1,4 +1,6 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+
 import { Footer } from './Footer';
 
 /**
@@ -11,7 +13,9 @@ export default {
 
 const Template = (args) => {
   return (
-    <Footer {...args} />
+    <MemoryRouter>
+      <Footer {...args} />
+    </MemoryRouter>
   );
 };
 
