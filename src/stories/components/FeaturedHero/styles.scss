@@ -1,0 +1,154 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Featured Hero
+
+.featured-hero {
+  min-height: 400px;
+  position: relative;
+
+  @include bp-max-tablet {
+    margin: $spacing-4 0;
+  }
+
+  @include bp-desktop {
+    height: 500px;
+  }
+}
+
+.featured-hero__image {
+  animation: 1s fade-in cubic-bezier(0.5, 0.25, 0, 1) 0s forwards;
+  height: 300px;
+  overflow: hidden;
+  opacity: 0;
+  position: relative;
+
+  @include bp-tablet {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.featured-hero__text {
+  line-height: $line-height-tight;
+
+  &:last-child {
+    text-align: right;
+    padding-top: $spacing-2;
+  }
+
+  @include bp-max-tablet {
+    &:first-child {
+      margin-bottom: #{-$spacing-6};
+      z-index: -1;
+    }
+  }
+
+  @include bp-tablet {
+    padding-top: $spacing-6;
+  }
+
+  @include bp-desktop {
+    padding-top: $spacing-8;
+
+    &:last-child {
+      padding-top: 0;
+    }
+  }
+
+  .featured-hero__title,
+  .featured-hero__link {
+    animation: .6s fade-up cubic-bezier(0.5, 0.25, 0, 1) forwards;
+    opacity: 0;
+    transform: translateY(25%);
+  }
+
+  .featured-hero__link {
+    display: inline-block;
+    transform: translateY(100%);
+  }
+
+  &.is-first {
+    .featured-hero__title {
+      animation-delay: .85s;
+    }
+
+    .featured-hero__link {
+      animation-delay: 1s;
+    }
+  }
+
+  &.is-last {
+    .featured-hero__title {
+      animation-delay: 1.85s;
+    }
+
+    .featured-hero__link {
+      animation-delay: 2s;
+    }
+  }
+}
+
+.featured-hero__title {
+
+  @include bp-desktop {
+    font-size: rem(60px);
+  }
+
+  @include bp-desktop-lg {
+    font-size: $font-size-display;
+  }
+}
+
+.featured-hero__light {
+  font-weight: 400;
+}
+
+.featured-hero__link {
+  font-family: $base-font-family;
+  font-size: $font-size-md;
+  line-height: 21px;
+  padding-right: $spacing-7;
+  position: relative;
+  text-decoration: none;
+  z-index: 4;
+
+  &::after {
+    @include image-replace(28px, 21px);
+    @include svg-background(icon-arrow-right-black);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px 21px;
+    bottom: $spacing-4;
+    content: '';
+    right: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+
+    &::after {
+      animation: 1s escape-right cubic-bezier(0.25, 0.75, 0.5, 1.25) 0.2s forwards;
+    }
+  }
+}
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
