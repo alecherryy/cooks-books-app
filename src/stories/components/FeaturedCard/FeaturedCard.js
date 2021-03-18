@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
  * Component for featured card element.
  *
  * @component
+ * @param {string} image Source of the component.
+ * @param {string} url URL of the component.
+ * @param {string} title of the component.
+ * @param {string} eyebrow of the component.
  * @return {object} (
  *   <FeaturedCard url={url} image={image} eyebrow={eyebrow} title={title} />
  * )
@@ -41,7 +45,7 @@ FeaturedCard.propTypes = {
    */
   title: PropTypes.string,
   /**
-   * FeaturedCard's portions
+   * FeaturedCard's eyebrow
    */
   eyebrow: PropTypes.string,
 };
