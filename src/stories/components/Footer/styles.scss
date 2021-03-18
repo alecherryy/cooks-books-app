@@ -1,0 +1,36 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Footer
+
+.footer {
+  font-size: $font-size-xs;
+  padding: $spacing-2 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+
+  @include bp-tablet {
+    font-size: $font-size-sm;
+  }
+}
+
+.footer__link {
+  margin-right: $spacing-1;
+
+  &::after {
+    content: '|';
+    display: inline-block;
+    font-weight: 400;
+    margin-left: $spacing-1;
+  }
+
+  @include bp-tablet {
+    margin-right: $spacing-2;
+
+    &::after {
+      content: '|';
+      margin-left: $spacing-2;
+    }
+  }
+}

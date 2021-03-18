@@ -1,4 +1,6 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+
 import { Footer } from './Footer';
 
 /**
@@ -11,7 +13,9 @@ export default {
 
 const Template = (args) => {
   return (
-    <Footer {...args} />
+    <MemoryRouter>
+      <Footer {...args} />
+    </MemoryRouter>
   );
 };
 
@@ -19,5 +23,4 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   modifierClasses: '',
-  content: 'Footer content goes here',
 };
