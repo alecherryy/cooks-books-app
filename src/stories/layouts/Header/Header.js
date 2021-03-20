@@ -10,21 +10,28 @@ import { Constrain } from '../Constrain/Constrain';
  *
  * @component
  * @param {string} modifierClasses Class modifiers of the component.
- * @param {node} content content of the component.
+ * @param {node} rightContent right side content of the component.
  * @return {object} (
  *   <Header modifierClasses={modifierClasses} />
- *      {content}
+ *      {rightContent}
  *   </Header>
  * )
  */
 
-export const Header = ({ modifierClasses, content }) => {
+export const Header = ({ modifierClasses, rightContent }) => {
   return (
     <div
       className={['header', `${modifierClasses}`].join(' ').trim()}
     >
       <Constrain modifierClasses="constrain--wide">
-        {content}
+        <div className="header__inner">
+          <div className='header__left'>
+            CookBooks Logo here
+          </div>
+          <div className='header__right'>
+            {rightContent}
+          </div>
+        </div>
       </Constrain>
     </div>
   );
@@ -36,12 +43,12 @@ Header.propTypes = {
    */
   modifierClasses: PropTypes.string,
   /**
-   * Header's content
+   * Header's right-content
    */
-  content: PropTypes.node,
+  rightContent: PropTypes.node,
 };
 
 Header.defaultProps = {
   modifierClasses: '',
-  content: 'Content goes here.',
+  rightContent: 'content goes here.',
 };

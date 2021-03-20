@@ -5,4 +5,15 @@
 
 .header {
   padding: $spacing-4 0;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.header__inner {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
