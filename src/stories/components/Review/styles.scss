@@ -14,11 +14,8 @@
   font-family: $header-font-family;
   font-weight: 700;
   letter-spacing: rem(1px);
-
   text-transform: uppercase;
-  // TODO: Change to sand-dark, I saw there was already on created
-  //   so will wait until that PR is merged then use it.
-  color: $sand;
+  color: $orange;
 }
 
 .review__title {
@@ -28,20 +25,18 @@
 }
 
 .review__sub-header {
-  width: 80%;
+  align-items: center;
+  display: flex;
   font-size: $font-size-xs;
-  line-height: $line-height-loose;
 }
 
 .review__sub-header-item {
   border-color: black;
   border-width: 1px;
-  border-style: none solid none none;
+  border-style: none none none solid;
   padding: rem(2px) $spacing-2;
   &:first-child {
     padding-left: rem(4px);
-  }
-  &:last-child {
     border-style: none;
   }
 }
@@ -60,20 +55,17 @@
   }
 }
 
-.pad-left {
-  margin-left: $spacing-3;
-}
-
-
 .review__icon {
   &::before {
-    @include image-replace( 12px, 12px);
+    @include image-replace( 20px, 20px);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 12px;
+    background-size: 20px;
     content: '';
     display: inline-block;
     margin: $spacing-1 auto 0;
+    overflow: hidden;
+
   }
 
   &.review__icon--star {
@@ -84,8 +76,6 @@
 
   &.review__icon--arrow {
     &::before {
-      @include image-replace( 20px, 20px);
-      background-size: 20px;
       @include svg-background(icon-review-arrow);
     }
   }
