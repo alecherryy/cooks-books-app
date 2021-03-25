@@ -1,0 +1,109 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// AccountMenu
+
+.account-menu {
+  background-color: $white;
+  max-width: 20rem;
+  padding: $spacing-3;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba( 03, 03, 03, 0.1);
+}
+
+.account-menu__welcome {
+  font-family: $header-font-family;
+  font-size: $font-size-h4;
+  margin-bottom: rem(5px);
+}
+
+.account-menu__message {
+  margin-bottom: $spacing-2;
+}
+
+.account-menu__bold-hello {
+  font-weight: 700;
+}
+
+.account-menu__option {
+  font-weight: 700;
+  margin: $spacing-1 $spacing-1 $spacing-1 0;
+  padding: $spacing-1 $spacing-1 $spacing-1 0;
+  display: flex;
+  align-items: center;
+  width: 70%;
+  border-top-right-radius: rem(40px);
+  border-bottom-right-radius: rem(40px);
+  // transition: 0.0s all;
+}
+
+  .account-menu__option--active {
+    color: $white;
+    background-color: $orange;
+    // transition: 0.0s all;
+  }
+
+.account-menu__option-text {
+  margin-left: rem(15px);
+}
+
+.account-menu__icon {
+
+  &::before {
+    @include image-replace( 26px, 26px );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 26px;
+    content: '';
+    display: inline-block;
+    margin: rem(10px) auto 0;
+  }
+
+  // Turn white with a filter if its the active one
+  &.account-menu__icon--active {
+    filter: invert(100%);
+  }
+
+  // Icons for each of the things
+  &.account-menu__icon--placeholder {
+    &::before {
+      @include svg-background(icon-section-title-placeholder);
+    }
+  }
+
+  // Icons for each of the things
+  &.account-menu__icon--list {
+    &::before {
+      @include svg-background(icon-account-list);
+    }
+  }
+
+  // Icons for each of the things
+  &.account-menu__icon--two-people {
+    &::before {
+      @include svg-background(icon-account-two-people);
+   }
+  }
+
+  // Icons for each of the things
+  &.account-menu__icon--person {
+    &::before {
+      @include svg-background(icon-account-person);
+    }
+  }
+
+  // Icons for each of the things
+  &.account-menu__icon--heart {
+    &::before {
+      @include svg-background(icon-account-heart);
+    }
+  }
+
+  // Icons for each of the things
+  &.account-menu__icon--logout {
+    &::before {
+      @include svg-background(icon-account-logout);
+      transform: rotate(180deg);
+    }
+  }
+}
