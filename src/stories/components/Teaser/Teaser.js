@@ -12,13 +12,13 @@ import { Grid } from '../../layouts/Grid/Grid';
  * @param {string} image Source of the component.
  * @param {string} url URL of the component.
  * @param {string} title of the component.
- * @param {string} description of the component.
+ * @param {string} excerpt of the component.
  * @param {number} portions of the component.
  * @param {number} time in mins of the component.
  * @param {number} rating of the component.
  * @return {object} (
- *   <Teaser url={url} image={image} eyebrow={eyebrow} title={title}
- *      portion={portion} time={time} rating={rating}
+ *   <Teaser url={url} image={image} excerpt={excerpt} title={title}
+ *      portions={portions} time={time} rating={rating}
  *   />
  * )
  */
