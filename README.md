@@ -7,6 +7,11 @@
 
 The repo contains development work for the CooksBooks web-based application. This product is implemented using a combination of languages and development tools such as: React, Node.js, public APIs, MongoDB, Storybook and Jest.
 
+## CooksBooks Proposal / Description
+A link to the Project Proposal Document Per Assignment 1:  
+https://docs.google.com/document/d/15pV5A6-JOxfCmokgAZ2sKmLJ8jxOeOMdnCY02-MzPbk/edit
+
+
 ## Installation
 To get started, clone this repo to your preferred folder, `cd` into the project and run
 ```
