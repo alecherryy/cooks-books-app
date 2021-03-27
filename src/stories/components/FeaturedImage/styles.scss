@@ -1,0 +1,60 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Featured Image
+
+.featured-image {
+  display: flex;
+  border-radius: 20px;
+  color: $white;
+  flex-direction: column;
+  font-size: $font-size-lg;
+  justify-content: flex-end;
+  min-height: rem(400px);
+  overflow: hidden;
+  margin: 0 0 500px;
+  padding: $spacing-3 0;
+  position: relative;
+
+  @include bp-tablet {
+    min-height: rem(600px);
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.featured-image__image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 110%;
+  width: 110%;
+  position: absolute;
+  top: 0;
+  transition: transform 0.4s ease-in-out;
+  transform: matrix(1.10, 0, 0, 1.10, 0, 0);
+  z-index: -1;
+
+  &::before {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &.is-animated {
+    transition: transform 3s ease-in;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+  }
+}
+
+.featured-image__title {
+  color: $white;
+}
