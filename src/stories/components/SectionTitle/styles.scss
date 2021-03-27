@@ -1,0 +1,48 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// SectionTitle
+
+.section-title {
+  padding: $spacing-1 $spacing-4;
+  max-width: rem(500px);
+}
+
+.section-title__img {
+ border-radius: 20px; 
+}
+
+.section-title__blurb {
+  margin-top: $spacing-1;
+  display: flex;
+}
+
+.section-title__text {
+  flex-basis: 90%;
+}
+
+.section-title__title {
+  font-family: $header-font-family;
+  font-size: $font-size-h3;
+  font-weight: 700;
+}
+
+.section-title__icon {
+  flex-basis: 10%;
+
+  &::before {
+    @include image-replace( 26px, 26px );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 26px;
+    content: '';
+    display: inline-block;
+    margin: rem(10px) auto 0;
+  }
+
+  &.section-title__icon--placeholder {
+    &::before {
+      @include svg-background(icon-section-title-placeholder);
+    }
+  }
+}
