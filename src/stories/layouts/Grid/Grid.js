@@ -8,18 +8,21 @@ import PropTypes from 'prop-types';
  *
  * @param {node} children of the component
  * @param {number} numColumns number of columns in layout.
+ * @param {boolean} reverse reverse the direction of items
  * @return {object} (
- *   <Grid numColumns={numColumns}>
+ *   <Grid numColumns={numColumns} reverse={reverse}>
  *      {children}
  *    </Grid>
  * )
  */
 
-export const Grid = ({ children, numColumns }) => {
-  const modifierClass = numColumns ? `grid--${numColumns}-col` : '';
+export const Grid = ({ children, numColumns, reverse }) => {
+  const numColumnsModifierClass = numColumns ? `grid--${numColumns}-col` : '';
+  const reverseModifierClass = reverse ? `grid--reverse` : '';
 
   return (
-    <div className={['grid', modifierClass].join(' ').trim()}>
+    <div className={['grid', numColumnsModifierClass, reverseModifierClass]
+      .join(' ').trim()}>
       {children}
     </div>
   );
@@ -34,6 +37,10 @@ Grid.propTypes = {
    * Grid's number of columns
    */
   numColumns: PropTypes.number,
+  /**
+   * Grid items' direction
+   */
+  reverse: PropTypes.bool,
 };
 
 Grid.defaultProps = {

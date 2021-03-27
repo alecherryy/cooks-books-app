@@ -14,44 +14,46 @@ export default {
 
 const Template = (args) => (
   <Constrain>
-    <Grid numColumns={args.numColumns}>
+    <Grid
+      numColumns={args.numColumns}
+      reverse={args.reverse}>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 1</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 2</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 3</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 4</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 5</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 6</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 7</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
       <div className="grid__item">
-        <h3>Test</h3>
+        <h3>Test 8</h3>
         <p>Lorem ipsum dolor sit amet, aliquip pertinax intellegebat vel ad.
           Quo diceret comprehensam id, mazim labore instructior et mea.</p>
       </div>
@@ -81,4 +83,11 @@ ThreeColumn.args = {
 export const FourColumn = Template.bind({});
 FourColumn.args = {
   numColumns: 4,
+};
+
+// Grid Layout two columns reversed
+export const TwoColumnReversed = Template.bind({});
+TwoColumnReversed.args = {
+  numColumns: 2,
+  reverse: true,
 };

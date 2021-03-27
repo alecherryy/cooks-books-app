@@ -9,6 +9,10 @@
   gap: calc(#{$spacing-3} / 2);
 }
 
+.grid--reverse {
+  direction: rtl;
+}
+
 .grid--2-col {
   @include bp-tablet {
     grid-template-columns: repeat(2, 1fr);
