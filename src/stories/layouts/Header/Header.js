@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Constrain } from '../Constrain/Constrain';
+import Logo from '../../../images/logo.svg';
 
 /**
  * Component for header element.
@@ -23,10 +24,12 @@ export const Header = ({ modifierClasses, rightContent }) => {
     <div
       className={['header', `${modifierClasses}`].join(' ').trim()}
     >
-      <Constrain modifierClasses="constrain--wide">
-        <div className="header__inner">
+      <Constrain modifierClasses='constrain--wide'>
+        <div className='header__inner'>
           <div className='header__left'>
-            CookBooks Logo here
+            <img className='section-title__img'
+              src={Logo}
+              alt='logo-img'/>
           </div>
           <div className='header__right'>
             {rightContent}
