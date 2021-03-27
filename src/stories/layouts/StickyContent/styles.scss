@@ -1,0 +1,14 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Sticky content
+
+.sticky-content {
+  background-color: $white;
+  border-radius: 20px;
+  padding: $spacing-4 $spacing-2;
+
+  @include bp-tablet {
+    padding: $spacing-6 $spacing-4;
+  }
+}

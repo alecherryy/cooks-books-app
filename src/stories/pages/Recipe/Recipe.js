@@ -1,5 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+import { Constrain } from '../../layouts/Constrain/Constrain';
+import { FeaturedImage } from '../../components/FeaturedImage/FeaturedImage';
+import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 
 /**
  * Component for Recipe page.
@@ -8,36 +11,17 @@ import PropTypes from 'prop-types';
  * @param {string} modifierClasses Class modifiers of the component.
  * @return {object} (
  *   <Recipe modifierClasses={modifierClasses} />
- *      {asideContent}
- *      {mainContent}
- *   </Recipe>
  * )
  */
 
-export const Recipe = ({ modifierClasses, asideContent, mainContent }) => {
+export const Recipe = () => {
   return (
     <div className="recipe">
+      <Constrain>
+        <FeaturedImage image={recipe.image} alt={recipe.title}
+          title={recipe.title} excerpt={recipe.excerpt} />
+        <Sidebar asideContent={''} mainContent={''} />
+      </Constrain>
     </div>
   );
-};
-
-Recipe.propTypes = {
-  /**
-   * Recipe's modifier classes
-   */
-  modifierClasses: PropTypes.string,
-  /**
-   * Recipe's sidebar content
-   */
-  asideContent: PropTypes.node,
-  /**
-   * Recipe's main content
-   */
-  mainContent: PropTypes.node,
-};
-
-Recipe.defaultProps = {
-  modifierClasses: '',
-  asideContent: '',
-  mainContent: '',
 };
