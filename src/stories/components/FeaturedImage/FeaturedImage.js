@@ -2,6 +2,7 @@ import './styles.scss';
 
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { useEffect } from 'react';
 
@@ -65,8 +66,9 @@ FeaturedImage.propTypes = {
 };
 
 FeaturedImage.defaultProps = {
-  image: '',
-  url: '#',
-  title: 'This is a recipe title',
-  excerpt: '',
+  image: 'https://picsum.photos/id/306/1200/600',
+  alt: '#',
+  title: 'Steamed Mussels in White Wine',
+  excerpt: 'Lorem ipsum dolor sit amet, ex vis decore utamur, ' +
+    'persequeris theophrastus eum at, vix eu illud legimus alienum.',
 };
