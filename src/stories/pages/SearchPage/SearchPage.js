@@ -46,6 +46,9 @@ export const SearchPage = () => {
   const [searchTerms, setSearchTerms] = useState('');
 
   const updateTermAndSearchApi = () => {
+    // spoonService.findRecipeById(716429)
+    //   .then((theResult) => alert(theResult));
+    // setResultJSON({ totalResults: 0, results: [], number: 0 });
     spoonService.findRecipesByKeywords(searchTerms)
       .then((theResult) => setResultJSON(theResult));
   };
