@@ -1,0 +1,66 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// SearchPage
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  margin-top: $spacing-2;
+  margin-bottom: $spacing-2;
+}
+
+.welcome__img {
+  max-width: rem(500px);
+}
+
+.welcome__title {
+  font-family: $header-font-family;
+  font-size: $font-size-h1;
+  font-weight: 400;
+}
+
+.welcome__title-bold {
+  font-weight: 700;
+}
+
+.welcome__paragraph {
+  max-width: rem(600px);
+  font-size: $font-size-h6;
+}
+
+// TODO:
+.searchbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  // color: red;
+  // background-color: white;
+  margin-top: $spacing-4;
+  margin-bottom: $spacing-4;
+}
+
+.results-info {
+  font-family: $header-font-family;
+  font-size: $font-size-h5;
+  font-weight: 700;
+  margin-bottom: $spacing-4;
+  min-height: 50vh;
+}
+
+.results-grid {
+  padding-top: $spacing-4;
+}
+
+// TODO:
+.show-more-btn {
+  display: flex;
+  justify-content: space-around;
+  color: red;
+  background-color: white;
+  margin-top: $spacing-4;
+  margin-bottom: $spacing-4;
+}
