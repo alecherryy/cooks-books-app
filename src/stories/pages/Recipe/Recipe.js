@@ -2,14 +2,14 @@ import '../../../scss/utility.scss';
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router';
 
+import { api } from '../../../services/spoonacular-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { FeaturedImage } from '../../components/FeaturedImage/FeaturedImage';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { StickyContent } from '../../layouts/StickyContent/StickyContent';
 import { Fragment } from 'react';
-import { api } from '../../../services/spoonacular-service';
-import { useParams } from 'react-router';
 
 /**
  * Component for Recipe page.

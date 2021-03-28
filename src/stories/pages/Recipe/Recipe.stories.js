@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 import '../../../scss/styles.scss';
 import { Recipe } from './Recipe';
 
@@ -12,7 +13,9 @@ export default {
 
 const Template = (args) => {
   return (
-    <Recipe {...args} />
+    <MemoryRouter initialEntries={['/recipes/609262']}>
+      <Recipe {...args} />
+    </MemoryRouter>
   );
 };
 
