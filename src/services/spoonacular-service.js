@@ -53,9 +53,29 @@ const findRandomRecipes = (number) => {
 //   'instructions'
 //
 
-const findRecipeById = (recipeId) => {
+const findRecipeById = (id) => {
   return (
-    fetch(`${BY_ID_URL}/${recipeId}/information`, {
+    fetch(`${BY_ID_URL}/${id}/information`, {
+      // method: 'GET',
+      headers: {
+        'x-rapidapi-key':
+          '96a59c87e8msh987f6b0d4a69ef3p1240d5jsne302b83f190e',
+        'x-rapidapi-host':
+          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+      },
+    })
+      .then((response) => response.json()));
+};
+
+/**
+ * Find recipes similar to the recipe ID
+ *
+ * @param {string} id of the recipe
+ * @return {object} a recipe object
+ */
+const findSimilarRecipeById = (id) => {
+  return (
+    fetch(`${BY_ID_URL}/${id}/similar`, {
       // method: 'GET',
       headers: {
         'x-rapidapi-key':
@@ -68,11 +88,9 @@ const findRecipeById = (recipeId) => {
 };
 
 // use an object to namespace the functions being called from this service
-const spoonServiceAPI = {
+export const api = {
   findRecipesByKeywords,
   findRandomRecipes,
   findRecipeById,
+  findSimilarRecipeById,
 };
-
-// export the api for this as the default
-export default spoonServiceAPI;

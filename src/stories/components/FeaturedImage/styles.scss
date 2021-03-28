@@ -59,3 +59,45 @@
 .featured-image__title {
   color: $white;
 }
+
+.featured-image__info {
+  display: grid;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  gap: $spacing-1;
+  grid-template-columns: repeat(3, 1fr);
+  letter-spacing: 1px;
+  margin-top: $spacing-3;
+  text-align: center;
+}
+
+.featured-image__icon {
+  &::before {
+    @include image-replace(36px, 36px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 36px;
+    content: '';
+    display: block;
+    margin: 0 auto $spacing-1;
+  }
+
+  &.featured-image__icon--portions {
+    &::before {
+      @include svg-background(icon-people-white);
+    }
+  }
+
+  &.featured-image__icon--time {
+    &::before {
+      @include svg-background(icon-time-white);
+    }
+  }
+
+  &.featured-image__icon--rating {
+    &::before {
+      @include svg-background(icon-star-empty-white);
+    }
+  }
+}

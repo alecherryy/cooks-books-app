@@ -1,0 +1,34 @@
+@import 'variables.scss';
+
+// @file
+// Utility classes
+
+// text classes
+.text-small {
+  font-size: $font-size-sm;
+}
+
+.text-large {
+  font-size: $font-size-lg;
+}
+
+.text-extra-large {
+  font-size: $font-size-xl;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.list-inline {
+  @include list-inline();
+}
+
+// list classes
+.list-clean {
+  @include list-clean();
+}
+
+.list-inline {
+  @include list-inline();
+}
