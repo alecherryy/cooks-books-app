@@ -36,3 +36,8 @@
 .list-inline {
   @include list-inline();
 }
+
+// pages
+.recipe {
+  @include fade-in-up();
+}
