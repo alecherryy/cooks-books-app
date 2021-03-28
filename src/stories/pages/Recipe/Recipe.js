@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 
-import { api } from '../../../services/spoonacular-service';
+import { API } from '../../../services/spoonacular-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { FeaturedImage } from '../../components/FeaturedImage/FeaturedImage';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
@@ -28,7 +28,7 @@ export const Recipe = () => {
   useEffect(() => {
     const recipeID = id ? id : '609262'; // default value for sample pages
 
-    api.findRecipeById(recipeID).then((res) => {
+    API.findRecipeById(recipeID).then((res) => {
       setRecipe(res);
       setIngredients(res.extendedIngredients);
     });
