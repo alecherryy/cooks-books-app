@@ -1,22 +1,22 @@
 import './App.scss';
 
+import { Header } from './stories/layouts/Header/Header';
+import { Main } from './stories/layouts/Main/Main';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Recipe } from './stories/pages/Recipe/Recipe';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-                    Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-                    Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Main>
+        <Switch>
+          <Route exact path="/recipes/:recipeId">
+            <Recipe />
+          </Route>
+        </Switch>
+      </Main>
+    </Router>
   );
 }
 

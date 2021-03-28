@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -16,7 +18,7 @@ import PropTypes from 'prop-types';
 
 export const Main = ( { children }) => {
   return (
-    <main role="main">
+    <main role="main" className="main">
       {children}
     </main>
   );

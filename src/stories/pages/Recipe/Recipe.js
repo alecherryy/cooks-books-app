@@ -1,4 +1,4 @@
-import '../../../scss/_utility.scss';
+import '../../../scss/utility.scss';
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { StickyContent } from '../../layouts/StickyContent/StickyContent';
 import { Fragment } from 'react';
 import { api } from '../../../services/spoonacular-service';
-// import { useParams } from 'react-router';
+import { useParams } from 'react-router';
 
 /**
  * Component for Recipe page.
@@ -21,16 +21,16 @@ import { api } from '../../../services/spoonacular-service';
  */
 
 export const Recipe = () => {
-  // const { id } = useParams();
+  const { id } = useParams();
   const [recipe, setRecipe] = useState({});
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    // const recipeID = id ? id : '716429';
-    const recipeID = '609262';
+    const recipeID = id ? id : '609262'; // default value for sample pages
 
     api.findRecipeById(recipeID).then((res) => {
-      console.log(res); // eslint-disable-line no-console
-      setRecipe(res); // eslint-disable-line no-console
+      setRecipe(res);
+      setIngredients(res.extendedIngredients);
     });
   }, []);
 
@@ -48,7 +48,7 @@ export const Recipe = () => {
           <StickyContent>
             <h4>Ingredients</h4>
             <ul className="text-small list-clean">
-              { recipe.extendedIngredients.map((el) => {
+              { ingredients.map((el) => {
                 const meas = el.measures.us.unitLong;
                 return <li key={el.id}>
                   {el.amount} {meas} {el.name}
