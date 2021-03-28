@@ -1,0 +1,119 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Form Item
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 $spacing-3;
+
+  ::placeholder {
+    color: $gray-3;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    font-weight: 700;
+    opacity: 1;
+
+    :focus {
+      color: red;
+    }
+  }
+
+  @include bp-tablet {
+    margin: 0 0 $spacing-4;
+  }
+}
+
+.form-item__label {
+  font-weight: 700;
+  margin: 0 0 $spacing-1;
+  order: -1;
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+// global form input styles
+%form-item-styles {
+  appearance: none;
+  background-color: $white;
+  border: solid 1px $white;
+  border-radius: 50px;
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 14px;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  height: rem(54px);
+  padding: 0 $spacing-3;
+
+  &:focus {
+    border-color: $gray-3;
+    outline: none;
+  }
+
+  @include bp-tablet {
+    height: rem(64px);
+  }
+}
+
+.form-item__input {
+  @extend %form-item-styles;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:invalid {
+    border-color: $orange;
+    box-shadow: none;
+  }
+}
+
+.form-item__input--text {
+  &[type='text'] {
+    appearance: none;
+  }
+}
+
+.form-item__input--email {
+  &[type='email'] {
+    appearance: none;
+  }
+}
+
+.form-item__input--password {
+  &[type='password'] {
+    appearance: none;
+  }
+}
+
+.form-item__input--date {
+  color: $gray-3;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: 700;
+
+  &[type='date'] {
+    appearance: none;
+  }
+}
+
+.form-item__input--textarea {
+  height: rem(300px);
+  padding-bottom: $spacing-2;
+  padding-top: $spacing-2;
+
+  &[type='textarea'] {
+    appearance: none;
+  }
+}
+
+.form-item__input--select {
+  @include svg-background(icon-arrow-down);
+
+  background-position: center right $spacing-2;
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding-right: $spacing-2;
+}
