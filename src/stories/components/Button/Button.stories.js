@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 import { Button } from './Button';
 
 /**
@@ -9,7 +10,9 @@ export default {
   component: Button,
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <MemoryRouter>
+  <Button {...args} />
+</MemoryRouter>;
 
 // Default button
 export const Default = Template.bind({});

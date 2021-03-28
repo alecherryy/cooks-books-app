@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 
 import { Header } from './Header';
 
@@ -12,7 +13,9 @@ export default {
 
 const Template = (args) => {
   return (
-    <Header {...args} />
+    <MemoryRouter>
+      <Header {...args} />
+    </MemoryRouter>
   );
 };
 

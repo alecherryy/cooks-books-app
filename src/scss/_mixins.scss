@@ -30,6 +30,7 @@
 
   li {
     padding-left: 0;
+    margin-bottom: $spacing-1;
 
     &::before {
       display: none;
@@ -44,11 +45,11 @@
   padding-left: 0;
 
   li {
-    padding-left: 0;
+    padding-left: $spacing-2;
   }
 
   > li {
-    display: inline;
+    display: inline-block;
   }
 }
 
