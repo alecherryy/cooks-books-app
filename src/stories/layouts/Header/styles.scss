@@ -4,5 +4,11 @@
 // Header
 
 .header {
-  padding: $spacing-4 0;
+  padding: $spacing-3 0;
+}
+
+.header__inner {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }

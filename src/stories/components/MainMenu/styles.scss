@@ -1,0 +1,33 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// SectionTitle
+
+.main-menu {
+  @include list-inline();
+}
+
+.main-menu__item {
+
+  @include bp-tablet {
+    padding-left: $spacing-4 !important;
+  }
+}
+
+.main-menu__link {
+  text-decoration: none;
+
+  &.main-menu__link--search {
+    @include svg-background(icon-search);
+
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-weight: 400;
+    padding: $spacing-1 0 $spacing-1 $spacing-3;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
