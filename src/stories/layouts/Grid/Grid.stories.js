@@ -89,5 +89,5 @@ FourColumn.args = {
 export const TwoColumnReversed = Template.bind({});
 TwoColumnReversed.args = {
   numColumns: 2,
-  reverse: true,
+  modifierClasses: 'grid--reverse',
 };

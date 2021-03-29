@@ -1,11 +1,12 @@
 import './App.scss';
 
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './stories/layouts/Header/Header';
 import { Main } from './stories/layouts/Main/Main';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Recipe } from './stories/pages/Recipe/Recipe';
 import { Footer } from './stories/layouts/Footer/Footer';
 import { MainMenu } from './stories/components/MainMenu/MainMenu';
+import { Recipe } from './stories/pages/Recipe/Recipe';
+import { Login } from './stories/pages/Login/Login';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       <Header rightContent={<MainMenu />} />
       <Main>
         <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
           <Route exact path="/recipes/:recipeId">
             <Recipe />
           </Route>
