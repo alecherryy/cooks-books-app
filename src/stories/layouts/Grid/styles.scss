@@ -7,6 +7,22 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: calc(#{$spacing-3} / 2);
+
+  @include bp-tablet {
+    gap: $spacing-3;
+
+    .login & {
+      min-height: 100vh;
+      gap: $spacing-6;
+    }
+  }
+
+  @include bp-tablet-lg {
+    .login & {
+      height: 100vh;
+      gap: calc(#{$spacing-6} * 2);
+    }
+  }
 }
 
 .grid--reverse {
@@ -45,4 +61,6 @@
   }
 }
 
-
+.grid__item {
+  align-self: center;
+}

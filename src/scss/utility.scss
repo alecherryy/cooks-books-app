@@ -3,7 +3,8 @@
 // @file
 // Utility classes
 
-// text classes
+// text classes'
+// text size
 .text-extra-small {
   font-size: $font-size-xs;
 }
@@ -20,15 +21,29 @@
   font-size: $font-size-xl;
 }
 
+// text style
 .text-italic {
   font-style: italic;
 }
 
+// text weight
+.text-light {
+  font-weight: 300;
+}
+
+.text-normal {
+  font-weight: 400;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+// list classes
 .list-inline {
   @include list-inline();
 }
 
-// list classes
 .list-clean {
   @include list-clean();
 }
@@ -38,6 +53,7 @@
 }
 
 // pages
+.login,
 .recipe {
   @include fade-in-up();
 }
