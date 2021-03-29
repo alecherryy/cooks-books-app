@@ -117,7 +117,7 @@ export const Home = () => {
               url: `/recipes/${recipe.id}`,
               image: `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`,
               title: recipe.title,
-              description: '',
+              description: recipe.summary,
               portions: recipe.servings,
               time: recipe.readyInMinutes,
               rating: recipe.spoonacularScore ?
@@ -153,6 +153,8 @@ export const Home = () => {
             )
           }
         </Grid>
+      </Constrain>
+      <Constrain modifierClasses="align-right spaced-30-bottom">
         <Button text='All recipes'
           modifierClasses='button--purple button--peek-right'
           url='/search'
