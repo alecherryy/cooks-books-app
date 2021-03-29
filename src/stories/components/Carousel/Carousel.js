@@ -1,5 +1,5 @@
-import './styles.scss';
 import 'swiper/swiper.scss';
+import './styles.scss';
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -63,7 +63,7 @@ export const Carousel = ({ cards }) => {
                 url={card.url}
                 image={card.image}
                 title={card.title}
-                description={card.description}
+                description={`${card.description.toString().split('. ')[0]}.`}
                 portions={parseInt(card.portions)}
                 time={parseInt(card.time)}
                 rating={parseInt(card.rating)}

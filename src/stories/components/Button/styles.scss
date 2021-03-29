@@ -161,19 +161,15 @@ $size-desktop: 178px;
   }
 }
 
+.button--peek-left,
+.button--peek-right {
+  margin-top: -$spacing-5;
+}
+
 .button--peek-left {
-  position: relative;
-  top: -$spacing-5;
-  left: $spacing-2;
+  margin-left: -$spacing-5;
 }
 
 .button--peek-right {
-  position: relative;
-  top: -$spacing-5;
-  right: -$spacing-1;
-  float: right;
-
-  @include bp-desktop {
-    right: -$spacing-5;
-  }
+  margin-right: -$spacing-5;
 }
