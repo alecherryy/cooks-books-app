@@ -1,0 +1,19 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Ingredients
+
+// .ingredients {}
+
+.ingredients__title {
+  @include svg-background(icon-measuring-cup);
+
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+  padding: $spacing-2 0 $spacing-2 $spacing-5;
+}
+
+.ingredients__ingredients {
+  @include list-clean();
+}

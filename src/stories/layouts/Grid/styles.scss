@@ -25,7 +25,7 @@
   }
 
   @include bp-tablet {
-    min-height: calc(100vh - #{rem(220px)});
+    min-height: calc(100vh - #{rem(240px)});
     gap: $spacing-3;
   }
 

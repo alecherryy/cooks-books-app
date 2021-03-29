@@ -35,7 +35,6 @@ export const FeaturedImage = ({
     const scrollpos = window.scrollY;
     if (scrollpos >= 100) {
       bgImage.current.classList.add('is-animated');
-      // bgImage.classList.add('is-animated');
     } else {
       bgImage.current.classList.remove('is-animated');
     }
@@ -100,7 +99,7 @@ FeaturedImage.propTypes = {
 };
 
 FeaturedImage.defaultProps = {
-  image: 'https://picsum.photos/id/306/1200/600',
+  image: '',
   title: 'Steamed Mussels in White Wine',
   excerpt: '',
   portions: 4,
