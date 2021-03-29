@@ -1,6 +1,5 @@
 import './styles.scss';
 
-// import React from 'react';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router';
@@ -11,7 +10,7 @@ import { Teaser } from '../../components/Teaser/Teaser';
 import { Button } from '../../components/Button/Button';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { API } from '../../../services/spoonacular-service';
-import img1 from '../../../images/artwork-4.svg';
+import artwork from '../../../images/artwork-4.svg';
 
 
 /**
@@ -32,9 +31,6 @@ export const SearchPage = () => {
   // listen for changes in url, search based on that
   useEffect(() => {
     setSearchBar(searchTerms);
-    // TODO: this line added for functionality showing in stories
-    //   but it also makes 'jerusalem' the default search on loading
-    //   a blank search page
     if (searchTerms) {
       API.findRecipesByKeywords(searchTerms)
         .then((theResults) => setResultJSON(theResults));
@@ -45,10 +41,9 @@ export const SearchPage = () => {
     <>
       <Router >
         <Constrain>
-
           {/* TODO: Break this into a component */}
           <div className='welcome'>
-            <img className='welcome__img' src={img1} alt="img-title"></img>
+            <img className='welcome__img' src={artwork} alt="img-title"></img>
             <div className='welcome__title'>
               <span className='welcome__title-bold'>Search </span>
             all recipes</div>
@@ -78,7 +73,6 @@ export const SearchPage = () => {
           <div className='results-info'>
             {`${resultJSON.number} results out of
            ${resultJSON.totalResults} recipes.`}</div>
-
           <div className='results-grid'>
             <Grid numColumns={4} >
               {resultJSON.results.map((r) => {
@@ -90,6 +84,7 @@ export const SearchPage = () => {
                       time={r.preparationMinutes}
                       portions={r.servings}
                       rating={((r.spoonacularScore + 10) / 20) | 0}
+                      excerpt={`${r.title} from ${r.sourceName}`}
                       url={`/recipes/${r.id}`} />
                   </div>
                 );

@@ -6,7 +6,6 @@
 .welcome {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
   margin-top: $spacing-2;
   margin-bottom: $spacing-2;
@@ -31,7 +30,6 @@
   font-size: $font-size-h6;
 }
 
-// TODO:
 .search {
   display: flex;
   flex-direction: column;
@@ -47,31 +45,28 @@
   width: rem(530px);
 }
 
-
 .button--peek {
   position: relative;
   top: -5rem;
   left: 12rem;
 }
 
+
 .results-info {
   font-family: $header-font-family;
   font-size: $font-size-h5;
   font-weight: 700;
   margin-bottom: 3rem;
-  // min-height: 50vh;
 }
 
 .results-grid {
   padding-top: $spacing-1;
 }
 
-// TODO:
+
 .show-more-btn {
   display: flex;
   justify-content: space-around;
-  // color: red;
-  // background-color: white;
   margin-top: $spacing-4;
   margin-bottom: $spacing-4;
 }
