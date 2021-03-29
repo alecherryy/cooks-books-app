@@ -160,3 +160,20 @@ $size-desktop: 178px;
     transform: translateX(0);
   }
 }
+
+.button--peek-left {
+  position: relative;
+  top: -$spacing-5;
+  left: $spacing-2;
+}
+
+.button--peek-right {
+  position: relative;
+  top: -$spacing-5;
+  right: -$spacing-1;
+  float: right;
+
+  @include bp-desktop {
+    right: -$spacing-5;
+  }
+}

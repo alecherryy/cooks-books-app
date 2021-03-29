@@ -18,9 +18,9 @@ export const Ingredients = ({ ingredients }) => {
     <div className="ingredients">
       <h4 className="ingredients__title">Ingredients</h4>
       <ul className="ingredients__ingredients">
-        {ingredients.map((ing) => {
+        {ingredients.map((ing, index) => {
           const meas = ing.measures.us.unitLong;
-          return <li key={ing.id}>
+          return <li key={ing.id + index}>
             {ing.amount} {meas} {ing.name}
           </li>;
         })}

@@ -2,7 +2,7 @@ import '../../../scss/utility.scss';
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 import { API } from '../../../services/spoonacular-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
@@ -23,14 +23,14 @@ import { Ingredients } from '../../components/Ingredients/Ingredients';
  */
 
 export const Recipe = () => {
-  const { id } = useParams();
+  const { recipeId } = useParams();
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   const [intro, setIntro] = useState([]);
 
   useEffect(() => {
-    const recipeID = id ? id : '609262'; // default value for sample pages
+    const recipeID = recipeId ? recipeId : '609262'; // default sample recipe id
 
     API.findRecipeById(recipeID).then((res) => {
       setRecipe(res);

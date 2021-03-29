@@ -12,7 +12,6 @@
   align-items: center;
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
-  color: $white;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -70,6 +69,7 @@
   position: relative;
   max-width: rem(400px);
   z-index: 1;
+  color: $white;
 }
 
 .featured-card__eyebrow {
@@ -84,6 +84,7 @@
   font-size: $font-size-h3;
   font-weight: 700;
   line-height: $line-height-tight;
+  padding-bottom: 15px;
 
   @include bp-tablet {
     font-size: $font-size-h2;

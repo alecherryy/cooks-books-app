@@ -27,7 +27,7 @@ export const SectionTitle = ({
   return (
     <div className={classes}>
       <img className="section-title__img"
-        src={imagePath} alt="Decorative Graphics"></img>
+        src={imagePath} alt="Decorative Graphics"/>
       <div className="section-title__blurb">
         <span
           className={svgClasses}>

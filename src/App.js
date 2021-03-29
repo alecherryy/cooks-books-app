@@ -7,6 +7,7 @@ import { Footer } from './stories/layouts/Footer/Footer';
 import { MainMenu } from './stories/components/MainMenu/MainMenu';
 import { Recipe } from './stories/pages/Recipe/Recipe';
 import { Login } from './stories/pages/Login/Login';
+import { Home } from './stories/pages/Home/Home';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route exact path="/recipes/:recipeId">
             <Recipe />
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       </Main>

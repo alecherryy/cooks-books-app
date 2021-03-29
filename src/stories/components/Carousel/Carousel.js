@@ -34,49 +34,45 @@ export const Carousel = ({ cards }) => {
   };
 
   const argsSwiper = {
-    spaceBetween: 20,
+    spaceBetween: 90,
     slidesPerView: 'auto',
     loop: true,
-    loopedSlides: 20,
+    loopedSlides: 15,
+    observer: true,
+    observeParents: true,
     breakpoints: {
       320: {
         slidesPerView: 1,
       },
-      480: {
-        slidesPerView: 2,
-      },
-      640: {
-        slidesPerView: 3,
-      },
       1024: {
-        width: 1024,
-        slidesPerView: 4,
+        slidesPerView: 2,
       },
     },
   };
 
   return (
     <>
-      <Swiper {...argsSwiper} >
+      <Swiper {...argsSwiper}
+        className='swiper-container--layout'>
         {
-          cards.map((card, index) =>
-            <SwiperSlide key={index}
+          cards.map((card) =>
+            <SwiperSlide key={card.id}
               className='swiper-slide--box'>
               <Card isFavorite={card.isFavorite}
                 url={card.url}
                 image={card.image}
                 title={card.title}
                 description={card.description}
-                portions={card.portions}
-                time={card.time}
-                rating={card.rating}
+                portions={parseInt(card.portions)}
+                time={parseInt(card.time)}
+                rating={parseInt(card.rating)}
               />
             </SwiperSlide>,
           )
         }
         <span slot='container-end'>
           <Button text='Next'
-            modifierClasses='button--blue button--peek'
+            modifierClasses='button--red button--peek-left'
             isButton={true}
             onClick={nextRecipe}
           />
