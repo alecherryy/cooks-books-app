@@ -12,6 +12,7 @@ import { Button } from '../../components/Button/Button';
 import ArtVegetables from '../../../images/artwork-vegetables.svg';
 import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
+import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 
 /**
  * Component for Home page.
@@ -67,108 +68,88 @@ export const Home = () => {
     <div className='home'>
       <Constrain>
         <FeaturedHero/>
-        <Grid
-          numColumns={4}
-          modifierClasses='spaced-80-top spaced-20-bottom'>
-          <div className='grid__item grid__tem--x-center'>
-            RECIPES
-          </div>
-          <div className='grid__item grid__tem--x-center'>
-            WORLD CUISINES
-          </div>
-          <div className='grid__item grid__tem--x-center'>
-            USER REVIEWS
-          </div>
-          <div className='grid__item grid__tem--x-center'>
-            CURATED MEAL PLANS
-          </div>
-        </Grid>
-        <Grid
-          numColumns={2}
-          modifierClasses='grid--reverse spaced-20-bottom'>
-          <div className='grid__item grid__item--lalign grid__tem--x-center'>
-            <SectionTitle
-              title='Recipe of the day'
-              url='#'
-              imagePath={ArtVegetables}
-              svgClass='section-title__icon--spatula'
-              paragraph='Get the best recipe every day of the week
-                with our daily picks'/>
-          </div>
-          <div className='grid__item grid__item--lalign grid__item--spacer'>
-            <FeaturedCard
-              image={`https://spoonacular.com/recipeImages/${recipeOfTheDay.id}-636x393.jpg`}
-              url={`/recipes/${recipeOfTheDay.id}`}
-              title={recipeOfTheDay.title}
-              eyebrow={
-                recipeOfTheDay.dishTypes &&
-                recipeOfTheDay.dishTypes.length > 0 ?
-                  recipeOfTheDay.dishTypes[0] : ''
-              }/>
-          </div>
-        </Grid>
-        <Grid
-          numColumns={2}
-          modifierClasses='spaced-20-bottom'>
-          <div className='grid__item grid__tem--x-center'>
-            <SectionTitle
-              title='Most popular recipes'
-              url='#'
-              imagePath={ArtChicken}
-              svgClass='section-title__icon--spoon'
-              paragraph='Top rated fan favourites from the Books of Cooks'/>
-          </div>
-          <div className='grid__item grid__item--spacer'>
-            <Carousel cards={
-              popularRecipes.map((recipe) => {
-                return ({
-                  id: recipe.id,
-                  isFavorite: false,
-                  url: `/recipes/${recipe.id}`,
-                  image: `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`,
-                  title: recipe.title,
-                  description: '',
-                  portions: recipe.servings,
-                  time: recipe.readyInMinutes,
-                  rating: recipe.spoonacularScore ?
-                    Math.round(recipe.spoonacularScore * 0.5) / 10 : '',
-                });
-              })
-            }/>
-          </div>
-        </Grid>
-        <Grid
-          numColumns={1}
-          modifierClasses='spaced-80-bottom'>
-          <div className='grid__item grid__tem--x-center'>
-            <SectionTitle
-              modifierClasses=''
-              title="This week's top picks"
-              url='#'
-              imagePath={ArtDessert}
-              svgClass='section-title__icon--measuring-cup'
-              paragraph='Curated collection of recipes for this week
-                by our top Cooks'/>
-          </div>
-        </Grid>
+      </Constrain>
+      <Grid
+        numColumns={4}
+        modifierClasses='spaced-80-top spaced-20-bottom'>
+        <div className='grid__item grid__tem--x-center'>
+          RECIPES
+        </div>
+        <div className='grid__item grid__tem--x-center'>
+          WORLD CUISINES
+        </div>
+        <div className='grid__item grid__tem--x-center'>
+          USER REVIEWS
+        </div>
+        <div className='grid__item grid__tem--x-center'>
+          CURATED MEAL PLANS
+        </div>
+      </Grid>
+      <SplitSection modifierClasses="split-section--reverse">
+        <SectionTitle
+          title='Recipe of the day'
+          imagePath={ArtVegetables}
+          svgClass='section-title__icon--spatula'
+          paragraph='Get the best recipe every day of the week
+            with our daily picks' />
+        <FeaturedCard
+          image={`https://spoonacular.com/recipeImages/${recipeOfTheDay.id}-636x393.jpg`}
+          url={`/recipes/${recipeOfTheDay.id}`}
+          title={recipeOfTheDay.title}
+          eyebrow={
+            recipeOfTheDay.dishTypes &&
+            recipeOfTheDay.dishTypes.length > 0 ?
+              recipeOfTheDay.dishTypes[0] : ''
+          }/>
+      </SplitSection>
+      <SplitSection>
+        <SectionTitle
+          title='Most popular recipes'
+          url='#'
+          imagePath={ArtChicken}
+          svgClass='section-title__icon--spoon'
+          paragraph='Top rated fan favourites from the Books of Cooks'/>
+        <Carousel cards={
+          popularRecipes.map((recipe) => {
+            return ({
+              id: recipe.id,
+              isFavorite: false,
+              url: `/recipes/${recipe.id}`,
+              image: `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`,
+              title: recipe.title,
+              description: '',
+              portions: recipe.servings,
+              time: recipe.readyInMinutes,
+              rating: recipe.spoonacularScore ?
+                Math.round(recipe.spoonacularScore * 0.5) / 10 : '',
+            });
+          })
+        }/>
+      </SplitSection>
+      <Constrain>
+        <SectionTitle
+          modifierClasses='spaced-aside-auto spaced-80-bottom'
+          title="This week's top picks"
+          url='#'
+          imagePath={ArtDessert}
+          svgClass='section-title__icon--measuring-cup'
+          paragraph='Curated collection of recipes for this week
+            by our top Cooks'/>
         <Grid numColumns={4}>
           {
             popularRecipes.map((recipe, index) =>
-              <div
-                className='grid__item grid__tem--x-center'
-                key={index}>
-                <Card
-                  isFavorite={false}
-                  url={`/recipes/${recipe.id}`}
-                  image={`https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`}
-                  title={recipe.title}
-                  description=''
-                  portions={parseInt(recipe.servings)}
-                  time={parseInt(recipe.readyInMinutes)}
-                  rating={recipe.spoonacularScore ?
-                    Math.round(recipe.spoonacularScore * 0.5) / 10 : ''}
-                />
-              </div>,
+              <Card
+                key={index}
+                isFavorite={false}
+                url={`/recipes/${recipe.id}`}
+                image={`https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`}
+                title={recipe.title}
+                description={`${recipe.summary.toString().split('. ')[0]}.`}
+                portions={parseInt(recipe.servings)}
+                time={parseInt(recipe.readyInMinutes)}
+                rating={recipe.spoonacularScore ?
+                  Math.round(recipe.spoonacularScore * 0.5) / 10 : ''}
+              />,
             )
           }
         </Grid>
@@ -176,7 +157,6 @@ export const Home = () => {
           modifierClasses='button--purple button--peek-right'
           url='/search'
         />
-        <br style={{ clear: 'both' }}/>
       </Constrain>
     </div>
   );

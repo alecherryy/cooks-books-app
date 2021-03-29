@@ -114,7 +114,7 @@ const Front = ({ title, image, description }) => {
       <span className="card__title">
         {title}
       </span>
-      <span>{description}</span>
+      <span dangerouslySetInnerHTML={ { __html: description } } />
     </span>
   );
 };
@@ -168,7 +168,7 @@ const Back = ({
       <span className="card__title">
         {title}
       </span>
-      {description}
+      <span dangerouslySetInnerHTML={ { __html: description } } />
       <div className="card__info">
         {portions &&
           <span className="card__icon card__icon--portions">

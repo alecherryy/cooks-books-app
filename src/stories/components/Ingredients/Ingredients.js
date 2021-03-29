@@ -21,7 +21,7 @@ export const Ingredients = ({ ingredients }) => {
         {ingredients.map((ing, index) => {
           const meas = ing.measures.us.unitLong;
           return <li key={ing.id + index}>
-            {ing.amount} {meas} {ing.name}
+            {Math.round(ing.amount * 10) / 10} {meas} {ing.name}
           </li>;
         })}
       </ul>

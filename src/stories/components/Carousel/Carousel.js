@@ -34,18 +34,19 @@ export const Carousel = ({ cards }) => {
   };
 
   const argsSwiper = {
-    spaceBetween: 90,
-    slidesPerView: 'auto',
     loop: true,
-    loopedSlides: 15,
     observer: true,
     observeParents: true,
+    spaceBetween: 15,
+    freeMode: true,
+    slidesPerView: 1,
     breakpoints: {
-      320: {
-        slidesPerView: 1,
-      },
-      1024: {
+      480: {
         slidesPerView: 2,
+        spaceBetween: 30,
+      },
+      1200: {
+        slidesPerView: 3,
       },
     },
   };

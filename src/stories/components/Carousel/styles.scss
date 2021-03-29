@@ -4,13 +4,7 @@
 // Carousel
 
 .swiper-container--layout {
-  padding: $spacing-1 $spacing-3 !important;
   position: relative !important;
-  max-width: rem(350px) !important;
-
-  @include bp-desktop {
-    max-width: rem(560px) !important;
-  }
 }
 
 .swiper-wrapper--pad {
