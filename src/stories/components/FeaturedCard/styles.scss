@@ -72,11 +72,11 @@
   flex-direction: column;
   padding-bottom: $spacing-4;
   position: relative;
-  max-width: 80%;
+  max-width: 90%;
   z-index: 1;
   color: $white;
 
-  @include bp-tablet-lg {
+  @include bp-desktop {
     max-width: 60%;
   }
 }
@@ -95,7 +95,7 @@
   line-height: $line-height-tight;
   padding-bottom: rem(15px);
 
-  @include bp-tablet {
+  @include bp-tablet-lg {
     font-size: $font-size-h2;
   }
 
