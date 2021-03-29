@@ -4,11 +4,8 @@
 // Carousel
 
 .swiper-container--layout {
-  padding-left: $spacing-5;
+  padding: 0 0 $spacing-2 $spacing-6;
   position: relative !important;
-}
-
-.swiper-wrapper--pad {
 }
 
 .swiper-slide--box {
