@@ -33,7 +33,8 @@ export const Login = () => {
               Sign up here</Link>.</p>
           </div>
           <div className="grid__item">
-            <Form buttonColor="blue" modifierClasses="form--login">
+            <Form buttonColor="blue" modifierClasses="form--login"
+              buttonText="Login">
               <FormItem type="text" placeholder="Username" />
               <FormItem type="password" placeholder="Password" />
             </Form>
