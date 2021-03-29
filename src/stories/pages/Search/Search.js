@@ -1,5 +1,3 @@
-import './styles.scss';
-
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router';
@@ -42,10 +40,9 @@ export const Search = () => {
     <>
       <Router >
         <Constrain>
-          {/* TODO: Break this into a component */}
           <Constrain modifierClasses="constrain--narrow">
             <img src={artwork} alt="img-title" />
-            <h1>
+            <h1 className="text-regular">
               <span><b>Search </b></span>
               all recipes
             </h1>
@@ -64,27 +61,29 @@ export const Search = () => {
             </Form>
           </Constrain>
 
-          <div className='results-infsso'>
+          <br />
+
+          <div className='text-bold'>
             {`${resultJSON.number} results out of
            ${resultJSON.totalResults} recipes.`}</div>
-          <div className='results-grid'>
-            <Grid numColumns={4} >
-              {resultJSON.results.map((r) => {
-                return (
-                  <div key={r.id}>
-                    <Teaser
-                      title={r.title}
-                      image={r.image}
-                      time={r.readyInMinutes}
-                      portions={r.servings}
-                      rating={((r.spoonacularScore + 10) / 20) | 0}
-                      excerpt={`${r.title} from ${r.sourceName}`}
-                      url={`/recipes/${r.id}`} />
-                  </div>
-                );
-              })}
-            </Grid>
-          </div>
+          <br />
+          <Grid numColumns={4} >
+            {resultJSON.results.map((r) => {
+              return (
+                <div key={r.id}>
+                  <Teaser
+                    title={r.title}
+                    image={r.image}
+                    time={r.readyInMinutes}
+                    portions={r.servings}
+                    rating={((r.spoonacularScore + 10) / 20) | 0}
+                    // excerpt={`${r.summary.toString().split('. ')[0]}.`}
+                    excerpt={`${r.title} from ${r.sourceName}`}
+                    url={`/recipes/${r.id}`} />
+                </div>
+              );
+            })}
+          </Grid>
 
           {/* TODO: MAKE THIS BUTTON CALL API FOR 10 MORE AND APPEND */}
           <Constrain modifierClasses="constrain--narrow">
