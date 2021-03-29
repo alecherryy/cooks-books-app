@@ -3,6 +3,7 @@ import { Teaser } from './Teaser';
 
 import { Grid } from '../../layouts/Grid/Grid';
 import { Constrain } from '../../layouts/Constrain/Constrain';
+import { MemoryRouter } from 'react-router';
 
 /**
  * Example Component: Teaser
@@ -12,11 +13,13 @@ export default {
   component: Teaser,
 };
 
-const Template = (args) => <Constrain modifierClasses="constrain--wide">
-  <Grid numColumns={4}>
-    <Teaser {...args} />
-  </Grid>
-</Constrain>;
+const Template = (args) => <MemoryRouter>
+  <Constrain modifierClasses="constrain--wide">
+    <Grid numColumns={4}>
+      <Teaser {...args} />
+    </Grid>
+  </Constrain>
+</MemoryRouter>;
 
 // Default spinning featured image
 export const Default = Template.bind({});

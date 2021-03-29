@@ -32,7 +32,7 @@ export const Form = ({
     <form className={['form', `${modifierClasses}`].join(' ').trim()}>
       {children}
       <Button modifierClasses={`button--${buttonColor} form__button`}
-        isButton={true} text={buttonText} handleClick={handleClick} />
+        isButton={true} text={buttonText} onClick={handleClick} />
     </form>
   );
 };
@@ -51,6 +51,10 @@ Form.propTypes = {
    */
   children: PropTypes.node,
   /**
+   * Form's buttonText
+   */
+  buttonText: PropTypes.string,
+  /**
    * Form's buttonColor
    */
   buttonColor: PropTypes.string,
@@ -64,6 +68,7 @@ Form.defaultProps = {
   modifierClasses: '',
   handleClick: null,
   children: null,
+  buttonText: 'Login',
   buttonColor: 'red',
   buttonText: 'Submit Form',
 };
