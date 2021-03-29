@@ -8,6 +8,7 @@ import { Constrain } from '../../layouts/Constrain/Constrain';
 import { Grid } from '../../layouts/Grid/Grid';
 import { Teaser } from '../../components/Teaser/Teaser';
 import { Button } from '../../components/Button/Button';
+import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { API } from '../../../services/spoonacular-service';
 import artwork from '../../../images/artwork-4.svg';
@@ -21,7 +22,7 @@ import artwork from '../../../images/artwork-4.svg';
  *  <SearchPage />
  * )
  */
-export const SearchPage = () => {
+export const Search = () => {
   const { searchTerms } = useParams();
   const [searchBar, setSearchBar] = useState('');
   const [resultJSON, setResultJSON] = useState(
@@ -42,35 +43,28 @@ export const SearchPage = () => {
       <Router >
         <Constrain>
           {/* TODO: Break this into a component */}
-          <div className='welcome'>
-            <img className='welcome__img' src={artwork} alt="img-title"></img>
-            <div className='welcome__title'>
-              <span className='welcome__title-bold'>Search </span>
-            all recipes</div>
-            <p className='welcome__paragraph'>
-              {`Type almpedit praesent honestatis mea ad,
-            nemore referrentur est ei, usu no omnium 
-            partiendo rationibus`}</p>
-          </div>
-
-          <div className='search'>
-            <div className='search__input'>
+          <Constrain modifierClasses="constrain--narrow">
+            <img src={artwork} alt="img-title" />
+            <h1>
+              <span><b>Search </b></span>
+              all recipes
+            </h1>
+            <p>{`Type almpedit praesent honestatis mea ad,
+              nemore referrentur est ei, usu no omnium 
+              partiendo rationibus`}</p>
+            <Form
+              buttonText='Search'
+              handleClick={() => {
+                history.push(`/search/${searchBar}`);
+              }}>
               <FormItem
                 handleChange={(e) => setSearchBar(e.target.value)}
                 placeholder={'Type something to search for'}
                 value={searchBar} />
-            </div>
-            <Button
-              modifierClasses='button--red button--peek'
-              isButton={true}
-              text='Search'
-              onClick={() => {
-                history.push(`/search/${searchBar}`);
-              }}
-            />
-          </div>
+            </Form>
+          </Constrain>
 
-          <div className='results-info'>
+          <div className='results-infsso'>
             {`${resultJSON.number} results out of
            ${resultJSON.totalResults} recipes.`}</div>
           <div className='results-grid'>
@@ -81,7 +75,7 @@ export const SearchPage = () => {
                     <Teaser
                       title={r.title}
                       image={r.image}
-                      time={r.preparationMinutes}
+                      time={r.readyInMinutes}
                       portions={r.servings}
                       rating={((r.spoonacularScore + 10) / 20) | 0}
                       excerpt={`${r.title} from ${r.sourceName}`}
@@ -93,9 +87,9 @@ export const SearchPage = () => {
           </div>
 
           {/* TODO: MAKE THIS BUTTON CALL API FOR 10 MORE AND APPEND */}
-          <div className='show-more-btn'>
+          <Constrain modifierClasses="constrain--narrow">
             <Button text='Load More Recipes' />
-          </div>
+          </Constrain>
 
         </Constrain>
       </Router>

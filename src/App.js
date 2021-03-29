@@ -7,7 +7,7 @@ import { Footer } from './stories/layouts/Footer/Footer';
 import { MainMenu } from './stories/components/MainMenu/MainMenu';
 import { Recipe } from './stories/pages/Recipe/Recipe';
 import { Login } from './stories/pages/Login/Login';
-import { SearchPage } from './stories/pages/SearchPage/SearchPage';
+import { Search } from './stories/pages/Search/Search';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route exact path={[
             '/search',
             '/search/:searchTerms']}>
-            <SearchPage />
+            <Search />
           </Route>
           <Route exact path="/recipes/:recipeId">
             <Recipe />
