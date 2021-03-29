@@ -12,6 +12,7 @@
   }
 }
 
+.form--signup,
 .form--login {
   > * {
     @include fade-in-up;
