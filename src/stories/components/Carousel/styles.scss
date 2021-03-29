@@ -3,16 +3,14 @@
 // @file
 // Carousel
 
+.swiper-container--layout {
+  position: relative !important;
+}
+
 .swiper-wrapper--pad {
   padding-left: $spacing-4;
 }
 
 .swiper-slide--box {
   box-sizing: border-box;
-}
-
-.button--peek {
-  position: relative;
-  top: -$spacing-5;
-  left: $spacing-1;
 }

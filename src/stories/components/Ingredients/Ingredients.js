@@ -18,10 +18,10 @@ export const Ingredients = ({ ingredients }) => {
     <div className="ingredients">
       <h4 className="ingredients__title">Ingredients</h4>
       <ul className="ingredients__ingredients">
-        {ingredients.map((ing) => {
+        {ingredients.map((ing, index) => {
           const meas = ing.measures.us.unitLong;
-          return <li key={ing.id}>
-            {ing.amount} {meas} {ing.name}
+          return <li key={ing.id + index}>
+            {Math.round(ing.amount * 10) / 10} {meas} {ing.name}
           </li>;
         })}
       </ul>

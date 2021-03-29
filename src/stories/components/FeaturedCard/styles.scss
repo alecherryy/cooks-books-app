@@ -5,18 +5,17 @@
 
 .featured-card {
   position: relative;
-  max-width: rem(800px);
 }
 
 .featured-card__link {
   align-items: center;
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
-  color: $white;
   display: flex;
   justify-content: center;
+  min-height: rem(350px);
   overflow: hidden;
-  padding: 15% $spacing-2;
+  padding: 5% $spacing-2;
   position: relative;
   text-decoration: none;
 
@@ -50,7 +49,12 @@
   }
 
   @include bp-tablet {
-    padding: 20% $spacing-2;
+    min-height: rem(380px);
+    padding: 5% $spacing-2;
+  }
+
+  @include bp-desktop {
+    min-height: rem(520px);
   }
 }
 
@@ -68,8 +72,13 @@
   flex-direction: column;
   padding-bottom: $spacing-4;
   position: relative;
-  max-width: rem(400px);
+  max-width: 80%;
   z-index: 1;
+  color: $white;
+
+  @include bp-tablet-lg {
+    max-width: 60%;
+  }
 }
 
 .featured-card__eyebrow {
@@ -84,6 +93,7 @@
   font-size: $font-size-h3;
   font-weight: 700;
   line-height: $line-height-tight;
+  padding-bottom: rem(15px);
 
   @include bp-tablet {
     font-size: $font-size-h2;
@@ -146,7 +156,7 @@ $size-desktop: 178px;
   @include bp-tablet {
     height: $size-desktop;
     padding: 0 $spacing-3;
-    top: 50%;
+    top: 60%;
     width: $size-desktop;
 
     &::after {

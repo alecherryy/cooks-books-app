@@ -2,6 +2,7 @@ import './styles.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /**
  * Component for featured card element.
@@ -18,7 +19,7 @@ import PropTypes from 'prop-types';
 export const FeaturedCard = ({ url, image, eyebrow, title }) => {
   return (
     <div className="featured-card">
-      <a href={url} className="featured-card__link">
+      <Link to={url} className="featured-card__link">
         <img className="featured-card__image" src={image}
           alt="Photo of the recipe dish" />
         <span className="featured-card__content">
@@ -26,7 +27,7 @@ export const FeaturedCard = ({ url, image, eyebrow, title }) => {
           <span className="featured-card__title">{title}</span>
           <span className="featured-card__button">Try it now</span>
         </span>
-      </a>
+      </Link>
     </div>
   );
 };

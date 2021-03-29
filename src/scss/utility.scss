@@ -3,8 +3,7 @@
 // @file
 // Utility classes
 
-// text classes'
-// text size
+// text classes
 .text-extra-small {
   font-size: $font-size-xs;
 }
@@ -21,29 +20,15 @@
   font-size: $font-size-xl;
 }
 
-// text style
 .text-italic {
   font-style: italic;
 }
 
-// text weight
-.text-light {
-  font-weight: 300;
-}
-
-.text-normal {
-  font-weight: 400;
-}
-
-.text-bold {
-  font-weight: 700;
+.text-center {
+  text-align: center
 }
 
 // list classes
-.list-inline {
-  @include list-inline();
-}
-
 .list-clean {
   @include list-clean();
 }
@@ -69,17 +54,13 @@ $units: 10, 20, 30, 40, 50, 60, 70, 80;
   }
 }
 
-// pages
-.login,
-.recipe {
-  @include fade-in-up();
+.spaced-aside-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.login {
-  @include bp-max-tablet-lg {
-    padding: $spacing-4 0;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: rem(600px);
-  }
+// pages
+.home,
+.recipe {
+  @include fade-in-up();
 }
