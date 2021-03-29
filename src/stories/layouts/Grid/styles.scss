@@ -69,3 +69,21 @@
 .grid__item {
   align-self: center;
 }
+
+.grid__tem--x-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid__item--spacer {
+  margin: $spacing-1 0 $spacing-7 0;
+
+  @include bp-tablet {
+    margin-top: $spacing-6;
+    margin-bottom: $spacing-6;
+  }
+}
+
+.grid__item--lalign {
+  direction: ltr;
+}

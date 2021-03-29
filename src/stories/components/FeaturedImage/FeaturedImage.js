@@ -33,10 +33,12 @@ export const FeaturedImage = ({
 
   const handleScroll = () => {
     const scrollpos = window.scrollY;
-    if (scrollpos >= 100) {
-      bgImage.current.classList.add('is-animated');
-    } else {
-      bgImage.current.classList.remove('is-animated');
+    if (bgImage.current != null) {
+      if (scrollpos >= 100) {
+        bgImage.current.classList.add('is-animated');
+      } else {
+        bgImage.current.classList.remove('is-animated');
+      }
     }
   };
 
