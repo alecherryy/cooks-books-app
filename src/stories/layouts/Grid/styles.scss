@@ -10,23 +10,28 @@
 
   @include bp-tablet {
     gap: $spacing-3;
-
-    .login & {
-      min-height: 100vh;
-      gap: $spacing-6;
-    }
-  }
-
-  @include bp-tablet-lg {
-    .login & {
-      height: 100vh;
-      gap: calc(#{$spacing-6} * 2);
-    }
   }
 }
 
 .grid--reverse {
   direction: rtl;
+}
+
+.grid--special {
+
+  @include bp-max-tablet-lg {
+    grid-template-columns: repeat(1, 1fr) !important;
+    padding: $spacing-4 0;
+  }
+
+  @include bp-tablet {
+    min-height: calc(100vh - #{rem(220px)});
+    gap: $spacing-3;
+  }
+
+  @include bp-desktop {
+    gap: calc(#{$spacing-6} * 2);
+  }
 }
 
 .grid--2-col {

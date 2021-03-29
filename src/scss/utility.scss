@@ -57,3 +57,9 @@
 .recipe {
   @include fade-in-up();
 }
+
+.login {
+  @include bp-max-tablet {
+    padding: $spacing-4 0;
+  }
+}

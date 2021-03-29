@@ -22,7 +22,7 @@ export const Login = () => {
   return (
     <div className="login">
       <Constrain>
-        <Grid numColumns={2}>
+        <Grid numColumns={2} modifierClasses="grid--special">
           <div className="grid__item">
             <img src={Artwork}
               alt="Decorative Graphics" />
