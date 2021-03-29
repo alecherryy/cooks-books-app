@@ -10,6 +10,8 @@ import { FeaturedImage } from '../../components/FeaturedImage/FeaturedImage';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { StickyContent } from '../../layouts/StickyContent/StickyContent';
 import { Fragment } from 'react';
+import { Instructions } from '../../components/Instructions/Instructions';
+import { Ingredients } from '../../components/Ingredients/Ingredients';
 
 /**
  * Component for Recipe page.
@@ -24,13 +26,20 @@ export const Recipe = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [instructions, setInstructions] = useState([]);
+  const [intro, setIntro] = useState([]);
 
   useEffect(() => {
     const recipeID = id ? id : '609262'; // default value for sample pages
 
     API.findRecipeById(recipeID).then((res) => {
       setRecipe(res);
+      setIntro(res.summary);
       setIngredients(res.extendedIngredients);
+    });
+
+    API.findRecipeIntructions(recipeID).then((res) => {
+      setInstructions(res[0]);
     });
   }, []);
 
@@ -46,19 +55,11 @@ export const Recipe = () => {
         />
         <Sidebar asideContent={
           <StickyContent>
-            <h4>Ingredients</h4>
-            <ul className="text-small list-clean">
-              { ingredients.map((el) => {
-                const meas = el.measures.us.unitLong;
-                return <li key={el.id}>
-                  {el.amount} {meas} {el.name}
-                </li>;
-              }) }
-            </ul>
+            <Ingredients ingredients={ingredients} />
           </StickyContent>
         }
-        mainContent={<Content summary={recipe.summary}
-          instructions={recipe.instructions}
+        mainContent={<Content summary={intro}
+          instructions={instructions}
         />} />
       </Constrain>
     </div>
@@ -76,14 +77,12 @@ export const Recipe = () => {
  * )
  */
 const Content = ({ summary, instructions }) => {
+  const formatSummary = `${summary.toString().split('. ')[0]}.`;
   return (
     <Fragment>
-      <p className="text-italic"
-        dangerouslySetInnerHTML={ { __html: summary } } />
-      { instructions && <>
-        <h3>Instructions</h3>
-        <p dangerouslySetInnerHTML={ { __html: instructions } } />
-      </> }
+      <p className="text-italic text-large spaced-50-bottom"
+        dangerouslySetInnerHTML={ { __html: formatSummary } } />
+      { instructions && <Instructions steps={instructions.steps} /> }
     </Fragment>
   );
 };

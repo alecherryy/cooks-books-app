@@ -35,7 +35,6 @@ export const FeaturedImage = ({
     const scrollpos = window.scrollY;
     if (scrollpos >= 100) {
       bgImage.current.classList.add('is-animated');
-      // bgImage.classList.add('is-animated');
     } else {
       bgImage.current.classList.remove('is-animated');
     }

@@ -1,0 +1,17 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Instruction
+
+.instructions__title {
+  @include svg-background(icon-spatula);
+
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding: $spacing-2 0 $spacing-2 $spacing-8;
+
+  @include bp-max-tablet {
+    background-size: 50px;
+    padding: $spacing-2 0 $spacing-2 $spacing-6;
+  }
+}

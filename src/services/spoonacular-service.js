@@ -47,6 +47,19 @@ const findRecipeById = (id) => {
 };
 
 /**
+ * Find recipe instructions
+ *
+ * @param {string} id of the recipe
+ * @return {object} an array of recipe instructions
+ */
+const findRecipeIntructions = (id) => {
+  return (
+    fetch(`${URL}/${id}/analyzedInstructions`, {
+      headers: HEADERS,
+    }).then((response) => response.json()));
+};
+
+/**
  * Find recipes similar to the recipe ID
  *
  * @param {string} id of the recipe
@@ -64,5 +77,6 @@ export const API = {
   findRecipesByKeywords,
   findRandomRecipes,
   findRecipeById,
+  findRecipeIntructions,
   findSimilarRecipeById,
 };
