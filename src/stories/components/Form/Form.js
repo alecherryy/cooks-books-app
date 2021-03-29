@@ -30,7 +30,7 @@ export const Form = ({
     <form className={['form', `${modifierClasses}`].join(' ').trim()}>
       {children}
       <Button modifierClasses={`button--${buttonColor} form__button`}
-        isButton={true} text="Login" handleClick={handleClick} />
+        isButton={true} text="Login" onClick={handleClick} />
     </form>
   );
 };
