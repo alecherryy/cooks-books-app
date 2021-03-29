@@ -7,10 +7,10 @@
 
 The repo contains development work for the CooksBooks web-based application. This product is implemented using a combination of languages and development tools such as: React, Node.js, public APIs, MongoDB, Storybook and Jest.
 
-## CooksBooks Proposal / Description
-A link to the Project Proposal Document Per Assignment 1:  
-https://docs.google.com/document/d/15pV5A6-JOxfCmokgAZ2sKmLJ8jxOeOMdnCY02-MzPbk/edit
+## Introduction
+CooksBooks is a web application that aims to bring both culinary creators and food enthusiasts together in a more level playing field than currently exists. By giving users the freedom of registering as either a chef or a foodie, it allows everyone to enjoy good recipes and food, while providing confidence in the robustness of recipes and reviews on the platform. Overall, CooksBooks provides a space for everyday individuals to browse recipes and be a part of an ongoing discussion, in contrast to the existing spaces of food critic reviews and recipe blogs. 
 
+Additional information can be found on our [Wiki](https://github.com/alecherryy/cooks-books-app/wiki) pages.
 
 ## Installation
 To get started, clone this repo to your preferred folder, `cd` into the project and run

@@ -41,11 +41,11 @@ export const Carousel = ({ cards }) => {
     freeMode: true,
     slidesPerView: 1,
     breakpoints: {
-      480: {
+      1024: {
         slidesPerView: 2,
         spaceBetween: 30,
       },
-      1200: {
+      1400: {
         slidesPerView: 3,
       },
     },
