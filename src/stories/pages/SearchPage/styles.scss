@@ -37,8 +37,6 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  // color: red;
-  // background-color: white;
   margin-top: $spacing-4;
   margin-bottom: $spacing-4;
 }
@@ -60,8 +58,8 @@
   font-family: $header-font-family;
   font-size: $font-size-h5;
   font-weight: 700;
-  margin-bottom: -10rem;
-  min-height: 50vh;
+  margin-bottom: 3rem;
+  // min-height: 50vh;
 }
 
 .results-grid {

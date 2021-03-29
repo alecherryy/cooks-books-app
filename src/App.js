@@ -23,7 +23,9 @@ function App() {
           <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/search/:searchTerms">
+          <Route exact path={[
+            '/search',
+            '/search/:searchTerms']}>
             <SearchPage />
           </Route>
           <Route exact path="/recipes/:recipeId">

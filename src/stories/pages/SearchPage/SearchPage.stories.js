@@ -13,12 +13,11 @@ export default {
 
 const Template = (args) => {
   return (
-    <MemoryRouter initialEntries={['/search/jerusalem]']}>
+    <MemoryRouter initialEntries={['/search/jerusalem']}>
       <SearchPage {...args} />
     </MemoryRouter>
   );
 };
-
 
 // Default search page
 export const Default = Template.bind({});
