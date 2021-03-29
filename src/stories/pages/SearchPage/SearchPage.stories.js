@@ -1,4 +1,6 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
+import '../../../scss/styles.scss';
 import { SearchPage } from './SearchPage';
 
 /**
@@ -9,10 +11,14 @@ export default {
   component: SearchPage,
 };
 
-const Template = (args) => <SearchPage {...args} />;
+const Template = (args) => {
+  return (
+    <MemoryRouter initialEntries={['/search/jerusalem]']}>
+      <SearchPage {...args} />
+    </MemoryRouter>
+  );
+};
+
 
 // Default search page
 export const Default = Template.bind({});
-Default.args = {
-  test: 'default',
-};

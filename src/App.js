@@ -9,6 +9,7 @@ import { Recipe } from './stories/pages/Recipe/Recipe';
 import { Login } from './stories/pages/Login/Login';
 import { Home } from './stories/pages/Home/Home';
 import { Signup } from './stories/pages/Signup/Signup';
+import { SearchPage } from './stories/pages/SearchPage/SearchPage';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route exact path="/search/:searchTerms">
+            <SearchPage />
           </Route>
           <Route exact path="/recipes/:recipeId">
             <Recipe />

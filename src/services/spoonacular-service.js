@@ -15,7 +15,8 @@ const HEADERS = {
 // find recipes by keywords, TODO: add some filters, add keywords by space
 const findRecipesByKeywords = (keywords) => {
   return (
-    fetch(`${URL}/complexSearch?query=${keywords}`, {
+    fetch(`${URL}/complexSearch?query=${keywords}
+    &addRecipeInformation=true`, {
       headers: HEADERS,
     }).then((response) => response.json()));
 };
