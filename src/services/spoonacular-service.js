@@ -47,12 +47,12 @@ const findRecipeById = (id) => {
 };
 
 /**
- * Find recipe instructions
+ * Get recipe instructions
  *
  * @param {string} id of the recipe
  * @return {object} an array of recipe instructions
  */
-const findRecipeIntructions = (id) => {
+const getRecipeIntructions = (id) => {
   return (
     fetch(`${URL}/${id}/analyzedInstructions`, {
       headers: HEADERS,
@@ -77,6 +77,6 @@ export const API = {
   findRecipesByKeywords,
   findRandomRecipes,
   findRecipeById,
-  findRecipeIntructions,
+  getRecipeIntructions,
   findSimilarRecipeById,
 };

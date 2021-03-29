@@ -38,12 +38,14 @@ export const Recipe = () => {
       setIngredients(res.extendedIngredients);
     });
 
-    API.findRecipeIntructions(recipeID).then((res) => {
+    API.getRecipeIntructions(recipeID).then((res) => {
       setInstructions(res[0]);
     });
   }, []);
 
+  // get Spoontacular score
   const score = recipe.spoonacularScore;
+  // convert to 5-scale rating
   const ratings = score ? (score / 100) * 5 : null;
 
   return (

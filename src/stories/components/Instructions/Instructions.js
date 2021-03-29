@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * Component for Section Title element.
+ * Component for Instructions element.
  *
  * @component
  * @param {string} modifierClasses Class modifiers of the component.

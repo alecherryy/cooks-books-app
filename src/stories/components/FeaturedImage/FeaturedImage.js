@@ -99,7 +99,7 @@ FeaturedImage.propTypes = {
 };
 
 FeaturedImage.defaultProps = {
-  image: 'https://picsum.photos/id/306/1200/600',
+  image: '',
   title: 'Steamed Mussels in White Wine',
   excerpt: '',
   portions: 4,
