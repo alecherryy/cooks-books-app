@@ -12,6 +12,7 @@ import { Button } from '../Button/Button';
  * @param {string} modifierClasses Class modifiers of the component.
  * @param {func} handleClick of the component.
  * @param {node} children of the component.
+ * @param {string} buttonText of the component.
  * @param {string} buttonColor of the component.
  * @return {object} (
  *   <Form modifierClasses={modifierClasses}
@@ -24,13 +25,14 @@ export const Form = ({
   modifierClasses,
   handleClick,
   buttonColor,
+  buttonText,
   children,
 }) => {
   return (
     <form className={['form', `${modifierClasses}`].join(' ').trim()}>
       {children}
       <Button modifierClasses={`button--${buttonColor} form__button`}
-        isButton={true} text="Login" handleClick={handleClick} />
+        isButton={true} text={buttonText} handleClick={handleClick} />
     </form>
   );
 };
@@ -52,6 +54,10 @@ Form.propTypes = {
    * Form's buttonColor
    */
   buttonColor: PropTypes.string,
+  /**
+   * Form's buttonText
+   */
+  buttonText: PropTypes.string,
 };
 
 Form.defaultProps = {
@@ -59,4 +65,5 @@ Form.defaultProps = {
   handleClick: null,
   children: null,
   buttonColor: 'red',
+  buttonText: 'Submit Form',
 };
