@@ -6,7 +6,7 @@
 .form-item {
   display: flex;
   flex-direction: column;
-  margin: 0 0 $spacing-3;
+  margin: 0 0 $spacing-2;
 
   ::placeholder {
     color: $gray-4;
@@ -21,7 +21,7 @@
   }
 
   @include bp-tablet {
-    margin: 0 0 $spacing-4;
+    margin: 0 0 $spacing-3;
   }
 }
 
@@ -115,5 +115,15 @@
   background-position: center right $spacing-2;
   background-repeat: no-repeat;
   background-size: auto;
+  color: $gray-4;
+  font-weight: 700;
   padding-right: $spacing-2;
+  position: relative;
+
+  option {
+    color: $black;
+    font-weight: 400;
+    margin: $spacing-3 0 0;
+    position: absolute;
+  }
 }

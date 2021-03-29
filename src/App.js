@@ -8,6 +8,7 @@ import { MainMenu } from './stories/components/MainMenu/MainMenu';
 import { Recipe } from './stories/pages/Recipe/Recipe';
 import { Login } from './stories/pages/Login/Login';
 import { Home } from './stories/pages/Home/Home';
+import { Signup } from './stories/pages/Signup/Signup';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         <Switch>
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
           <Route exact path="/recipes/:recipeId">
             <Recipe />
