@@ -23,14 +23,15 @@ import { Ingredients } from '../../components/Ingredients/Ingredients';
  */
 
 export const Recipe = () => {
-  const { id } = useParams();
+  const { recipeId } = useParams();
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   const [intro, setIntro] = useState([]);
 
   useEffect(() => {
-    const recipeID = id ? id : '609262'; // default value for sample pages
+    const recipeID = recipeId ? recipeId : '609262';
+    // default value for sample pages
 
     API.findRecipeById(recipeID).then((res) => {
       setRecipe(res);

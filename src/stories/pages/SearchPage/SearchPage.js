@@ -5,27 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router';
 
-
-// import React, { useState, useEffect } from 'react';
-
-// import PropTypes from 'prop-types';
-
-// import { Footer } from '../../components/Footer/Footer';
-import { Teaser } from '../../components/Teaser/Teaser';
-import { Button } from '../../components/Button/Button';
-// import { Form } from '../../components/Form/Form';
-import { FormItem } from '../../components/FormItem/FormItem';
-
-
-// import { SectionTitle } from '../../components/SectionTitle/SectionTitle';
-import { API } from '../../../services/spoonacular-service';
-
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { Grid } from '../../layouts/Grid/Grid';
-
+import { Teaser } from '../../components/Teaser/Teaser';
+import { Button } from '../../components/Button/Button';
+import { FormItem } from '../../components/FormItem/FormItem';
+import { API } from '../../../services/spoonacular-service';
 import img1 from '../../../images/artwork-4.svg';
-
-// import test from '../../../images/artwork-1.svg'
 
 
 /**
@@ -38,31 +24,19 @@ import img1 from '../../../images/artwork-4.svg';
  */
 export const SearchPage = () => {
   const { searchTerms } = useParams();
-
+  const [searchBar, setSearchBar] = useState('');
   const [resultJSON, setResultJSON] = useState(
     { totalResults: 0, results: [], number: 0 });
-
-  const [searchBar, setSearchBar] = useState('');
   const history = useHistory();
 
-
-  // const updateTermAndSearchApi = () => {
-  //   // spoonService.findRecipeById(716429)
-  //   //   .then((theResult) => alert(theResult));
-  //   // setResultJSON({ totalResults: 0, results: [], number: 0 });
-  //   if (searchBar === '') {
-  //     alert('pls dont search with no terms');
-  //     return;
-  //   }
-  //   alert('clicked me!');
-  //   API.findRecipesByKeywords(searchBar)
-  //     .then((theResult) => setResultJSON(theResult));
-  // };
-
+  // listen for changes in url, search based on that
   useEffect(() => {
     setSearchBar(searchTerms);
-    if (searchBar) {
-      API.findRecipesByKeywords(searchBar)
+    // TODO: this line added for functionality showing in stories
+    //   but it also makes 'jerusalem' the default search on loading
+    //   a blank search page
+    if (searchTerms) {
+      API.findRecipesByKeywords(searchTerms)
         .then((theResults) => setResultJSON(theResults));
     }
   }, [searchTerms]);
@@ -86,28 +60,15 @@ export const SearchPage = () => {
 
           <div className='search'>
             <div className='search__input'>
-              <h2>{searchTerms}</h2>
               <FormItem
                 handleChange={(e) => setSearchBar(e.target.value)}
                 placeholder={'Type something to search for'}
                 value={searchBar} />
             </div>
-            {/* <Button
-              modifierClasses='button--red button--peek'
-              isButton={false}
-              text='search'
-              url={`${searchBar}`}
-            /> */}
-            {/* <Button
-              modifierClasses='button--red button--peek'
-              isButton={true}
-              text='dummy'
-              onClick={() => updateTermAndSearchApi()}
-            /> */}
             <Button
               modifierClasses='button--red button--peek'
               isButton={true}
-              text='tryMe'
+              text='Search'
               onClick={() => {
                 history.push(`/search/${searchBar}`);
               }}
