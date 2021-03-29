@@ -52,6 +52,23 @@
   @include list-inline();
 }
 
+// margins
+$units: 10, 20, 30, 40, 50, 60, 70, 80;
+
+@each $unit in $units {
+  .spaced-#{$unit} {
+    margin: #{$unit}px 0;
+  }
+
+  .spaced-#{$unit}-top {
+    margin-top: #{$unit}px;
+  }
+
+  .spaced-#{$unit}-bottom {
+    margin-bottom: #{$unit}px;
+  }
+}
+
 // pages
 .login,
 .recipe {
