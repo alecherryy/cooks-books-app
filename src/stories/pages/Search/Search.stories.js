@@ -1,20 +1,20 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 import '../../../scss/styles.scss';
-import { SearchPage } from './SearchPage';
+import { Search } from './Search';
 
 /**
  * Example Component: Search Page
  */
 export default {
   title: 'Example/SearchPage',
-  component: SearchPage,
+  component: Search,
 };
 
 const Template = (args) => {
   return (
     <MemoryRouter initialEntries={['/search/jerusalem']}>
-      <SearchPage {...args} />
+      <Search {...args} />
     </MemoryRouter>
   );
 };
