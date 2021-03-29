@@ -167,7 +167,7 @@ const Back = ({
       </span>
       {description}
       <div className="card__info">
-        {description &&
+        {portions &&
           <span className="card__icon card__icon--portions">
             Yields {portions}
           </span>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Constrain } from '../Constrain/Constrain';
 import Logo from '../../../images/logo.svg';
+import { Link } from 'react-router-dom';
 
 /**
  * Component for header element.
@@ -21,22 +22,24 @@ import Logo from '../../../images/logo.svg';
 
 export const Header = ({ modifierClasses, rightContent }) => {
   return (
-    <div
+    <header
       className={['header', `${modifierClasses}`].join(' ').trim()}
     >
       <Constrain modifierClasses='constrain--wide'>
         <div className='header__inner'>
           <div className='header__left'>
-            <img className='section-title__img'
-              src={Logo}
-              alt='logo-img'/>
+            <Link to="/">
+              <img className='section-title__img'
+                src={Logo}
+                alt='logo-img'/>
+            </Link>
           </div>
           <div className='header__right'>
             {rightContent}
           </div>
         </div>
       </Constrain>
-    </div>
+    </header>
   );
 };
 

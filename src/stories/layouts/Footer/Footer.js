@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Constrain } from '../../layouts/Constrain/Constrain';
+import { Constrain } from '../Constrain/Constrain';
 
 /**
  * Component for footer element.

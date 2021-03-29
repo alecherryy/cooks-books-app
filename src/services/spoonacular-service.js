@@ -1,78 +1,82 @@
-const MULTI_URL =
-  'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch';
-
-const RANDOM_URL =
-  'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random';
-
-const BY_ID_URL =
+const URL =
   'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes';
 
-//  find recipes by keywords, TODO: add some filters, add keywords by space
+const HEADERS = {
+  'x-rapidapi-key': '96a59c87e8msh987f6b0d4a69ef3p1240d5jsne302b83f190e',
+  'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+};
+
+/**
+ * Find given number of random recipes
+ *
+ * @param {number} number of the recipe
+ * @return {object} a recipe object
+ */
+// find recipes by keywords, TODO: add some filters, add keywords by space
 const findRecipesByKeywords = (keywords) => {
   return (
-    fetch(`${MULTI_URL}?query=${keywords}`, {
-      // method: 'GET',
-      headers: {
-        'x-rapidapi-key':
-          '96a59c87e8msh987f6b0d4a69ef3p1240d5jsne302b83f190e',
-        'x-rapidapi-host':
-          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-      },
-    })
-      .then((response) => response.json()));
+    fetch(`${URL}/complexSearch?query=${keywords}`, {
+      headers: HEADERS,
+    }).then((response) => response.json()));
 };
 
-// find random recipes, number is number you want back
-// Gives a JSON object with an array of recipes:
-// {recipes: [
-// {an array of recipe objects,
-//   relevant fields probably
-//     'title', 'image', 'servings', 'readiInMinutes',
-//     'instructions'}
-// ]}
+/**
+ * Find given number of random recipes
+ *
+ * @param {number} number of the recipe
+ * @return {object} a recipe object
+ */
 const findRandomRecipes = (number) => {
   return (
-    fetch(`${RANDOM_URL}?number=${number}`, {
-      // method: 'GET',
-      headers: {
-        'x-rapidapi-key':
-          '96a59c87e8msh987f6b0d4a69ef3p1240d5jsne302b83f190e',
-        'x-rapidapi-host':
-          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-      },
-    })
-      .then((response) => response.json()));
+    fetch(`${URL}/random?number=${number}`, {
+      headers: HEADERS,
+    }).then((response) => response.json()));
 };
 
-// find recipe by id, sample ids in webpages for now:
-//   850965 for bagel dip
-//   716429 pasta with garlic and stuff
-//   158042 for egg salad
-// Gives a JSON object back, relevant fields probably:
-//   'title', 'image', 'servings', 'readiInMinutes',
-//   'instructions'
-//
-
-const findRecipeById = (recipeId) => {
+/**
+ * Find recipes by ID
+ *
+ * @param {string} id of the recipe
+ * @return {object} a recipe object
+ */
+const findRecipeById = (id) => {
   return (
-    fetch(`${BY_ID_URL}/${recipeId}/information`, {
-      // method: 'GET',
-      headers: {
-        'x-rapidapi-key':
-          '96a59c87e8msh987f6b0d4a69ef3p1240d5jsne302b83f190e',
-        'x-rapidapi-host':
-          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-      },
-    })
-      .then((response) => response.json()));
+    fetch(`${URL}/${id}/information`, {
+      headers: HEADERS,
+    }).then((response) => response.json()));
+};
+
+/**
+ * Get recipe instructions
+ *
+ * @param {string} id of the recipe
+ * @return {object} an array of recipe instructions
+ */
+const getRecipeIntructions = (id) => {
+  return (
+    fetch(`${URL}/${id}/analyzedInstructions`, {
+      headers: HEADERS,
+    }).then((response) => response.json()));
+};
+
+/**
+ * Find recipes similar to the recipe ID
+ *
+ * @param {string} id of the recipe
+ * @return {object} an array of recipe objects
+ */
+const findSimilarRecipeById = (id) => {
+  return (
+    fetch(`${URL}/${id}/similar`, {
+      headers: HEADERS,
+    }).then((response) => response.json()));
 };
 
 // use an object to namespace the functions being called from this service
-const spoonServiceAPI = {
+export const API = {
   findRecipesByKeywords,
   findRandomRecipes,
   findRecipeById,
+  getRecipeIntructions,
+  findSimilarRecipeById,
 };
-
-// export the api for this as the default
-export default spoonServiceAPI;
