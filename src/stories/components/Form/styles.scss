@@ -1,0 +1,34 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Form
+
+.form {
+  padding: 0 $spacing-3 $spacing-8 0;
+  position: relative;
+
+  @include bp-tablet {
+    padding: 0 $spacing-5 $spacing-10 0;
+  }
+}
+
+.form--login {
+  > * {
+    @include fade-in-up;
+    position: relative;
+    z-index: 2;
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}n) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}
+
+.form__button {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}

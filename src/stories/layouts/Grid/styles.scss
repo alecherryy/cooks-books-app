@@ -7,10 +7,31 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: calc(#{$spacing-3} / 2);
+
+  @include bp-tablet {
+    gap: $spacing-3;
+  }
 }
 
 .grid--reverse {
   direction: rtl;
+}
+
+.grid--special {
+
+  @include bp-max-tablet-lg {
+    grid-template-columns: repeat(1, 1fr) !important;
+    padding: $spacing-4 0;
+  }
+
+  @include bp-tablet {
+    min-height: calc(100vh - #{rem(240px)});
+    gap: $spacing-3;
+  }
+
+  @include bp-desktop {
+    gap: calc(#{$spacing-6} * 2);
+  }
 }
 
 .grid--2-col {
@@ -45,4 +66,6 @@
   }
 }
 
-
+.grid__item {
+  align-self: center;
+}
