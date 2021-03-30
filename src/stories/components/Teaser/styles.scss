@@ -11,6 +11,10 @@
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  b {
+    font-weight: 400;
+  }
 }
 
 .teaser__link {
@@ -29,16 +33,15 @@
 }
 
 .teaser__image {
-  clip-path: url('#MaskImage');
+  border-radius: 20px;
   display: block;
-  height: 203px;
+  height: 220px;
   object-fit: cover;
-  margin: 0 auto $spacing-3;
-  width: 223px;
+  margin: 0 auto $spacing-1;
 }
 
 .teaser__item {
-  // font-weight: 700;
+  font-size: $font-size-xs;
   text-align: center;
 
   &::before {
@@ -49,7 +52,7 @@
     background-size: contain;
     content: '';
     display: block;
-    margin: $spacing-2 auto $spacing-1;
+    margin: 0 auto $spacing-1;
   }
 }
 
