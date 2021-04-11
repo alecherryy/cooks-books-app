@@ -1,0 +1,75 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Teaser
+
+.teaser {
+  font-size: $font-size-sm;
+  margin: 0 auto $spacing-5;
+  max-width: rem(280px);
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  b {
+    font-weight: 400;
+  }
+}
+
+.teaser__link {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    .teaser__title {
+      color: $orange;
+    }
+  }
+}
+
+.teaser__mask {
+  position: absolute;
+}
+
+.teaser__image {
+  border-radius: 20px;
+  display: block;
+  height: 220px;
+  object-fit: cover;
+  margin: 0 auto $spacing-1;
+}
+
+.teaser__item {
+  font-size: $font-size-xs;
+  text-align: center;
+
+  &::before {
+    @include image-replace(30px, 30px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    display: block;
+    margin: 0 auto $spacing-1;
+  }
+}
+
+.teaser__item--portions {
+  &::before {
+    @include svg-background(icon-people);
+  }
+}
+
+.teaser__item--time {
+  &::before {
+    @include svg-background(icon-time);
+  }
+}
+
+.teaser__item--rating {
+  &::before {
+    @include svg-background(icon-star-empty);
+  }
+}

@@ -3,6 +3,7 @@ import './styles.scss';
 // import React, { useState } from 'react';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /**
  * Component for card element.
@@ -34,14 +35,14 @@ export const Card = ({
   };
 
   return (
-    <a className={[
+    <Link className={[
       'card',
       `${favorite ? 'card--favorite' : ''}`].join(' ').trim()
-    } url={url}>
+    } to={url}>
       <Front title={title} description={description} image={image}/>
       <Back title={title} description={description} portions={portions}
         time={time} rating={rating} onClick={() => toggleFavorite()} />
-    </a>
+    </Link>
   );
 };
 
@@ -106,12 +107,14 @@ Card.defaultProps = {
  */
 const Front = ({ title, image, description }) => {
   return (
-    <span className="card__front"
-      style={{ backgroundImage: `url(${image})` }}>
+    <span className="card__front">
+      <img className="card__front--image"
+        src={image}
+        alt="image-alt"/>
       <span className="card__title">
         {title}
       </span>
-      <span>{description}</span>
+      <span dangerouslySetInnerHTML={ { __html: description } } />
     </span>
   );
 };
@@ -165,9 +168,9 @@ const Back = ({
       <span className="card__title">
         {title}
       </span>
-      {description}
+      <span dangerouslySetInnerHTML={ { __html: description } } />
       <div className="card__info">
-        {description &&
+        {portions &&
           <span className="card__icon card__icon--portions">
             Yields {portions}
           </span>

@@ -160,3 +160,16 @@ $size-desktop: 178px;
     transform: translateX(0);
   }
 }
+
+.button--peek-left,
+.button--peek-right {
+  margin-top: -$spacing-5;
+}
+
+.button--peek-left {
+  margin-left: -$spacing-5;
+}
+
+.button--peek-right {
+  margin-right: -$spacing-5;
+}

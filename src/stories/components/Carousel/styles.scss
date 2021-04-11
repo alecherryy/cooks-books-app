@@ -1,0 +1,13 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Carousel
+
+.swiper-container--layout {
+  padding: 0 0 $spacing-2 $spacing-6;
+  position: relative !important;
+}
+
+.swiper-slide--box {
+  box-sizing: border-box;
+}

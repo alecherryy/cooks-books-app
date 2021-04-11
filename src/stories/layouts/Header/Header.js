@@ -4,29 +4,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Constrain } from '../Constrain/Constrain';
+import Logo from '../../../images/logo.svg';
+import { Link } from 'react-router-dom';
 
 /**
  * Component for header element.
  *
  * @component
  * @param {string} modifierClasses Class modifiers of the component.
- * @param {node} content content of the component.
+ * @param {node} rightContent right side content of the component.
  * @return {object} (
  *   <Header modifierClasses={modifierClasses} />
- *      {content}
+ *      {rightContent}
  *   </Header>
  * )
  */
 
-export const Header = ({ modifierClasses, content }) => {
+export const Header = ({ modifierClasses, rightContent }) => {
   return (
-    <div
+    <header
       className={['header', `${modifierClasses}`].join(' ').trim()}
     >
-      <Constrain modifierClasses="constrain--wide">
-        {content}
+      <Constrain modifierClasses='constrain--wide'>
+        <div className='header__inner'>
+          <div className='header__left'>
+            <Link to="/">
+              <img className='section-title__img'
+                src={Logo}
+                alt='logo-img'/>
+            </Link>
+          </div>
+          <div className='header__right'>
+            {rightContent}
+          </div>
+        </div>
       </Constrain>
-    </div>
+    </header>
   );
 };
 
@@ -36,12 +49,12 @@ Header.propTypes = {
    */
   modifierClasses: PropTypes.string,
   /**
-   * Header's content
+   * Header's right-content
    */
-  content: PropTypes.node,
+  rightContent: PropTypes.node,
 };
 
 Header.defaultProps = {
   modifierClasses: '',
-  content: 'Content goes here.',
+  rightContent: 'content goes here.',
 };

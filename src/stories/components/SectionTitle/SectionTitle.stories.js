@@ -15,7 +15,6 @@ const Template = (args) => <SectionTitle {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   modifierClasses: '',
-  url: '#',
   title: 'This is a Section Title',
   imagePath: 'https://picsum.photos/id/249/425/200',
   paragraph: `Type almpedit praesent honestatis mea ad

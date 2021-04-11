@@ -2,7 +2,7 @@
 
 // @file
 // Sidebar
-$sidebar-width: rem(300px);
+$sidebar-width: rem(350px);
 
 .sidebar {
   @include bp-tablet-lg {
@@ -13,6 +13,12 @@ $sidebar-width: rem(300px);
 
   @include bp-desktop {
     gap: $spacing-5;
+  }
+
+  .recipe & {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: rem(1000px);
   }
 }
 

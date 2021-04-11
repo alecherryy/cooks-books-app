@@ -8,27 +8,26 @@ import PropTypes from 'prop-types';
  *
  * @component
  * @param {string} modifierClasses Class modifiers of the component.
- * @param {string} url URL of the component.
  * @param {string} imagePath The path to the img for this component.
  * @param {string} title The title of this component.
  * @param {string} paragraph The paragraph in this component.
  * @param {string} svgClass A class to determine which SVG component uses.
  * @return {object} (
- *   <SectionTitle modifierClasses={modifierClasses} url={url}
+ *   <SectionTitle modifierClasses={modifierClasses}
  *      imagePath={imagePath} title={title}
  *      paragraph={paragraph} svgClass={svgClass} />
  * )
  */
 export const SectionTitle = ({
-  modifierClasses, url, imagePath, title, paragraph, svgClass,
+  modifierClasses, imagePath, title, paragraph, svgClass,
 }) => {
   const classes = ['section-title', `${modifierClasses}`].join(' ').trim();
   const svgClasses = ['section-title__icon', `${svgClass}`].join(' ').trim();
 
   return (
-    <div className={classes} url={url}>
+    <div className={classes}>
       <img className="section-title__img"
-        src={imagePath} alt="title-img"></img>
+        src={imagePath} alt="Decorative Graphics"/>
       <div className="section-title__blurb">
         <span
           className={svgClasses}>
@@ -47,12 +46,6 @@ SectionTitle.propTypes = {
   * SectionTitle's modifier classes.
   */
   modifierClasses: PropTypes.string,
-
-  /**
-   * SectionTitle's url.
-   */
-  url: PropTypes.string,
-
   /**
    * SectionTitle's path to the image to be used.
    */

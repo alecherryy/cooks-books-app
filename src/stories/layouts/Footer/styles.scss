@@ -5,10 +5,8 @@
 
 .footer {
   font-size: $font-size-xs;
-  padding: $spacing-2 0;
-  bottom: 0;
-  right: 0;
-  position: fixed;
+  padding: $spacing-3 0;
+  text-align: right;
 
   @include bp-tablet {
     font-size: $font-size-sm;

@@ -1,0 +1,107 @@
+@import 'variables.scss';
+
+// @file
+// Utility classes
+
+// text classes
+.text-extra-small {
+  font-size: $font-size-xs;
+}
+
+.text-small {
+  font-size: $font-size-sm;
+}
+
+.text-large {
+  font-size: $font-size-lg;
+}
+
+.text-extra-large {
+  font-size: $font-size-xl;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+// text weight
+.text-bold {
+  font-weight: 700;
+}
+
+.text-regular {
+  font-weight: 400;
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+// Alignment
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+// list classes
+.list-clean {
+  @include list-clean();
+}
+
+.list-inline {
+  @include list-inline();
+}
+
+// margins
+$units: 10, 20, 30, 40, 50, 60, 70, 80;
+
+@each $unit in $units {
+  .spaced-#{$unit} {
+    margin: #{$unit}px 0;
+  }
+
+  .spaced-#{$unit}-top {
+    margin-top: #{$unit}px;
+  }
+
+  .spaced-#{$unit}-bottom {
+    margin-bottom: #{$unit}px;
+  }
+}
+
+.spaced-aside-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.spaced-none-left {
+  margin-left: 0;
+}
+
+.spaced-none-right {
+  margin-right: 0;
+}
+
+.spaced-none-top {
+  margin-top: 0;
+}
+
+.spaced-none-bottom {
+  margin-bottom: 0;
+}
+
+// pages
+.home,
+.search,
+.login,
+.signup,
+.recipe {
+  @include fade-in-up();
+}
