@@ -1,8 +1,10 @@
 import './styles.scss';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Auth';
+
 
 /**
  * Component for Main Menu element.
@@ -14,6 +16,8 @@ import { Link } from 'react-router-dom';
  * )
  */
 export const MainMenu = () => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <ul className="main-menu">
       <li className="main-menu__item">
@@ -21,7 +25,16 @@ export const MainMenu = () => {
           className="main-menu__link main-menu__link--search">Search</Link>
       </li>
       <li className="main-menu__item">
-        <Button url="/login" text="Login" />
+        {
+          currentUser === null &&
+          <Button url="/login" text="Login" />
+        }
+        {
+          currentUser !== null &&
+          // TODO: Make this redirect to account once we have that
+          //   for now it goes to login, where I've added a temp 'logout' button
+          <Button url="/login" text={currentUser.email} />
+        }
       </li>
     </ul>
   );

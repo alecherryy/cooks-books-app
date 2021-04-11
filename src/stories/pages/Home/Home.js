@@ -14,6 +14,7 @@ import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 
+
 /**
  * Component for Home page.
  *
