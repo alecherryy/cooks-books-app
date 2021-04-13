@@ -5,10 +5,13 @@
 
 .account-menu {
   background-color: $white;
-  max-width: 20rem;
-  padding: $spacing-3;
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba( 03, 03, 03, 0.1);
+  font-size: $font-size-sm;
+  max-width: rem(300px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: $spacing-3;
 }
 
 .account-menu__welcome {
@@ -17,72 +20,46 @@
   margin-bottom: rem(5px);
 }
 
-.account-menu__message {
-  margin-bottom: $spacing-2;
-}
+.account-menu__menu {
+  @include list-clean();
 
-.account-menu__bold-hello {
   font-weight: 700;
+  padding-top: $spacing-2;
 }
 
-.account-menu__option {
-  font-weight: 700;
-  margin: $spacing-1 $spacing-1 $spacing-1 0;
-  padding: $spacing-1 $spacing-1 $spacing-1 0;
-  display: flex;
-  align-items: center;
-  width: 70%;
-  border-top-right-radius: rem(40px);
-  border-bottom-right-radius: rem(40px);
-  // transition: 0.0s all;
-}
+.account-menu__link {
+  display: inline-block;
+  padding: $spacing-1 0 $spacing-1 $spacing-5;
+  text-decoration: none;
+  position: relative;
 
-  .account-menu__option--active {
-    color: $white;
-    background-color: $orange;
-    // transition: 0.0s all;
-  }
-
-.account-menu__option-text {
-  margin-left: rem(15px);
-}
-
-.account-menu__icon {
-
-  &::before {
-    @include image-replace( 26px, 26px );
+  &::before,
+  &::after {
+    @include image-replace(26px, 26px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 26px;
     content: '';
-    display: inline-block;
-    margin: rem(10px) auto 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.4 ease-in-out;
   }
 
-  // Turn white with a filter if its the active one
-  &.account-menu__icon--active {
-    filter: invert(100%);
+  &::after {
+    opacity: 0;
   }
 
-  // Icons for each of the things
-  &.account-menu__icon--placeholder {
-    &::before {
-      @include svg-background(icon-section-title-placeholder);
-    }
-  }
-
-  // Icons for each of the things
-  &.account-menu__icon--list {
+  &.account-menu__link--account {
     &::before {
       @include svg-background(icon-account-list);
     }
   }
 
-  // Icons for each of the things
   &.account-menu__icon--two-people {
     &::before {
       @include svg-background(icon-account-two-people);
-   }
+    }
   }
 
   // Icons for each of the things

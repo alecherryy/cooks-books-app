@@ -1,4 +1,6 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
+import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { AccountMenu } from './AccountMenu';
 
 /**
@@ -9,7 +11,12 @@ export default {
   component: AccountMenu,
 };
 
-const Template = (args) => <AccountMenu {...args} />;
+const Template = (args) => <MemoryRouter>
+  <Sidebar
+    asideContent={<AccountMenu {...args} />}
+    mainContent='Main content goes here'
+  />
+</MemoryRouter>;
 
 // Default AccountMenu
 export const Default = Template.bind({});

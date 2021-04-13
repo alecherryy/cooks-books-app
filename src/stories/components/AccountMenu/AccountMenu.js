@@ -1,7 +1,8 @@
 import './styles.scss';
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 
 /**
@@ -16,55 +17,36 @@ import PropTypes from 'prop-types';
 */
 
 export const AccountMenu = ({ username, message }) => {
-  const menuOptions = [
-    // TODO:, once we know how our pages are rigged up, username
-    //   can be used in these to also have each option route to the
-    //   proper component? That was my thought anyways.
-    { key: 0, text: 'Account', iconClass: 'person' },
-    { key: 1, text: 'Favorites', iconClass: 'heart' },
-    { key: 2, text: 'Your Reviews', iconClass: 'list' },
-    { key: 3, text: 'People', iconClass: 'two-people' },
-    { key: 4, text: 'Logout', iconClass: 'logout' },
+  const menu = [
+    { path: 'account', title: 'Account' },
+    { path: 'favorites', title: 'Favorites' },
+    { path: 'reviews', title: 'Reviews' },
+    { path: 'people', title: 'People' },
+    { path: 'logout', title: 'Logout' },
   ];
 
-  const [currActive, setCurrActive] = useState(0);
+  // const [currActive, setCurrActive] = useState(0);
 
   // const [activeOption, setActiveOption] = useState("ACCOUNT");
   return (
     <div className="account-menu">
       <div className="account-menu__welcome">
-        <span className="account-menu__bold-hello">Hello, </span>
+        <span className="text-bold">Hello, </span>
         {username}.
       </div>
-      <div className="account-menu__message">{message}</div>
-      {/* <br /><br /> */}
-      {
-        // map each option from the array of JSONs to the proper menu option
-        menuOptions.map((option) =>
-          <div key={option.key}
-
-            // If currActive, also make text have active class
-            className={`account-menu__option 
-            ${option.key === currActive ? `account-menu__option--active` : ''}`}
-            // to={`PROPER-PLACE-HERE`}
-            onClick={() => setCurrActive(option.key)}>
-
-            {/* If currActive, also make icon have active class */}
-            <span className={`account-menu__icon 
-            account-menu__icon--${option.iconClass}
-            ${option.key === currActive ? 'account-menu__icon--active' : ''}`}>
-            </span>
-
-            {/* Display the option text TODO: use username to make link */}
-            <span className="account-menu__option-text">{option.text}</span>
-          </div>)
-      }
+      <p>{message}</p>
+      <ul className="account-menu__menu">
+        {
+          menu.map((item, index) =>
+            <MenuItem key={index} path={item.path} title={item.title} />,
+          )
+        }
+      </ul>
     </div>
   );
 };
 
 AccountMenu.propTypes = {
-
   /**
    * AccountMenu's username
    */
@@ -79,4 +61,29 @@ AccountMenu.propTypes = {
 AccountMenu.defaultProps = {
   username: 'LogIn!',
   message: `Lorem ipsum dolor si amet, tollit accumsan expetanda.`,
+};
+
+const MenuItem = ({ path, title }) => {
+  return (
+    <li className="account-menu__item">
+      <NavLink className={`account-menu__link account-menu__link--${title}`}
+        to={`/user/${path}`}>{title}</NavLink>
+    </li>
+  );
+};
+
+MenuItem.propTypes = {
+  /**
+   * MenuItem's path
+   */
+  path: PropTypes.string.isRequired,
+  /**
+   * MenuItem's title
+   */
+  title: PropTypes.string.isRequired,
+};
+
+MenuItem.defaultProps = {
+  path: '/',
+  title: 'Title',
 };
