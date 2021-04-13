@@ -2,10 +2,10 @@ import './styles.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Constrain } from '../Constrain/Constrain';
 import Logo from '../../../images/logo.svg';
-import { Link } from 'react-router-dom';
 
 /**
  * Component for header element.
