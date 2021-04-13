@@ -23,15 +23,9 @@ export const MainMenu = () => {
           className="main-menu__link main-menu__link--search">Search</Link>
       </li>
       <li className="main-menu__item">
-        {
-          currentUser === null &&
-          <Button url="/login" text="Login" />
-        }
-        {
-          currentUser !== null &&
-          // TODO: Make this redirect to account once we have that
-          //   for now it goes to login, where I've added a temp 'logout' button
-          <Button url="/login" text={currentUser.email} />
+        { currentUser === null ?
+          <Button url="/login" text="Login" /> :
+          <Button url="/" text="My Account" />
         }
       </li>
     </ul>
