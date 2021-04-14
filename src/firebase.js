@@ -1,5 +1,7 @@
 import firebase from 'firebase/app';
+
 import 'firebase/auth';
+import 'firebase/firestore';
 
 // Made with guidance from :
 // https://www.youtube.com/watch?v=cFgoSrOui2M

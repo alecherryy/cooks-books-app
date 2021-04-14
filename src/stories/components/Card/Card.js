@@ -1,14 +1,21 @@
 import './styles.scss';
 
-// import React, { useState } from 'react';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../Auth';
+import database from '../../../db-service';
+import firebase from 'firebase/app';
+
+// import React, { useState } from 'react';
+// import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 
 /**
  * Component for card element.
  *
  * @component
+ * @param {number} id ID of the component.
  * @param {boolean} isFavorite Card is user favorite.
  * @param {string} image Source of the component.
  * @param {string} url URL of the component.
@@ -24,14 +31,40 @@ import { Link } from 'react-router-dom';
  *   />
  * )
  */
-export const Card = ({
-  isFavorite, image, url, title, description, portions, time, rating,
-}) => {
-  const [favorite, setFavorite] = useState(
-    isFavorite ? isFavorite : false);
+export const Card = (
+  {
+    id,
+    isFavorite,
+    image,
+    url,
+    title,
+    description,
+    portions,
+    time,
+    rating,
+  }) => {
+  const [favorite, setFavorite] = useState(isFavorite ? isFavorite : false);
+  const { currentUser } = useContext(AuthContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    setFavorite(isFavorite ? isFavorite : false);
+  }, [isFavorite]);
 
   const toggleFavorite = () => {
-    setFavorite(!favorite);
+    if (currentUser) {
+      if (!favorite) {
+        database.setProfile(currentUser.uid, {
+          favoriteRecipes: firebase.firestore.FieldValue.arrayUnion(id),
+        }).then(() => setFavorite(!favorite));
+      } else {
+        database.setProfile(currentUser.uid, {
+          favoriteRecipes: firebase.firestore.FieldValue.arrayRemove(id),
+        }).then(() => setFavorite(!favorite));
+      }
+    } else {
+      history.push(`/login`);
+    }
   };
 
   return (
@@ -41,12 +74,21 @@ export const Card = ({
     } to={url}>
       <Front title={title} description={description} image={image}/>
       <Back title={title} description={description} portions={portions}
-        time={time} rating={rating} onClick={() => toggleFavorite()} />
+        time={time} rating={rating}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFavorite();
+        }}/>
     </Link>
   );
 };
 
 Card.propTypes = {
+  /**
+   * Card's ID
+   */
+  id: PropTypes.number,
   /**
    * Card's isFavorite
    */
@@ -82,6 +124,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
+  id: -1,
   isFavorite: false,
   image: '',
   url: '#',
@@ -114,7 +157,7 @@ const Front = ({ title, image, description }) => {
       <span className="card__title">
         {title}
       </span>
-      <span dangerouslySetInnerHTML={ { __html: description } } />
+      <span dangerouslySetInnerHTML={{ __html: description }}/>
     </span>
   );
 };
@@ -157,9 +200,10 @@ Front.defaultProps = {
  *      time={time} rating={rating} onClick={onClick} />
  * )
  */
-const Back = ({
-  favorite, title, description, portions, time, rating, onClick,
-}) => {
+const Back = (
+  {
+    favorite, title, description, portions, time, rating, onClick,
+  }) => {
   return (
     <span className="card__back">
       <button className="card__favorite" onClick={onClick}>
@@ -168,22 +212,22 @@ const Back = ({
       <span className="card__title">
         {title}
       </span>
-      <span dangerouslySetInnerHTML={ { __html: description } } />
+      <span dangerouslySetInnerHTML={{ __html: description }}/>
       <div className="card__info">
         {portions &&
-          <span className="card__icon card__icon--portions">
-            Yields {portions}
-          </span>
+        <span className="card__icon card__icon--portions">
+          Yields {portions}
+        </span>
         }
         {time &&
-          <span className="card__icon card__icon--time">
-            {time} mins
-          </span>
+        <span className="card__icon card__icon--time">
+          {time} mins
+        </span>
         }
         {rating &&
-          <span className="card__icon card__icon--rating">
-            {rating}
-          </span>
+        <span className="card__icon card__icon--rating">
+          {rating}
+        </span>
         }
       </div>
     </span>

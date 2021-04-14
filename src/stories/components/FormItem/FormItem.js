@@ -43,7 +43,12 @@ export const FormItem = ({
     case 'textarea':
       return <Textarea />;
     case 'select':
-      return <Select options={options} />;
+      return (
+        <Select
+          options={options}
+          handleChange={handleChange}
+        />
+      );
     default:
       return (
         <Input
@@ -179,7 +184,7 @@ Input.propTypes = {
   /**
    * Input's disabled property
    */
-  handleChange: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -207,13 +212,16 @@ const Textarea = () => (
 /**
  * Render <textarea></textarea> HTML
  * @param {array} options of the input.
+ * @param {func} handleChange of the input.
+ *
  * @return {object} (
  *   <Select options={options />
  * )
  */
-const Select = ({ options }) => (
+const Select = ({ options, handleChange }) => (
   <select
     defaultValue={options[0]}
+    onChange={handleChange}
     className={['form-item__input', 'form-item__input--select']
       .join(' ')
       .trim()}
@@ -234,8 +242,13 @@ Select.propTypes = {
    * Select's options
    */
   options: PropTypes.array,
+  /**
+   * Select's handleChange
+   */
+  handleChange: PropTypes.func,
 };
 
 Select.defaultProps = {
   options: [],
+  handleChange: null,
 };
