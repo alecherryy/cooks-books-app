@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { API } from '../../../services/spoonacular-service';
 import { FeaturedHero } from '../../components/FeaturedHero/FeaturedHero';
@@ -13,6 +13,8 @@ import ArtVegetables from '../../../images/artwork-vegetables.svg';
 import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
+import { AuthContext } from '../../../Auth';
+import database from '../../../db-service';
 
 /**
  * Component for Home page.
@@ -25,6 +27,9 @@ import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 export const Home = () => {
   const [popularRecipes, setPopularRecipes] = useState([]);
   const [recipeOfTheDay, setRecipeOfTheDay] = useState({});
+  const { currentUser } = useContext(AuthContext);
+  // const [error, setError] = useState('');
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     API.findRandomRecipes(8).then((response) => {
@@ -39,6 +44,9 @@ export const Home = () => {
     //     id: 715497,
     //     image: 'https://spoonacular.com/recipeImages/715497-556x370.jpg',
     //     readyInMinutes: 5,
+    //     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
+    //       'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
+    //       'aliquam neque rhoncus.',
     //     servings: 1,
     //     spoonacularScore: 99,
     //     title: 'Berry Banana Breakfast Smoothie',
@@ -48,6 +56,9 @@ export const Home = () => {
     //     id: 1070648,
     //     image: 'https://spoonacular.com/recipeImages/1070648-556x370.jpg',
     //     readyInMinutes: 30,
+    //     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
+    //       'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
+    //       'aliquam neque rhoncus.',
     //     servings: 6,
     //     spoonacularScore: 65,
     //     title: 'Easy Tomato Basil Chicken – One Pot Meal',
@@ -58,11 +69,22 @@ export const Home = () => {
     //   id: 715497,
     //   image: 'https://spoonacular.com/recipeImages/715497-556x370.jpg',
     //   readyInMinutes: 5,
+    //   summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
+    //     'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
+    //     'aliquam neque rhoncus.',
     //   servings: 1,
     //   spoonacularScore: 99,
     //   title: 'Berry Banana Breakfast Smoothie',
     // });
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      database.getProfileUpdates(currentUser.uid, setProfile);
+    } else {
+      setProfile(null);
+    }
+  }, [currentUser]);
 
   return (
     <div className='home'>
@@ -91,7 +113,7 @@ export const Home = () => {
           imagePath={ArtVegetables}
           svgClass='section-title__icon--spatula'
           paragraph='Get the best recipe every day of the week
-            with our daily picks' />
+            with our daily picks'/>
         <FeaturedCard
           image={`https://spoonacular.com/recipeImages/${recipeOfTheDay.id}-636x393.jpg`}
           url={`/recipes/${recipeOfTheDay.id}`}
@@ -113,7 +135,8 @@ export const Home = () => {
           popularRecipes.map((recipe) => {
             return ({
               id: recipe.id,
-              isFavorite: false,
+              isFavorite: profile &&
+                profile.favoriteRecipes.includes(recipe.id),
               url: `/recipes/${recipe.id}`,
               image: `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`,
               title: recipe.title,
@@ -140,7 +163,9 @@ export const Home = () => {
             popularRecipes.map((recipe, index) =>
               <Card
                 key={index}
-                isFavorite={false}
+                id={recipe.id}
+                isFavorite={profile &&
+                  profile.favoriteRecipes.includes(recipe.id)}
                 url={`/recipes/${recipe.id}`}
                 image={`https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`}
                 title={recipe.title}
