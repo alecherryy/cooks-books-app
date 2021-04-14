@@ -25,7 +25,7 @@ export const MainMenu = () => {
       <li className="main-menu__item">
         { currentUser === null ?
           <Button url="/login" text="Login" /> :
-          <Button url="/" text="My Account" />
+          <Button url="/login" text={currentUser.email} />
         }
       </li>
     </ul>

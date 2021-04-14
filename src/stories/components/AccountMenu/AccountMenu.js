@@ -18,7 +18,7 @@ import { NavLink } from 'react-router-dom';
 
 export const AccountMenu = ({ username, message }) => {
   const menu = [
-    { path: 'account', title: 'Account' },
+    { path: 'information', title: 'Your Information' },
     { path: 'favorites', title: 'Favorites' },
     { path: 'reviews', title: 'Reviews' },
     { path: 'people', title: 'People' },
@@ -66,8 +66,8 @@ AccountMenu.defaultProps = {
 const MenuItem = ({ path, title }) => {
   return (
     <li className="account-menu__item">
-      <NavLink className={`account-menu__link account-menu__link--${title}`}
-        to={`/user/${path}`}>{title}</NavLink>
+      <NavLink className={`account-menu__link account-menu__link--${path}`}
+        to={`/account/${path}`}><span>{title}</span></NavLink>
     </li>
   );
 };

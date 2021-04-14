@@ -10,6 +10,7 @@ import { Login } from './stories/pages/Login/Login';
 import { Home } from './stories/pages/Home/Home';
 import { Signup } from './stories/pages/Signup/Signup';
 import { Search } from './stories/pages/Search/Search';
+import { Account } from './stories/pages/Account/Account';
 import { AuthProvider } from './Auth';
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/">
               <Home />
+            </Route>
+            <Route path="/account">
+              <Account />
             </Route>
           </Switch>
         </Main>

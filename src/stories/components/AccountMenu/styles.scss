@@ -27,6 +27,11 @@
   padding-top: $spacing-2;
 }
 
+.account-menu__item {
+  position: relative;
+  z-index: 1;
+}
+
 .account-menu__link {
   display: inline-block;
   padding: $spacing-1 0 $spacing-1 $spacing-5;
@@ -36,51 +41,117 @@
   &::before,
   &::after {
     @include image-replace(26px, 26px);
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: 26px;
     content: '';
     left: 0;
     position: absolute;
-    top: 0;
-    transition: all 0.4 ease-in-out;
+    top: calc((100% - 26px) / 2);
+    transition: all 0.4s ease-in-out;
+    z-index: 2;
   }
 
   &::after {
     opacity: 0;
   }
 
-  &.account-menu__link--account {
-    &::before {
-      @include svg-background(icon-account-list);
-    }
+  &:hover,
+  &:focus {
+    color: $orange;
   }
 
-  &.account-menu__icon--two-people {
+  &.active {
+    color: $white;
+
     &::before {
-      @include svg-background(icon-account-two-people);
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    span {
+      &::before {
+        background-color: $orange;
+        border-bottom-right-radius: 70px;
+        border-top-right-radius: 70px;
+        content: '';
+        display: block;
+        height: 100%;
+        left: -30px;
+        position: absolute;
+        top: 0;
+        width: 250px;
+        z-index: -2;
+      }
     }
   }
+}
 
-  // Icons for each of the things
-  &.account-menu__icon--person {
-    &::before {
-      @include svg-background(icon-account-person);
-    }
+.account-menu__link--information {
+  &::before {
+    @include svg-background(icon-account-edit);
   }
 
-  // Icons for each of the things
-  &.account-menu__icon--heart {
-    &::before {
-      @include svg-background(icon-account-heart);
-    }
+  &::after {
+    @include svg-background(icon-account-edit-white);
+  }
+}
+
+.account-menu__link--favorites {
+  &::before {
+    @include svg-background(icon-heart);
   }
 
-  // Icons for each of the things
-  &.account-menu__icon--logout {
-    &::before {
-      @include svg-background(icon-account-logout);
-      transform: rotate(180deg);
-    }
+  &::after {
+    @include svg-background(icon-heart-white);
+  }
+}
+
+.account-menu__link--reviews {
+  &::before {
+    @include svg-background(icon-reviews);
+  }
+
+  &::after {
+    @include svg-background(icon-reviews-white);
+  }
+}
+
+.account-menu__link--favorites {
+  &::before {
+    @include svg-background(icon-heart);
+  }
+
+  &::after {
+    @include svg-background(icon-heart-white);
+  }
+}
+
+.account-menu__link--people {
+  &::before {
+    @include svg-background(icon-users);
+  }
+
+  &::after {
+    @include svg-background(icon-users-white);
+  }
+}
+
+.account-menu__link--logout {
+  &::before,
+  &::after {
+    transform: rotate(180deg);
+  }
+
+  &::before {
+    @include svg-background(icon-logout);
+  }
+
+  &::after {
+    @include svg-background(icon-logout-white);
   }
 }
