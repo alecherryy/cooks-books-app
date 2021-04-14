@@ -41,7 +41,7 @@ export const FormItem = ({
     // switch statement to check value of type
     switch (type) {
     case 'textarea':
-      return <Textarea />;
+      return <Textarea handleChange={handleChange} />;
     case 'select':
       return <Select options={options} />;
     default:
@@ -196,11 +196,12 @@ Input.defaultProps = {
  *   <Textarea />
  * )
  */
-const Textarea = () => (
+const Textarea = ({ handleChange }) => (
   <textarea
     className={['form-item__input', 'form-item__input--textarea']
       .join(' ')
       .trim()}
+    onChange={handleChange}
   ></textarea>
 );
 

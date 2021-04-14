@@ -12,6 +12,7 @@ import { StickyContent } from '../../layouts/StickyContent/StickyContent';
 import { Fragment } from 'react';
 import { Instructions } from '../../components/Instructions/Instructions';
 import { Ingredients } from '../../components/Ingredients/Ingredients';
+import { AddReview } from '../../components/AddReview/AddReview';
 
 /**
  * Component for Recipe page.
@@ -30,15 +31,15 @@ export const Recipe = () => {
   const [intro, setIntro] = useState([]);
 
   useEffect(() => {
-    const recipeID = recipeId ? recipeId : '609262'; // default sample recipe id
+    const id = recipeId ? recipeId : '609262'; // default sample recipe id
 
-    API.findRecipeById(recipeID).then((res) => {
+    API.findRecipeById(id).then((res) => {
       setRecipe(res);
       setIntro(res.summary);
       setIngredients(res.extendedIngredients);
     });
 
-    API.getRecipeIntructions(recipeID).then((res) => {
+    API.getRecipeIntructions(id).then((res) => {
       setInstructions(res[0]);
     });
   }, []);
@@ -74,17 +75,20 @@ export const Recipe = () => {
  * @component
  * @param {string} summary of the component.
  * @param {string} instructions of the component.
+ * @param {string} recipeId of the component.
  * @return {object} (
  *   <Content summary={summary} instructions={instructions} />
  * )
  */
-const Content = ({ summary, instructions }) => {
+const Content = ({ recipeId, summary, instructions }) => {
   const formatSummary = `${summary.toString().split('. ')[0]}.`;
   return (
     <Fragment>
       <p className="text-italic text-large spaced-50-bottom"
         dangerouslySetInnerHTML={ { __html: formatSummary } } />
       { instructions && <Instructions steps={instructions.steps} /> }
+
+      <AddReview recipeId={recipeId} />
     </Fragment>
   );
 };
@@ -98,9 +102,14 @@ Content.propTypes = {
    * Content's instructions
    */
   instructions: PropTypes.string,
+  /**
+   * Content's recipeId
+   */
+  recipeId: PropTypes.string,
 };
 
 Content.defaultProps = {
   summary: '',
   instructions: '',
+  recipeId: '',
 };

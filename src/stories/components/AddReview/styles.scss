@@ -1,0 +1,82 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Review
+
+.add-review {
+  padding: $spacing-3 0 0;
+}
+
+.review__recipe {
+  font-size: $font-size-sm;
+  font-family: $header-font-family;
+  font-weight: 700;
+  letter-spacing: rem(1px);
+  text-transform: uppercase;
+  color: $orange;
+}
+
+.review__title {
+  font-family: $header-font-family;
+  font-size: $font-size-lg;
+  font-weight: 700;
+}
+
+.review__sub-header {
+  align-items: center;
+  display: flex;
+  font-size: $font-size-xs;
+}
+
+.review__sub-header-item {
+  border-color: black;
+  border-width: 1px;
+  border-style: none none none solid;
+  padding: rem(2px) $spacing-2;
+  &:first-child {
+    padding-left: rem(4px);
+    border-style: none;
+  }
+}
+
+
+.review__content {
+  margin-top: $spacing-1;
+}
+
+.review__view-recipe {
+  text-align: right;
+  vertical-align: middle;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.review__icon {
+  &::before {
+    @include image-replace( 20px, 20px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    content: '';
+    display: inline-block;
+    margin: $spacing-1 auto 0;
+    overflow: hidden;
+
+  }
+
+  &.review__icon--star {
+    &::before {
+      @include svg-background(icon-review-star);
+    }
+  }
+
+  &.review__icon--arrow {
+    &::before {
+      @include svg-background(icon-review-arrow);
+    }
+  }
+
+}
+
