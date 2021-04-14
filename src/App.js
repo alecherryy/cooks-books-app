@@ -32,11 +32,17 @@ function App() {
             <Route exact path="/recipes/:recipeId">
               <Recipe />
             </Route>
+            <Route exact path={[
+              '/account',
+              '/account/information',
+              '/account/favorites',
+              '/account/reviews',
+              '/account/people',
+            ]}>
+              <Account />
+            </Route>
             <Route path="/">
               <Home />
-            </Route>
-            <Route path="/account">
-              <Account />
             </Route>
           </Switch>
         </Main>

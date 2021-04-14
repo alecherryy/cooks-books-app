@@ -1,7 +1,8 @@
-import React from 'react';
-import { Route, Switch } from 'react-router';
-import { AccountMenu } from '../../components/AccountMenu/AccountMenu';
+import React, { useEffect } from 'react';
+import { Route } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
+import { AccountMenu } from '../../components/AccountMenu/AccountMenu';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 
 /**
@@ -14,6 +15,12 @@ import { Constrain } from '../../layouts/Constrain/Constrain';
  */
 
 export const Account = () => {
+  const history = useHistory();
+
+  useEffect(()=> {
+    history.push('/account/information');
+  });
+
   return (
     <div className="account">
       <Constrain>
@@ -22,11 +29,9 @@ export const Account = () => {
             <AccountMenu username='Placeholder' message="Lorem Ipsum for now" />
           </div>
           <div className="sidebar__main">
-            <Switch>
-              <Route exact path="/account/information">
-                Your account information.
-              </Route>
-            </Switch>
+            <Route exact path="/account/information">
+              Your account information.
+            </Route>
           </div>
         </div>
       </Constrain>
