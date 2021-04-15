@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Auth';
-import database from '../../../db-service';
+import database from '../../../services/firestore-service';
 
 /**
  * Component for Main Menu element.

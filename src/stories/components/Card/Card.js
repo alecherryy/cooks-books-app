@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../Auth';
-import database from '../../../db-service';
+import database from '../../../services/firestore-service';
 import firebase from 'firebase/app';
 
 // import React, { useState } from 'react';

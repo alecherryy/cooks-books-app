@@ -10,7 +10,7 @@ import Artwork from '../../../images/artwork-3.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { AuthContext } from '../../../Auth';
-import database from '../../../db-service';
+import database from '../../../services/firestore-service';
 
 /**
  * Component for Signup page.
