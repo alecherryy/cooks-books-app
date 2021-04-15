@@ -34,3 +34,11 @@
   right: 0;
   z-index: 1;
 }
+
+.form--review {
+  padding-bottom: $spacing-5;
+
+  .form__button {
+    position: static;
+  }
+}

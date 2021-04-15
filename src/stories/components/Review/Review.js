@@ -103,9 +103,6 @@ Review.propTypes = {
    * Review's date.
    */
   date: PropTypes.string,
-  // TODO: Actually record this as a date? I was getting an error
-  // date: PropTypes.instanceOf( Date ),
-
   /**
    * Review's name.
    */

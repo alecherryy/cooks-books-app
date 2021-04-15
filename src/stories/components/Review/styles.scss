@@ -4,9 +4,8 @@
 // Review
 
 .review {
-  padding: $spacing-1 $spacing-4;
-  max-width: rem(600px);
-  font-size: $font-size-sm
+  font-size: $font-size-sm;
+  padding: $spacing-1 0;
 }
 
 .review__recipe {
@@ -32,24 +31,25 @@
 
 .review__sub-header-item {
   border-color: black;
-  border-width: 1px;
   border-style: none none none solid;
+  border-width: 1px;
+  line-height: 1;
   padding: rem(2px) $spacing-2;
+
   &:first-child {
     padding-left: rem(4px);
     border-style: none;
   }
 }
 
-
 .review__content {
-  margin-top: $spacing-1;
+  margin-top: $spacing-2;
 }
 
 .review__view-recipe {
   text-align: right;
   vertical-align: middle;
-  
+
   a {
     text-decoration: none;
   }
@@ -65,7 +65,6 @@
     display: inline-block;
     margin: $spacing-1 auto 0;
     overflow: hidden;
-
   }
 
   &.review__icon--star {
@@ -79,6 +78,5 @@
       @include svg-background(icon-review-arrow);
     }
   }
-
 }
 

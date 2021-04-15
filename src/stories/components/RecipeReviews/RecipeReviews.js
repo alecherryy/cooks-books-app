@@ -1,7 +1,9 @@
 import './styles.scss';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { Review } from '../Review/Review';
 import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
 
@@ -15,6 +17,7 @@ import { FormItem } from '../FormItem/FormItem';
  * )
  */
 export const RecipeReviews = ({ recipeId }) => {
+  const [reviews, setReviews] = useState(null);
   const [review, setReview] = useState({
     recipeId,
     title: '',
@@ -28,14 +31,24 @@ export const RecipeReviews = ({ recipeId }) => {
     user: 'apizzoccheri',
   });
 
+  useEffect(() => {
+    // TODO make call to DB to fecth the recipe's reviews
+    setReviews([{
+      title: 'Test',
+      content: 'Hello world',
+      rating: '4',
+      username: 'apizzoccheri',
+      date: 'September 2, 2021',
+    }]);
+  }, [reviews]);
+
+  // push review to database
   const submitNewReview = (e) => {
-    console.log(review); // eslint-disable-line no-console
     e.preventDefault();
   };
 
   return (
     <div className="recipe-review">
-      <h3>Reviews</h3>
       <NewReview recipeId={recipeId}
         handleClick={(e) => submitNewReview(e)}
         addReviewTitle={(e) => setReview({
@@ -51,6 +64,11 @@ export const RecipeReviews = ({ recipeId }) => {
           rating: e.target.value,
         })}
       />
+      { reviews && <h3>Reviews</h3> }
+      { reviews && reviews.map((r, index) => {
+        return <Review key={index} title={r.title} content={r.content}
+          date={r.date} rating={r.rating} name={r.username} />;
+      })}
     </div>
   );
 };
@@ -97,7 +115,8 @@ const NewReview = ({
         you have tried; include tips, changes and anything you have
         done to make this recipe your own. Happy cooking!
       </p>
-      <Form handleClick={handleClick} buttonColor="black"
+      <Form modifierClasses="form--review"
+        handleClick={handleClick} buttonColor="black"
         buttonText="Leave a review">
         <FormItem placeholder="Title"
           handleChange={addReviewTitle} />
