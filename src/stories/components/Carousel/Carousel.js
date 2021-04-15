@@ -59,7 +59,9 @@ export const Carousel = ({ cards }) => {
           cards.map((card) =>
             <SwiperSlide key={card.id}
               className='swiper-slide--box'>
-              <Card isFavorite={card.isFavorite}
+              <Card
+                id={card.id}
+                isFavorite={card.isFavorite}
                 url={card.url}
                 image={card.image}
                 title={card.title}

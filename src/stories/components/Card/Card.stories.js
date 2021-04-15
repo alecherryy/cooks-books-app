@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Card } from './Card';
+import { MemoryRouter } from 'react-router-dom';
 
 /**
  * Example Component: Card
@@ -10,7 +11,10 @@ export default {
   component: Card,
 };
 
-const Template = (args) => <Card {...args} />;
+const Template = (args) =>
+  <MemoryRouter>
+    <Card {...args} />
+  </MemoryRouter>;
 
 // Default card
 export const Default = Template.bind({});
