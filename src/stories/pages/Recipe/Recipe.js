@@ -12,7 +12,7 @@ import { StickyContent } from '../../layouts/StickyContent/StickyContent';
 import { Fragment } from 'react';
 import { Instructions } from '../../components/Instructions/Instructions';
 import { Ingredients } from '../../components/Ingredients/Ingredients';
-import { AddReview } from '../../components/AddReview/AddReview';
+import { RecipeReviews } from '../../components/RecipeReviews/RecipeReviews';
 
 /**
  * Component for Recipe page.
@@ -88,7 +88,7 @@ const Content = ({ recipeId, summary, instructions }) => {
         dangerouslySetInnerHTML={ { __html: formatSummary } } />
       { instructions && <Instructions steps={instructions.steps} /> }
 
-      <AddReview recipeId={recipeId} />
+      <RecipeReviews recipeId={recipeId} />
     </Fragment>
   );
 };

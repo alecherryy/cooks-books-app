@@ -43,7 +43,7 @@ export const FormItem = ({
     case 'textarea':
       return <Textarea handleChange={handleChange} />;
     case 'select':
-      return <Select options={options} />;
+      return <Select options={options} handleChange={handleChange} />;
     default:
       return (
         <Input
@@ -192,6 +192,8 @@ Input.defaultProps = {
 
 /**
  * Render <textarea></textarea> HTML
+ * @param {func} handleChange of the input.
+ *
  * @return {object} (
  *   <Textarea />
  * )
@@ -208,13 +210,16 @@ const Textarea = ({ handleChange }) => (
 /**
  * Render <textarea></textarea> HTML
  * @param {array} options of the input.
+ * @param {func} handleChange of the input.
+ *
  * @return {object} (
  *   <Select options={options />
  * )
  */
-const Select = ({ options }) => (
+const Select = ({ options, handleChange }) => (
   <select
     defaultValue={options[0]}
+    onChange={handleChange}
     className={['form-item__input', 'form-item__input--select']
       .join(' ')
       .trim()}
@@ -229,14 +234,3 @@ const Select = ({ options }) => (
     ))}
   </select>
 );
-
-Select.propTypes = {
-  /**
-   * Select's options
-   */
-  options: PropTypes.array,
-};
-
-Select.defaultProps = {
-  options: [],
-};
