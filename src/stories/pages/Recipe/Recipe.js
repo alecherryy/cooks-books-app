@@ -13,6 +13,7 @@ import { Fragment } from 'react';
 import { Instructions } from '../../components/Instructions/Instructions';
 import { Ingredients } from '../../components/Ingredients/Ingredients';
 import { RecipeReviews } from '../../components/RecipeReviews/RecipeReviews';
+import { UTILS } from '../../../utils';
 
 /**
  * Component for Recipe page.
@@ -44,17 +45,12 @@ export const Recipe = () => {
     });
   }, []);
 
-  // get Spoontacular score
-  const score = recipe.spoonacularScore;
-  // convert to 5-scale rating
-  const ratings = score ? (score / 100) * 5 : null;
-
   return (
     <div className="recipe">
       <Constrain>
         <FeaturedImage title={recipe.title} image={recipe.image}
           time={recipe.readyInMinutes} portions={recipe.servings}
-          rating={Math.round(ratings * 10) / 10}
+          rating={UTILS.convertScore(recipe.spoonacularScore)}
         />
         <Sidebar asideContent={
           <StickyContent>
@@ -64,6 +60,8 @@ export const Recipe = () => {
         mainContent={<Content summary={intro}
           instructions={instructions}
         />} />
+        <Sidebar asideContent=''
+          mainContent={<RecipeReviews recipeId={recipeId} />} />
       </Constrain>
     </div>
   );
@@ -80,15 +78,13 @@ export const Recipe = () => {
  *   <Content summary={summary} instructions={instructions} />
  * )
  */
-const Content = ({ recipeId, summary, instructions }) => {
+const Content = ({ summary, instructions }) => {
   const formatSummary = `${summary.toString().split('. ')[0]}.`;
   return (
     <Fragment>
       <p className="text-italic text-large spaced-50-bottom"
         dangerouslySetInnerHTML={ { __html: formatSummary } } />
       { instructions && <Instructions steps={instructions.steps} /> }
-
-      <RecipeReviews recipeId={recipeId} />
     </Fragment>
   );
 };
@@ -102,14 +98,9 @@ Content.propTypes = {
    * Content's instructions
    */
   instructions: PropTypes.string,
-  /**
-   * Content's recipeId
-   */
-  recipeId: PropTypes.string,
 };
 
 Content.defaultProps = {
   summary: '',
   instructions: '',
-  recipeId: '',
 };

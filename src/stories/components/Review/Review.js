@@ -3,6 +3,7 @@ import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { UTILS } from '../../../utils';
 
 /**
  * Component for Review element.
@@ -12,7 +13,7 @@ import { Fragment } from 'react';
  * @param {string} modifierClasses Class modifiers of the Review component.
  * @param {string} title Title for the Review component.
  * @param {number} rating Rating in stars of the Review component.
- * @param {string} date Date of creation of the Review component.
+ * @param {date} date Date of creation of the Review component.
  * @param {string} name Name of user who wrote the review.
  * @param {string} profUrl URL to profile of author of component.
  * @param {string} content Content of the review component.
@@ -39,14 +40,11 @@ export const Review = ({
   return (
     <Fragment>
       <div className={classes}>
-
         {isUserVariant && <div className="review__recipe">
           {recipeTitle}</div>}
-
         <div className="review__title">
           {title}
         </div>
-
         <div className="review__sub-header">
           <span className="review__sub-header-item">
             {/* I have it as number of stars rendering, not number colored */}
@@ -54,7 +52,9 @@ export const Review = ({
               <i key={star.key}
                 className="review__icon review__icon--star"></i>)}
           </span>
-          <span className="review__sub-header-item">{date}</span>
+          <span className="review__sub-header-item">
+            {UTILS.convertDateToString(date)}
+          </span>
           {!isUserVariant && <span className="review__sub-header-item">
             By: <a href={profUrl}>@{name}</a>
           </span>}
@@ -102,7 +102,7 @@ Review.propTypes = {
   /**
    * Review's date.
    */
-  date: PropTypes.string,
+  date: PropTypes.date,
   /**
    * Review's name.
    */
@@ -134,8 +134,7 @@ Review.defaultProps = {
   modifierClasses: '',
   title: 'Review Title',
   rating: 4,
-  date: 'August 16, 1929',
-  // date: new Date('August 16, 1929 06:00:00'),
+  date: new Date(),
   name: 'Reviewer',
   profUrl: '#',
   content: 'Lorem ipsum dolor sit amet, errem postulant' +

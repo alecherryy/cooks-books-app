@@ -38,7 +38,7 @@ export const RecipeReviews = ({ recipeId }) => {
       content: 'Hello world',
       rating: '4',
       username: 'apizzoccheri',
-      date: 'September 2, 2021',
+      date: new Date(),
     }]);
   }, [reviews]);
 
@@ -111,9 +111,10 @@ const NewReview = ({
     <div className="add-review">
       <h3>Tried this recipe?
         <span className="text-regular"> Leave a review.</span></h3>
-      <p>Help other users discover new recipes by reviewing the ones
-        you have tried; include tips, changes and anything you have
-        done to make this recipe your own. Happy cooking!
+      <p className="spaced-30-bottom">
+        Tell other users what you think of this recipes,including
+        tips, changes and anything you have done to make it your own.
+        Happy cooking!
       </p>
       <Form modifierClasses="form--review"
         handleClick={handleClick} buttonColor="black"

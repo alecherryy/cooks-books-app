@@ -69,6 +69,8 @@
   &.review__icon--star {
     &::before {
       @include svg-background(icon-review-star);
+
+      margin: 0;
     }
   }
 

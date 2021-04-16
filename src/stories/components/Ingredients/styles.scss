@@ -16,4 +16,6 @@
 
 .ingredients__ingredients {
   @include list-clean();
+
+  font-size: $font-size-sm;
 }

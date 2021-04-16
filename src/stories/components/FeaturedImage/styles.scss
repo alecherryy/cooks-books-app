@@ -69,6 +69,14 @@
   letter-spacing: 1px;
   margin-top: $spacing-3;
   text-align: center;
+
+  @include bp-tablet {
+    gap: $spacing-3;
+  }
+
+  @include bp-desktop {
+    gap: $spacing-5;
+  }
 }
 
 .featured-image__icon {

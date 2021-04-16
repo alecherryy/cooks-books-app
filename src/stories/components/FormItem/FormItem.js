@@ -179,7 +179,7 @@ Input.propTypes = {
   /**
    * Input's disabled property
    */
-  handleChange: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
