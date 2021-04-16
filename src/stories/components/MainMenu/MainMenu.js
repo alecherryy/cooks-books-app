@@ -1,31 +1,60 @@
 import './styles.scss';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Auth';
+import database from '../../../services/firestore-service';
 
 /**
  * Component for Main Menu element.
  *
  * @component
- * @param {string} modifierClasses Class modifiers of the component.
  * @return {object} (
  *   <MainMenu />
  * )
  */
 export const MainMenu = () => {
+  // const [error, setError] = useState('');
   const { currentUser } = useContext(AuthContext);
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    if (currentUser) {
+      // setError('');
+      database.getProfile(currentUser.uid)
+        .then((doc) => {
+          setProfile(doc.data());
+        })
+        .catch((error) => {
+          // setError(error);
+        });
+    }
+  }, [currentUser]);
+
   return (
     <ul className="main-menu">
+      { currentUser ?
+        <li className="main-menu__item">
+          Welcome back,&nbsp;
+          <strong>{profile ?
+            profile.username :
+            currentUser.fullName
+          }</strong>!
+        </li> :
+        <li className="main-menu__item">
+          Hello there,&nbsp;
+          <strong>Stranger</strong>!
+        </li>
+      }
       <li className="main-menu__item">
         <Link to="/search"
           className="main-menu__link main-menu__link--search">Search</Link>
       </li>
       <li className="main-menu__item">
-        { currentUser === null ?
-          <Button url="/login" text="Login" /> :
-          <Button url="/login" text={currentUser.email} />
+        { currentUser ?
+          <Button url="/account/information" text="My Account" /> :
+          <Button url="/login" text="Login" />
         }
       </li>
     </ul>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import fire from './firebase';
+import firebase from './firebase';
 
 /**
  * A context to be used by components in the tree, holds
@@ -24,14 +24,33 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fire.auth().onAuthStateChanged(setCurrentUser);
+    firebase.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
   }, []);
+
+  const signup = (email, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  };
+
+  const login = (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  };
+
+  const logout = () => {
+    return firebase.auth().signOut();
+  };
+
+  const value = {
+    currentUser,
+    signup,
+    login,
+    logout,
+  };
 
   return (
     <AuthContext.Provider
-      value={{
-        currentUser,
-      }}
+      value={value}
     >
       {children}
     </AuthContext.Provider>

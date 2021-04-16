@@ -73,7 +73,7 @@
       opacity: 1;
     }
 
-    span {
+    .account-menu__text {
       &::before {
         background-color: $orange;
         border-bottom-right-radius: 70px;
@@ -90,6 +90,7 @@
     }
   }
 }
+
 
 .account-menu__link--information {
   &::before {
@@ -141,7 +142,13 @@
   }
 }
 
-.account-menu__link--logout {
+.account-menu__link--account {
+  @include button-clear();
+  color: $black;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  padding: $spacing-1 0 $spacing-1 $spacing-5;
+
   &::before,
   &::after {
     transform: rotate(180deg);
