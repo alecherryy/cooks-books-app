@@ -13,7 +13,7 @@ import ArtVegetables from '../../../images/artwork-vegetables.svg';
 import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
-import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import database from '../../../services/firestore-service';
 import { UTILS } from '../../../utils/utils';
 

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import Artwork from '../../../images/artwork-4.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
-import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 
 /**
  * Component for Login page.
@@ -21,11 +21,11 @@ import { AuthContext } from '../../../Auth';
  */
 
 export const Login = () => {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   // const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useContext(AuthContext);
   const history = useHistory();
 
   const handleLogin = () => {

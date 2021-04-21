@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { NavLink, useHistory } from 'react-router-dom';
-import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 import database from '../../../services/firestore-service';
 
 /**
