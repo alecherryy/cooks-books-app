@@ -14,7 +14,8 @@ import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 import { AuthContext } from '../../../Auth';
-import database from '../../../db-service';
+import database from '../../../services/firestore-service';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Home page.
@@ -115,7 +116,7 @@ export const Home = () => {
           paragraph='Get the best recipe every day of the week
             with our daily picks'/>
         <FeaturedCard
-          image={`https://spoonacular.com/recipeImages/${recipeOfTheDay.id}-636x393.jpg`}
+          image={getRecipeImgURL(recipeOfTheDay.id, 636, 393)}
           url={`/recipes/${recipeOfTheDay.id}`}
           title={recipeOfTheDay.title}
           eyebrow={
@@ -135,16 +136,15 @@ export const Home = () => {
           popularRecipes.map((recipe) => {
             return ({
               id: recipe.id,
-              isFavorite: profile &&
+              isFavorite: profile && profile.favoriteRecipes &&
                 profile.favoriteRecipes.includes(recipe.id),
               url: `/recipes/${recipe.id}`,
-              image: `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`,
+              image: getRecipeImgURL(recipe.id, 636, 393),
               title: recipe.title,
               description: recipe.summary,
               portions: recipe.servings,
               time: recipe.readyInMinutes,
-              rating: recipe.spoonacularScore ?
-                Math.round(recipe.spoonacularScore * 0.5) / 10 : '',
+              rating: UTILS.convertScore(recipe.spoonacularScore),
             });
           })
         }/>
@@ -164,10 +164,10 @@ export const Home = () => {
               <Card
                 key={index}
                 id={recipe.id}
-                isFavorite={profile &&
-                  profile.favoriteRecipes.includes(recipe.id)}
+                isFavorite={profile && profile.favoriteRecipes &&
+                profile.favoriteRecipes.includes(recipe.id)}
                 url={`/recipes/${recipe.id}`}
-                image={`https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`}
+                image={getRecipeImgURL(recipe.id, 636, 393)}
                 title={recipe.title}
                 description={`${recipe.summary.toString().split('. ')[0]}.`}
                 portions={parseInt(recipe.servings)}
@@ -187,4 +187,17 @@ export const Home = () => {
       </Constrain>
     </div>
   );
+};
+
+export const getRecipeImgURL = (recipeId, imgLength, imgWidth) => {
+  // Note: The API supports the following dimensions:-
+  // 90 x 90
+  // 240 x 150
+  // 312 x 150
+  // 312 x 231
+  // 480 x 360
+  // 556 x 370
+  // 636 x 393
+  return `https://spoonacular.com` +
+    `/recipeImages/${recipeId}-${imgLength}x${imgWidth}.jpg`;
 };

@@ -37,6 +37,15 @@
   font-weight: 300;
 }
 
+// text color
+.text-user-warning {
+  color: $red;
+}
+
+.text-user-success {
+  color: $green-dark;
+}
+
 // Alignment
 .align-left {
   text-align: left;

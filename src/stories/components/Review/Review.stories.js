@@ -1,5 +1,7 @@
 import React from 'react';
 import { Review } from './Review';
+import { UTILS } from '../../../utils/utils';
+
 
 /**
  * Sample Review component.
@@ -17,8 +19,7 @@ Default.args = {
   modifierClasses: '',
   title: 'Sample Review Title',
   rating: 4,
-  date: 'August 16, 1929',
-  // date: new Date('August 16, 1929 06:00:00'),
+  date: UTILS.convertDateToString(new Date()),
   name: 'username',
   profUrl: '#',
   content:

@@ -12,6 +12,8 @@ import { StickyContent } from '../../layouts/StickyContent/StickyContent';
 import { Fragment } from 'react';
 import { Instructions } from '../../components/Instructions/Instructions';
 import { Ingredients } from '../../components/Ingredients/Ingredients';
+import { RecipeReviews } from '../../components/RecipeReviews/RecipeReviews';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Recipe page.
@@ -30,30 +32,25 @@ export const Recipe = () => {
   const [intro, setIntro] = useState([]);
 
   useEffect(() => {
-    const recipeID = recipeId ? recipeId : '609262'; // default sample recipe id
+    const id = recipeId ? recipeId : '609262'; // default sample recipe id
 
-    API.findRecipeById(recipeID).then((res) => {
+    API.findRecipeById(id).then((res) => {
       setRecipe(res);
       setIntro(res.summary);
       setIngredients(res.extendedIngredients);
     });
 
-    API.getRecipeIntructions(recipeID).then((res) => {
+    API.getRecipeIntructions(id).then((res) => {
       setInstructions(res[0]);
     });
   }, []);
-
-  // get Spoontacular score
-  const score = recipe.spoonacularScore;
-  // convert to 5-scale rating
-  const ratings = score ? (score / 100) * 5 : null;
 
   return (
     <div className="recipe">
       <Constrain>
         <FeaturedImage title={recipe.title} image={recipe.image}
           time={recipe.readyInMinutes} portions={recipe.servings}
-          rating={Math.round(ratings * 10) / 10}
+          rating={UTILS.convertScore(recipe.spoonacularScore)}
         />
         <Sidebar asideContent={
           <StickyContent>
@@ -63,6 +60,8 @@ export const Recipe = () => {
         mainContent={<Content summary={intro}
           instructions={instructions}
         />} />
+        <Sidebar asideContent=''
+          mainContent={<RecipeReviews recipeId={recipeId} />} />
       </Constrain>
     </div>
   );
@@ -74,6 +73,7 @@ export const Recipe = () => {
  * @component
  * @param {string} summary of the component.
  * @param {string} instructions of the component.
+ * @param {string} recipeId of the component.
  * @return {object} (
  *   <Content summary={summary} instructions={instructions} />
  * )
