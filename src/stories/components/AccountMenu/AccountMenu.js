@@ -1,44 +1,29 @@
 import './styles.scss';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-import database from '../../../services/firestore-service';
 
 /**
  * Functional Component for Account Menu
- *
+ * @param {string} username of the user
  * @component
  * @return {object} (
  *  <AccountMenu />
  * )
 */
 
-export const AccountMenu = () => {
-  const { logout, currentUser } = useContext(AuthContext);
-  const [profile, setProfile] = useState(null);
+export const AccountMenu = ({ username }) => {
+  const { logout } = useContext(AuthContext);
   const history = useHistory();
-
-  useEffect(() => {
-    if (currentUser) {
-      // setError('');
-      database.getProfile(currentUser.uid)
-        .then((doc) => {
-          setProfile(doc.data());
-        })
-        .catch((error) => {
-          // setError(error);
-        });
-    }
-  }, [currentUser]);
 
   // define menu items
   const menu = [
     { path: 'information', title: 'Your Information' },
     { path: 'favorites', title: 'Favorites' },
-    { path: 'reviews', title: 'Reviews' },
+    { path: 'reviews', title: 'AccountMenus' },
     { path: 'people', title: 'People' },
   ];
 
@@ -55,7 +40,7 @@ export const AccountMenu = () => {
     <div className="account-menu">
       <div className="account-menu__welcome">
         <span className="text-bold">Hello, </span>
-        {profile && profile.username}.
+        {username}.
       </div>
       <p>Welcome back. This is your account page with all the information
         you need.
@@ -77,6 +62,16 @@ export const AccountMenu = () => {
   );
 };
 
+AccountMenu.propTypes = {
+  /**
+   * AccountMenu's username.
+   */
+  username: PropTypes.string,
+};
+
+AccountMenu.defaultProps = {
+  username: 'Username',
+};
 
 /**
  * Partial for MenuItem component.
