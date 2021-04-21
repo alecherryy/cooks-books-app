@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { useHistory } from 'react-router-dom';
 
 import { AccountMenu } from '../../components/AccountMenu/AccountMenu';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 
 /**
@@ -29,8 +30,13 @@ export const Account = () => {
             <AccountMenu username='Placeholder' message="Lorem Ipsum for now" />
           </div>
           <div className="sidebar__main">
+            <h1>My Account</h1>
+            <p>In this page, you will find all information related
+              to your account, favorite recipes, reviews you have posted
+              and much more.
+            </p>
             <Route exact path="/account/information">
-              Your account information.
+              <UserInfo />
             </Route>
           </div>
         </div>

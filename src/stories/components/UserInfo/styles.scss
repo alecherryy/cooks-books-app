@@ -1,0 +1,100 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// User Information
+
+// .user-info {}
+
+.user-info__top {
+  align-items: center;
+  display: flex;
+  margin: $spacing-1 0;
+
+  @include bp-tablet {
+    margin: $spacing-2 0;
+  }
+}
+
+.user-info__title {
+  margin: 0;
+}
+
+.user-info__button {
+  @include button-clear();
+  @include image-replace(20px, 20px);
+  @include svg-background(icon-edit);
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  margin-left: $spacing-1;
+  padding: 0;
+
+  &.is-editing {
+    @include svg-background(icon-done);
+  }
+}
+
+.user-info__item {
+  margin-bottom: $spacing-1;
+
+  @include bp-tablet {
+    margin-bottom: $spacing-2;
+  }
+}
+
+.user-info__label {
+  display: block;
+  font-size: $font-size-xs;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.user-info__input {
+  appearance: none;
+  background-color: transparent;
+  border-color: $black;
+  border-style: solid;
+  border-width: 0 0 1px;
+  color: $black;
+  font-family: $base-font-family;
+  font-size: $font-size-sm;
+  height: rem(30px);
+
+  @include bp-tablet {
+    font-size: $font-size-md;
+    height: rem(40px);
+  }
+
+  &:disabled {
+    border-bottom-width: 0;
+    opacity: 0.65;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $red;
+  }
+}
+
+.user-info__input--select {
+  @include svg-background(icon-arrow-down);
+
+  background-position: center right $spacing-2;
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding-right: $spacing-2;
+  position: relative;
+
+  option {
+    color: $black;
+    font-weight: 400;
+    margin: $spacing-3 0 0;
+    position: absolute;
+  }
+
+  &:disabled {
+    background-image: none;
+  }
+}

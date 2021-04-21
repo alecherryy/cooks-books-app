@@ -15,7 +15,6 @@ import database from '../../../services/firestore-service';
  *  <AccountMenu />
  * )
 */
-
 export const AccountMenu = () => {
   const { logout, currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
