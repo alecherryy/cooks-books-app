@@ -37,9 +37,9 @@ export const MainMenu = () => {
       { currentUser ?
         <li className="main-menu__item">
           Welcome back,&nbsp;
-          <strong>{profile ?
+          <strong>{profile && profile.username ?
             profile.username :
-            currentUser.fullName
+            'Friend'
           }</strong>!
         </li> :
         <li className="main-menu__item">
