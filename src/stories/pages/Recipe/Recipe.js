@@ -13,7 +13,7 @@ import { Fragment } from 'react';
 import { Instructions } from '../../components/Instructions/Instructions';
 import { Ingredients } from '../../components/Ingredients/Ingredients';
 import { RecipeReviews } from '../../components/RecipeReviews/RecipeReviews';
-import { UTILS } from '../../../utils';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Recipe page.

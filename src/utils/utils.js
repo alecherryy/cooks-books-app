@@ -12,7 +12,7 @@ const convertScore = (num) => {
 };
 
 /**
- * Convert Spoonacular score to 5-point scale.
+ * Convert dae to string.
  *
  * @name convertScore
  * @param {Date} date of the score

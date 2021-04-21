@@ -10,7 +10,7 @@ import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { API } from '../../../services/spoonacular-service';
 import Artwork from '../../../images/artwork-4.svg';
-import { UTILS } from '../../../utils';
+import { UTILS } from '../../../utils/utils';
 
 
 /**

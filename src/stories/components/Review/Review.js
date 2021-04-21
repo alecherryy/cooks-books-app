@@ -3,7 +3,7 @@ import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { UTILS } from '../../../utils';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Review element.

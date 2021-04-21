@@ -15,7 +15,7 @@ import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 import { AuthContext } from '../../../Auth';
 import database from '../../../services/firestore-service';
-import { UTILS } from '../../../utils';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Home page.
