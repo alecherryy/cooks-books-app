@@ -17,8 +17,7 @@ Default.args = {
   modifierClasses: '',
   title: 'Sample Review Title',
   rating: 4,
-  date: 'August 16, 1929',
-  // date: new Date('August 16, 1929 06:00:00'),
+  date: new Date(),
   name: 'username',
   profUrl: '#',
   content:

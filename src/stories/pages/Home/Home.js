@@ -15,6 +15,7 @@ import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 import { AuthContext } from '../../../Auth';
 import database from '../../../services/firestore-service';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Home page.
@@ -143,8 +144,7 @@ export const Home = () => {
               description: recipe.summary,
               portions: recipe.servings,
               time: recipe.readyInMinutes,
-              rating: recipe.spoonacularScore ?
-                Math.round(recipe.spoonacularScore * 0.5) / 10 : '',
+              rating: UTILS.convertScore(recipe.spoonacularScore),
             });
           })
         }/>

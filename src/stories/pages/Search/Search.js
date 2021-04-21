@@ -10,6 +10,7 @@ import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { API } from '../../../services/spoonacular-service';
 import Artwork from '../../../images/artwork-4.svg';
+import { UTILS } from '../../../utils/utils';
 
 
 /**
@@ -65,9 +66,6 @@ export const Search = () => {
         <br />
         <Grid numColumns={4} >
           {resultJSON.results.map((r) => {
-            const ratings = r.spoonacularScore ?
-              (r.spoonacularScore / 100) * 5 :
-              null;
             return (
               <div key={r.id}>
                 <Teaser
@@ -75,7 +73,7 @@ export const Search = () => {
                   image={r.image}
                   time={r.readyInMinutes}
                   portions={r.servings}
-                  rating={Math.round(ratings * 10) / 10}
+                  rating={UTILS.convertScore(r.spoonacularScore)}
                   excerpt={`${r.summary.toString().split('. ')[0]}.`}
                   // excerpt={`${r.title} from ${r.sourceName}`}
                   url={`/recipes/${r.id}`} />

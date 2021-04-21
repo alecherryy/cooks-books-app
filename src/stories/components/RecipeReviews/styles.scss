@@ -3,9 +3,8 @@
 // @file
 // Review
 
-.review {
-  font-size: $font-size-sm;
-  padding: $spacing-1 0;
+.add-review {
+  padding: $spacing-3 0 0;
 }
 
 .review__recipe {
@@ -31,19 +30,18 @@
 
 .review__sub-header-item {
   border-color: black;
-  border-style: none none none solid;
   border-width: 1px;
-  line-height: 1;
+  border-style: none none none solid;
   padding: rem(2px) $spacing-2;
-
   &:first-child {
     padding-left: rem(4px);
     border-style: none;
   }
 }
 
+
 .review__content {
-  margin-top: $spacing-2;
+  margin-top: $spacing-1;
 }
 
 .review__view-recipe {
@@ -65,11 +63,14 @@
     display: inline-block;
     margin: $spacing-1 auto 0;
     overflow: hidden;
+
   }
 
   &.review__icon--star {
     &::before {
       @include svg-background(icon-review-star);
+
+      margin: 0;
     }
   }
 
@@ -78,5 +79,6 @@
       @include svg-background(icon-review-arrow);
     }
   }
+
 }
 
