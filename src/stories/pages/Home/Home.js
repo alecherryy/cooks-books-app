@@ -14,7 +14,7 @@ import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { USERS } from '../../../services/user-service';
 import { UTILS } from '../../../utils/utils';
 
 /**
@@ -81,7 +81,7 @@ export const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      database.getProfileUpdates(currentUser.uid, setProfile);
+      USERS.getProfileUpdates(currentUser.uid, setProfile);
     } else {
       setProfile(null);
     }

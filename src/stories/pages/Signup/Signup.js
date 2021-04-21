@@ -10,7 +10,7 @@ import Artwork from '../../../images/artwork-3.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Component for Signup page.
@@ -37,7 +37,7 @@ export const Signup = () => {
     setLoading(true);
     signup(email, password)
       .then((result) => {
-        return database.setProfile(result.user.uid, {
+        return USERS.setProfile(result.user.uid, {
           fullName,
           username,
           userType,

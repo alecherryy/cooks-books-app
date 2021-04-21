@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Component for Main Menu element.
@@ -22,7 +22,7 @@ export const MainMenu = () => {
   useEffect(() => {
     if (currentUser) {
       // setError('');
-      database.getProfile(currentUser.uid)
+      USERS.getProfile(currentUser.uid)
         .then((doc) => {
           setProfile(doc.data());
         })

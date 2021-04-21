@@ -37,10 +37,8 @@ const getProfileUpdates = (userId, setProfile) => {
     });
 };
 
-const api = {
+export const USERS = {
   setProfile,
   getProfile,
   getProfileUpdates,
 };
-
-export default api;

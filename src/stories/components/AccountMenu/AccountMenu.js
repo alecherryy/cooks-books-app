@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Functional Component for Account Menu
@@ -23,7 +23,7 @@ export const AccountMenu = () => {
   useEffect(() => {
     if (currentUser) {
       // setError('');
-      database.getProfile(currentUser.uid)
+      USERS.getProfile(currentUser.uid)
         .then((doc) => {
           setProfile(doc.data());
         })
