@@ -1,6 +1,10 @@
 import './App.scss';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { Header } from './stories/layouts/Header/Header';
 import { Main } from './stories/layouts/Main/Main';
 import { Footer } from './stories/layouts/Footer/Footer';
@@ -10,35 +14,42 @@ import { Login } from './stories/pages/Login/Login';
 import { Home } from './stories/pages/Home/Home';
 import { Signup } from './stories/pages/Signup/Signup';
 import { Search } from './stories/pages/Search/Search';
-import { AuthProvider } from './Auth';
+import { Account } from './stories/pages/Account/Account';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Header rightContent={<MainMenu />} />
-        <Main>
-          <Switch>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path={['/search', '/search/:searchTerms']}>
-              <Search />
-            </Route>
-            <Route exact path="/recipes/:recipeId">
-              <Recipe />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Main>
-        <Footer />
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Header rightContent={<MainMenu />} />
+      <Main>
+        <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path={['/search', '/search/:searchTerms']}>
+            <Search />
+          </Route>
+          <Route exact path="/recipes/:recipeId">
+            <Recipe />
+          </Route>
+          <Route exact path={[
+            `/account`,
+            `/account/information`,
+            `/account/favorites`,
+            `/account/reviews`,
+            `/account/people`,
+          ]}>
+            <Account />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Main>
+      <Footer />
+    </Router>
   );
 }
 
