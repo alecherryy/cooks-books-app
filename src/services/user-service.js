@@ -37,8 +37,24 @@ const getProfileUpdates = (userId, setProfile) => {
     });
 };
 
+/**
+ * Update profile of current user
+ *
+ * @param {string} userId id of the user
+ * @param {object} profile to update
+ * @return {object} updated user
+ */
+const updateProfile = (userId, profile) => {
+  const doc = firebase.firestore().collection(USERS_COLLECTION)
+    .doc(userId);
+  // console.log(doc.data()); // eslint-disable-line no-console
+
+  return doc.set(profile).data();
+};
+
 export const USERS = {
   setProfile,
   getProfile,
   getProfileUpdates,
+  updateProfile,
 };

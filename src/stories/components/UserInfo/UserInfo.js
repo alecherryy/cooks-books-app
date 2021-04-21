@@ -3,6 +3,7 @@ import './styles.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Component for account info element.
@@ -17,6 +18,12 @@ export const UserInfo = ({ user }) => {
   const [cachedUser, setCachedUser] = useState(user);
   const [editing, setEditing] = useState(false);
 
+  const updateUser = () => {
+    if (!editing) {
+      USERS.updateProfile(cachedUser._id, cachedUser);
+    }
+  };
+
   return (
     <div className="user-info">
       <div className="user-info__top">
@@ -25,7 +32,10 @@ export const UserInfo = ({ user }) => {
           'user-info__button',
           editing ? 'is-editing' : '',
         ].join(' ').trim()}
-        onClick={() => setEditing(!editing)}
+        onClick={() => {
+          setEditing(!editing);
+          updateUser();
+        }}
         >{ editing ? 'Update' : 'Edit'}</button>
       </div>
       <p>Below you can find your account information; you can update your login
@@ -34,7 +44,7 @@ export const UserInfo = ({ user }) => {
       <div className="user-info__item">
         <label className="user-info__label">Full Name</label>
         <input type="text" className="user-info__input"
-          value={cachedUser && cachedUser.fullName}
+          value={cachedUser.fullName ? cachedUser.fullName : ''}
           disabled={!editing}
           onChange={(e) => setCachedUser({
             ...cachedUser,
@@ -44,7 +54,7 @@ export const UserInfo = ({ user }) => {
       <div className="user-info__item">
         <label className="user-info__label">Username</label>
         <input type="text" className="user-info__input"
-          value={cachedUser && cachedUser.username}
+          value={cachedUser.username}
           disabled={!editing}
           onChange={(e) => setCachedUser({
             ...cachedUser,
@@ -72,7 +82,7 @@ export const UserInfo = ({ user }) => {
       <div className="user-info__item">
         <label className="user-info__label">Email</label>
         <input type="email" className="user-info__input"
-          value={cachedUser && cachedUser.email}
+          value={cachedUser.email}
           disabled={!editing}
           onChange={(e) => setCachedUser({
             ...cachedUser,
@@ -82,7 +92,7 @@ export const UserInfo = ({ user }) => {
       <div className="user-info__item">
         <label className="user-info__label">Password</label>
         <input type="password" className="user-info__input"
-          value={cachedUser && cachedUser.password}
+          value={cachedUser.password}
           disabled={!editing}
           onChange={(e) => setCachedUser({
             ...cachedUser,

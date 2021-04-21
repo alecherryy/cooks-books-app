@@ -61,10 +61,15 @@
   font-family: $base-font-family;
   font-size: $font-size-sm;
   height: rem(30px);
+  width: 100%;
 
   @include bp-tablet {
     font-size: $font-size-md;
     height: rem(40px);
+  }
+
+  @include bp-tablet-lg {
+    width: 75%;
   }
 
   &:disabled {

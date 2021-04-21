@@ -3,7 +3,7 @@ import './styles.scss';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 import { USERS } from '../../../services/user-service';
 
 /**

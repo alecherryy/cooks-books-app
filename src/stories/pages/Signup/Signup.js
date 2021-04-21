@@ -9,8 +9,7 @@ import { Link } from 'react-router-dom';
 import Artwork from '../../../images/artwork-3.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
-import { AuthContext } from '../../../Auth';
-import { USERS } from '../../../services/user-service';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 
 /**
  * Component for Signup page.

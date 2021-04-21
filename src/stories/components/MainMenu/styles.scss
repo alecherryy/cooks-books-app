@@ -12,6 +12,12 @@
   @include bp-tablet {
     padding-left: $spacing-4 !important;
   }
+
+  @include bp-max-tablet {
+    &:first-child {
+      display: none;
+    }
+  }
 }
 
 .main-menu__link {

@@ -3,9 +3,9 @@ import './styles.scss';
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
-import { AuthContext } from '../../../Auth';
-import { USERS } from '../../../services/user-service';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 import firebase from 'firebase/app';
+import { USERS } from '../../../services/user-service';
 
 // import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
