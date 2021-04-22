@@ -19,9 +19,7 @@ export const UserInfo = ({ user }) => {
   const [editing, setEditing] = useState(false);
 
   const updateUser = () => {
-    if (!editing) {
-      USERS.updateProfile(cachedUser._id, cachedUser);
-    }
+    USERS.updateUser(cachedUser._id, cachedUser);
   };
 
   return (

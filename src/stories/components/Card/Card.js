@@ -54,11 +54,11 @@ export const Card = (
   const toggleFavorite = () => {
     if (currentUser) {
       if (!favorite) {
-        USERS.setProfile(currentUser.uid, {
+        USERS.updateUser(currentUser.uid, {
           favoriteRecipes: firebase.firestore.FieldValue.arrayUnion(id),
         }).then(() => setFavorite(!favorite));
       } else {
-        USERS.setProfile(currentUser.uid, {
+        USERS.updateUser(currentUser.uid, {
           favoriteRecipes: firebase.firestore.FieldValue.arrayRemove(id),
         }).then(() => setFavorite(!favorite));
       }

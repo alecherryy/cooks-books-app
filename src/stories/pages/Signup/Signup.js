@@ -36,7 +36,7 @@ export const Signup = () => {
     setLoading(true);
     signup(email, password)
       .then((result) => {
-        return USERS.setProfile(result.user.uid, {
+        return USERS.updateUser(result.user.uid, {
           fullName,
           username,
           userType,

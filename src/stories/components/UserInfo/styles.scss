@@ -54,7 +54,7 @@
 .user-info__input {
   appearance: none;
   background-color: transparent;
-  border-color: $black;
+  border-color: rgba(0, 0, 0, 0.3);
   border-style: solid;
   border-width: 0 0 1px;
   color: $black;
@@ -73,7 +73,6 @@
   }
 
   &:disabled {
-    border-bottom-width: 0;
     opacity: 0.65;
   }
 

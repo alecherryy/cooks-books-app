@@ -19,18 +19,21 @@ import { UserInfo } from '../../components/UserInfo/UserInfo';
 
 export const Account = () => {
   const { currentUser } = useContext(AuthContext);
-  const [profile, setProfile] = useState(currentUser);
+  const [profile, setProfile] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
     if (currentUser) {
-      USERS.getProfile(currentUser.uid).then((res) => {
-        const user = res.data();
-        user.email = currentUser.email;
-        setProfile(user);
-      }).catch((error) => {
-        // setError(error);
+      USERS.getUser(currentUser.uid).then((res) => {
+        setProfile(res);
       });
+      // .then((res) => {
+      //   const user = res.data();
+      //   user.email = currentUser.email;
+      //   setProfile(user);
+      // }).catch((error) => {
+      //   // setError(error);
+      // });
     }
   }, [currentUser]);
 

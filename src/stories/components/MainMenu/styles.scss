@@ -13,7 +13,7 @@
     padding-left: $spacing-4 !important;
   }
 
-  @include bp-max-tablet {
+  @include bp-max-tablet-lg {
     &:first-child {
       display: none;
     }

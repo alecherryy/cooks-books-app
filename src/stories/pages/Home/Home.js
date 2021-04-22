@@ -81,7 +81,7 @@ export const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      USERS.getProfileUpdates(currentUser.uid, setProfile);
+      USERS.getUserUpdates(currentUser.uid, setProfile);
     } else {
       setProfile(null);
     }
