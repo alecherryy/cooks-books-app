@@ -20,7 +20,7 @@ const updateUser = (userId, user) => {
  * @param {string} userId id of the user
  * @return {object} a promise
  */
-const getUser = (userId) => {
+const findUser = (userId) => {
   return ALL_USERS.doc(userId)
     .get().then((res) => {
       return res.data();
@@ -42,6 +42,6 @@ const getUserUpdates = (userId, setProfile) => {
 
 export const USERS = {
   updateUser,
-  getUser,
+  findUser,
   getUserUpdates,
 };
