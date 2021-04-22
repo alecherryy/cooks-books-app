@@ -10,8 +10,8 @@ const ALL_USERS = firebase.firestore().collection(USERS_COLLECTION);
  * @param {object} user an object with fields and their values
  * @return {object} a promise
  */
-const updateUser = (userId, user) => {
-  return ALL_USERS.doc(userId).set(user);
+const updateUser = (userId, ...user) => {
+  return ALL_USERS.doc(userId).set(...user, { merge: true });
 };
 
 /**
@@ -21,10 +21,7 @@ const updateUser = (userId, user) => {
  * @return {object} a promise
  */
 const findUser = (userId) => {
-  return ALL_USERS.doc(userId)
-    .get().then((res) => {
-      return res.data();
-    });
+  return ALL_USERS.doc(userId).get();
 };
 
 /**
@@ -41,7 +38,7 @@ const getUserUpdates = (userId, setProfile) => {
 };
 
 export const USERS = {
-  updateUser,
   findUser,
+  updateUser,
   getUserUpdates,
 };
