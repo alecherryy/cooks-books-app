@@ -8,7 +8,7 @@
 The repo contains development work for the CooksBooks web-based application. This product is implemented using a combination of languages and development tools such as: React, Node.js, public APIs, MongoDB, Storybook and Jest.
 
 ## Introduction
-CooksBooks is a web application that aims to bring both culinary creators and food enthusiasts together in a more level playing field than currently exists. By giving users the freedom of registering as either a chef or a foodie, it allows everyone to enjoy good recipes and food, while providing confidence in the robustness of recipes and reviews on the platform. Overall, CooksBooks provides a space for everyday individuals to browse recipes and be a part of an ongoing discussion, in contrast to the existing spaces of food critic reviews and recipe blogs. 
+CooksBooks is a web application that aims to bring both culinary creators and food enthusiasts together in a more level playing field than currently exists. By giving users the freedom of registering as either a chef or a foodie, it allows everyone to enjoy good recipes and food, while providing confidence in the robustness of recipes and reviews on the platform. Overall, CooksBooks provides a space for everyday individuals to browse recipes and be a part of an ongoing discussion, in contrast to the existing spaces of food critic reviews and recipe blogs.
 
 Additional information can be found on our [Wiki](https://github.com/alecherryy/cooks-books-app/wiki) pages.
 
@@ -196,8 +196,8 @@ Global setup for tests can be found in:
 ```
 src/setupTests.js
 ```
-## Database and API Connection
-To establish communication with the database or public API, locate the `.env-sample` file in the project root, make a copy of it and rename it `.env`. Inside the file, you can assign values to the environemnt globals like so:
+## USERSand API Connection
+To establish communication with the USERSor public API, locate the `.env-sample` file in the project root, make a copy of it and rename it `.env`. Inside the file, you can assign values to the environemnt globals like so:
 ```
 DB_URL=https://www.mongodb.com/
 DB_COLLECTION_NAME=Collection_Name
@@ -220,4 +220,4 @@ or
 ```
 npm run storybook
 ```
-to get work with the database and/or API.
+to get work with the USERSand/or API.

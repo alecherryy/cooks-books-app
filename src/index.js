@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { AuthProvider } from './Auth';
+import { AuthProvider } from './stories/components/AuthProvider/AuthProvider';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

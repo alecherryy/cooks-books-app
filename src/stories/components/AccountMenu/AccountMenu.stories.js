@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
+import { AuthProvider } from '../../../Auth';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { AccountMenu } from './AccountMenu';
 
@@ -12,10 +13,12 @@ export default {
 };
 
 const Template = (args) => <MemoryRouter>
-  <Sidebar
-    asideContent={<AccountMenu {...args} />}
-    mainContent='Main content goes here'
-  />
+  <AuthProvider>
+    <Sidebar
+      asideContent={<AccountMenu {...args} />}
+      mainContent='Main content goes here'
+    />
+  </AuthProvider>
 </MemoryRouter>;
 
 // Default AccountMenu

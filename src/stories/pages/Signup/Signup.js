@@ -9,8 +9,7 @@ import { Link } from 'react-router-dom';
 import Artwork from '../../../images/artwork-3.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
-import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 
 /**
  * Component for Signup page.
@@ -37,7 +36,7 @@ export const Signup = () => {
     setLoading(true);
     signup(email, password)
       .then((result) => {
-        return database.setProfile(result.user.uid, {
+        return USERS.updateUser(result.user.uid, {
           fullName,
           username,
           userType,
