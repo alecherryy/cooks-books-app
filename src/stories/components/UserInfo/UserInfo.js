@@ -1,29 +1,28 @@
 import './styles.scss';
 
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
 import { USERS } from '../../../services/user-service';
-import { AuthContext } from '../AuthProvider/AuthProvider';
 
 /**
  * Component for account info element.
  *
  * @component
  * @param {object} user information.
+ * @param {string} id of the user.
  * @return {object} (
  *   <UserInfo user={user} />
  * )
  */
-export const UserInfo = ({ user }) => {
-  const { currentUser } = useContext(AuthContext);
+export const UserInfo = ({ id, user }) => {
   const [cachedUser, setCachedUser] = useState(user);
   const [editing, setEditing] = useState(false);
 
 
   const updateUser = () => {
-    USERS.updateUser(currentUser.uid, cachedUser).then((res) => {
-      USERS.findUser(currentUser.uid).then((doc) => {
+    USERS.updateUser(id, cachedUser).then((res) => {
+      USERS.findUser(id).then((doc) => {
         setCachedUser(doc.data());
       });
     });
@@ -122,10 +121,15 @@ UserInfo.propTypes = {
    * UserInfo's user
    */
   user: PropTypes.object,
+  /**
+   * UserInfo's id
+   */
+  id: PropTypes.id,
 };
 
 UserInfo.defaultProps = {
   user: {},
+  id: '',
 };
 
 /**
