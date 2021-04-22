@@ -24,16 +24,11 @@ export const Account = () => {
 
   useEffect(() => {
     if (currentUser) {
-      USERS.getUser(currentUser.uid).then((res) => {
-        setProfile(res);
+      USERS.findUser(currentUser.uid).then((res) => {
+        setProfile(res.data());
+      }).catch((error) => {
+        // setError(error);
       });
-      // .then((res) => {
-      //   const user = res.data();
-      //   user.email = currentUser.email;
-      //   setProfile(user);
-      // }).catch((error) => {
-      //   // setError(error);
-      // });
     }
   }, [currentUser]);
 

@@ -1,9 +1,10 @@
 import './styles.scss';
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
 import { USERS } from '../../../services/user-service';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 /**
  * Component for account info element.
@@ -15,12 +16,20 @@ import { USERS } from '../../../services/user-service';
  * )
  */
 export const UserInfo = ({ user }) => {
+  const { currentUser } = useContext(AuthContext);
   const [cachedUser, setCachedUser] = useState(user);
   const [editing, setEditing] = useState(false);
 
+
   const updateUser = () => {
-    USERS.updateUser(cachedUser._id, cachedUser);
+    USERS.updateUser(currentUser.uid, cachedUser).then((res) => {
+      USERS.findUser(currentUser.uid).then((doc) => {
+        setCachedUser(doc.data());
+      });
+    });
   };
+
+  const isChef = cachedUser && cachedUser.userType === 'Chef';
 
   return (
     <div className="user-info">
@@ -60,41 +69,47 @@ export const UserInfo = ({ user }) => {
           })} />
       </div>
       <div className="user-info__item">
-        <label className="user-info__label">User Role</label>
+        <label className="user-info__label">Account Type</label>
         <select
           disabled={!editing}
-          defaultValue={cachedUser.role}
+          defaultValue={cachedUser.userType}
           onChange={(e) => setCachedUser({
             ...cachedUser,
-            role: e.target.value,
+            userType: e.target.value,
           })}
           className={[
             'user-info__input',
             'user-info__input--select'].join(' ').trim()
           }
         >
-          <option value="CHEF">Chef</option>
-          <option value="FOODIE">Foodie</option>
+          <option value="Chef">Chef</option>
+          <option value="Foodie">Foodie</option>
         </select>
       </div>
+      { isChef &&
+        <div className="user-info__item">
+          <label className="user-info__label">Restaurant Name</label>
+          <input type="text" className="user-info__input"
+            value={cachedUser.restaurant}
+            disabled={!editing}
+            onChange={(e) => setCachedUser({
+              ...cachedUser,
+              restaurant: e.target.value,
+            })} />
+        </div>
+      }
       <div className="user-info__item">
-        <label className="user-info__label">Email</label>
-        <input type="email" className="user-info__input"
-          value={cachedUser.email}
+        <label className="user-info__label">{
+          isChef ?
+            'Restaurant Website' :
+            'Website'
+        }</label>
+        <input type="url" className="user-info__input"
+          value={cachedUser.website ? cachedUser.website : ''}
           disabled={!editing}
           onChange={(e) => setCachedUser({
             ...cachedUser,
-            email: e.target.value,
-          })} />
-      </div>
-      <div className="user-info__item">
-        <label className="user-info__label">Password</label>
-        <input type="password" className="user-info__input"
-          value={cachedUser.password}
-          disabled={!editing}
-          onChange={(e) => setCachedUser({
-            ...cachedUser,
-            password: e.target.value,
+            website: e.target.value,
           })} />
       </div>
       <DeleteUser handleClick={null} />

@@ -23,7 +23,7 @@ export const MainMenu = () => {
   useEffect(() => {
     if (currentUser) {
       // setError('');
-      USERS.getUser(currentUser.uid)
+      USERS.findUser(currentUser.uid)
         .then((doc) => {
           setProfile(doc.data());
         })

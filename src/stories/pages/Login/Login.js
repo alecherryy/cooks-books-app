@@ -34,7 +34,7 @@ export const Login = () => {
     login(email, password)
       .then(() => {
         setLoading(false);
-        history.push('/account/information');
+        history.push('/');
       })
       .catch((error) => {
         // setError(error);
