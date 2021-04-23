@@ -10,19 +10,18 @@ import { USERS } from '../../../services/user-service';
  *
  * @component
  * @param {object} user information.
- * @param {string} id of the user.
  * @return {object} (
  *   <UserInfo user={user} />
  * )
  */
-export const UserInfo = ({ id, user }) => {
-  const [cachedUser, setCachedUser] = useState(user);
+export const UserInfo = ({ user }) => {
+  const [cachedUser, setCachedUser] = useState(user.data);
   const [editing, setEditing] = useState(false);
 
 
   const updateUser = () => {
-    USERS.updateUser(id, cachedUser).then((res) => {
-      USERS.findUser(id).then((doc) => {
+    USERS.updateUser(user._id, cachedUser).then((res) => {
+      USERS.findUser(user._id).then((doc) => {
         setCachedUser(doc.data());
       });
     });
@@ -121,15 +120,10 @@ UserInfo.propTypes = {
    * UserInfo's user
    */
   user: PropTypes.object,
-  /**
-   * UserInfo's id
-   */
-  id: PropTypes.id,
 };
 
 UserInfo.defaultProps = {
   user: {},
-  id: '',
 };
 
 /**

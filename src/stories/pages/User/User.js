@@ -1,58 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Route } from 'react-router';
+import { Route, useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 
-import { AccountMenu } from '../../components/AccountMenu/AccountMenu';
+import { UserMenu } from '../../components/UserMenu/UserMenu';
 import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { USERS } from '../../../services/user-service';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 
 /**
- * Component for Account page.
+ * Component for User page.
  *
  * @component
  * @return {object} (
- *   <Account />
+ *   <User />
  * )
  */
 
-export const Account = () => {
-  const { currentUser } = useContext(AuthContext);
+export const User = () => {
+  const [userId] = useParams();
   const [profile, setProfile] = useState();
-  const history = useHistory();
 
   useEffect(() => {
-    if (currentUser) {
-      USERS.findUser(currentUser.uid).then((res) => {
-        const data = res.data();
-        setProfile({
-          _id: currentUser.uid,
-          data,
-        });
-      }).catch((error) => {
-        // setError(error);
+    USERS.findUser(userId).then((res) => {
+      const data = res.data();
+      setProfile({
+        _id: userId,
+        data,
       });
-    }
-  }, [currentUser]);
-
-  useEffect(()=> {
-    history.push('/account/information');
+    }).catch((error) => {
+      // setError(error);
+    });
   });
 
   return (
-    <div className="account">
+    <div className="user">
       <Constrain>
         <div className="sidebar">
           <div className="sidebar__aside">
             { profile &&
-              <AccountMenu username={profile.username &&
+              <UserMenu username={profile.username &&
                 profile.username}
               message="Lorem Ipsum for now" />
             }
           </div>
           <div className="sidebar__main">
-            <h1>My Account</h1>
+            <h3>Favorites</h3>
             <p>In this page, you will find all information related
               to your account, favorite recipes, reviews you have posted
               and much more.
