@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
 import { API } from '../../../services/spoonacular-service';
+import recipeService from '../../../services/recipe-service';
+import ingredientsService from '../../../services/ingredients-service';
+import instructionsService from '../../../services/instructions-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { FeaturedImage } from '../../components/FeaturedImage/FeaturedImage';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
@@ -31,9 +34,13 @@ export const Recipe = () => {
   const [instructions, setInstructions] = useState([]);
   const [intro, setIntro] = useState([]);
 
-  useEffect(() => {
-    const id = recipeId ? recipeId : '609262'; // default sample recipe id
 
+  /**
+   * Makes calls to spoonacular to set state.
+   *
+   * @param {integer} id The used to call spoonacular
+   */
+  const setStateFromSpoonacular = (id) => {
     API.findRecipeById(id).then((res) => {
       setRecipe(res);
       setIntro(res.summary);
@@ -43,6 +50,58 @@ export const Recipe = () => {
     API.getRecipeIntructions(id).then((res) => {
       setInstructions(res[0]);
     });
+  };
+
+  /**
+   * Makes calls to firebase to set state.
+   *
+   * @param {string} id The used to call firebase.
+   */
+  const setStateFromFirebase = (id) => {
+    // set recipe, summary, with one call
+    // call service to get promise, forEach through result
+    recipeService.findRecipeById( id ).then((snapshot) => {
+      snapshot.forEach((doc) => {
+        const recipe = doc.data();
+        setRecipe(recipe);
+        setIntro(recipe.summary);
+      });
+    });
+
+    // loop through return from ingredientsService
+    const newIngredients = [];
+    // call service to get promise, forEach through result
+    ingredientsService.findAllIngredientsForId( id )
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          newIngredients.push(doc.data());
+        });
+        setIngredients(newIngredients);
+      });
+
+    // loop through return from instructionsService
+    const newInstructions = [];
+    // call service to get promise, forEach through result
+    instructionsService.findAllInstructionsForId( id )
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          newInstructions.push(doc.data());
+        });
+        const newInstructionsInArray = { steps: newInstructions };
+        setInstructions(newInstructionsInArray);
+      });
+  };
+
+
+  useEffect(() => {
+    const id = recipeId ? recipeId : '609262'; // default sample recipe id
+    const isSpoonId = UTILS.isSpoonRecipeId(id);
+
+    if ( isSpoonId ) {
+      setStateFromSpoonacular(id);
+    } else {
+      setStateFromFirebase(id);
+    };
   }, []);
 
   return (

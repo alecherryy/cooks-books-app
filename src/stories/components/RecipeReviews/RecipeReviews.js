@@ -40,7 +40,7 @@ export const RecipeReviews = ({ recipeId }) => {
       username: 'apizzoccheri',
       date: new Date(),
     }]);
-  }, [reviews]);
+  }, []);
 
   // push review to database
   const submitNewReview = (e) => {

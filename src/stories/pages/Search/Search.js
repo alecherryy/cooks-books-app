@@ -9,6 +9,7 @@ import { Teaser } from '../../components/Teaser/Teaser';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { API } from '../../../services/spoonacular-service';
+import recipeService from '../../../services/recipe-service';
 import Artwork from '../../../images/artwork-4.svg';
 import { UTILS } from '../../../utils/utils';
 
@@ -28,13 +29,39 @@ export const Search = () => {
     { totalResults: 0, results: [], number: 0 });
   const history = useHistory();
 
+  /**
+   * Stiches together data from firebase and spoonacular.
+   *   Ugly as heck due to needing information from two
+   *   promises that have to resolve.
+   * @param {string} searchTerms Terms to search.
+   */
+  const doubleCallbackHell = (searchTerms) => {
+    // call spoonacular first, save results
+    API.findRecipesByKeywords(searchTerms)
+      .then((theResults) => {
+        const spoonJson = theResults;
+
+        // when promise resolves, call firebase
+        recipeService.findRecipesByTitle(searchTerms)
+          .then((snapshot) => {
+            // iterate over all returned elements, add to spoonjson
+            snapshot.forEach((doc) => {
+              spoonJson.results.push(doc.data());
+            });
+
+            // set state to stitched json variable
+            setResultJSON(spoonJson);
+          });
+      });
+  };
+
+
   // listen for changes in url, search based on that
   useEffect(() => {
     setSearchBar(searchTerms);
 
     if (searchTerms) {
-      API.findRecipesByKeywords(searchTerms)
-        .then((theResults) => setResultJSON(theResults));
+      doubleCallbackHell(searchTerms);
     }
   }, [searchTerms]);
 
@@ -61,8 +88,9 @@ export const Search = () => {
               value={searchBar} />
           </Form>
         </Constrain>
-        <p className='text-bold'>{resultJSON.number} results out of
-          {' '}{resultJSON.totalResults} recipes</p>
+        <p className='text-bold'>{resultJSON.results.length} results out of
+          {' '}
+          {resultJSON.totalResults - 10 + resultJSON.results.length} recipes</p>
         <br />
         <Grid numColumns={4} >
           {resultJSON.results.map((r) => {

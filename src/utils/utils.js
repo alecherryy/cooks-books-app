@@ -26,9 +26,15 @@ const convertDateToString = (date) => {
   });
 };
 
+const isSpoonRecipeId = (recipeId) => {
+  return ! isNaN( parseInt(recipeId) );
+};
+
 /**
  * Export utiliy functions
  */
 export const UTILS = {
-  convertScore, convertDateToString,
+  convertScore,
+  convertDateToString,
+  isSpoonRecipeId,
 };
