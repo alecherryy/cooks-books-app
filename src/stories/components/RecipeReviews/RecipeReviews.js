@@ -10,7 +10,8 @@ import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
 
 import database from '../../../services/firestore-service';
-import recipeService from '../../../services/recipe-service';
+// import recipeService from '../../../services/recipe-service';
+import reviewService from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
 
 /**
@@ -32,7 +33,7 @@ export const RecipeReviews = ({ recipeId }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [reviews, setReviews] = useState(null);
   const [review, setReview] = useState({
-    // recipeId,
+    recipeId,
     title: '',
     content: '',
     rating: '',
@@ -55,7 +56,7 @@ export const RecipeReviews = ({ recipeId }) => {
     }
 
     // this call is purely to make document discoverable in future
-    recipeService.createRecipeFromSpoonId(recipeId);
+    // recipeService.createRecipeFromSpoonId(recipeId);
     // this one actually gets data
     setReviewsFromDB();
   }, [currentUser]);
@@ -67,7 +68,7 @@ export const RecipeReviews = ({ recipeId }) => {
    */
   const setReviewsFromDB = () => {
     setReviews([]);
-    recipeService.readReviewsForRecipe(recipeId)
+    reviewService.findReviewsForRecipeId(recipeId)
       .then((collection) => {
         const theReviews = [];
         collection.forEach((doc) => {
@@ -85,7 +86,8 @@ export const RecipeReviews = ({ recipeId }) => {
    * @param {object} e passed from button event, to clear form
    */
   const checkAndSubmitReviewToDB = (e) => {
-    // alert( 'ran submit!' );
+  // TODO: History push? or only show if theres a current user.
+
     setErrorMessage('');
     setSuccessMessage('');
 
@@ -107,7 +109,7 @@ export const RecipeReviews = ({ recipeId }) => {
       // this gets around the setReview being async
       const reviewToAdd = { ...review, username: profile.username };
       // submit to firebase, when successfull regrab all reviews
-      recipeService.createReviewForRecipe(recipeId, reviewToAdd)
+      reviewService.createReview(reviewToAdd)
         .then((docRef) => {
           setReviewsFromDB();
           setSuccessMessage( 'Review submitted!' );
@@ -130,6 +132,7 @@ export const RecipeReviews = ({ recipeId }) => {
 
   return (
     <div className="recipe-review">
+      { profile !== null &&
       <NewReview
         recipeId={recipeId}
         handleClick={(e) => createReview(e)}
@@ -155,6 +158,7 @@ export const RecipeReviews = ({ recipeId }) => {
         errorMessage={errorMessage}
         successMessage={successMessage}
       />
+      }
       {reviews && <h3>Reviews</h3>}
       {reviews &&
         reviews.map((r, index) => {
