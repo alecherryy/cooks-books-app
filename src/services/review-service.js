@@ -24,9 +24,7 @@ const findReviewsForRecipeId = ( recipeId ) => {
 };
 
 
-const api = {
+export const REVIEWS = {
   createReview,
   findReviewsForRecipeId,
 };
-
-export default api;

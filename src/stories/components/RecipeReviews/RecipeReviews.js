@@ -11,7 +11,7 @@ import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
 import { USERS } from '../../../services/user-service';
 // import recipeService from '../../../services/recipe-service';
-import reviewService from '../../../services/review-service';
+import { REVIEWS } from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
 
 /**
@@ -31,7 +31,7 @@ export const RecipeReviews = ({ recipeId }) => {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState({
     // userId: currentUser.uid,
     recipeId,
@@ -69,7 +69,7 @@ export const RecipeReviews = ({ recipeId }) => {
    */
   const setReviewsFromDB = () => {
     setReviews([]);
-    reviewService.findReviewsForRecipeId(recipeId)
+    REVIEWS.findReviewsForRecipeId(recipeId)
       .then((collection) => {
         const theReviews = [];
         collection.forEach((doc) => {
@@ -115,7 +115,7 @@ export const RecipeReviews = ({ recipeId }) => {
         uid: currentUser.uid,
       };
       // submit to firebase, when successfull regrab all reviews
-      reviewService.createReview(reviewToAdd)
+      REVIEWS.createReview(reviewToAdd)
         .then((docRef) => {
           setReviewsFromDB();
           setSuccessMessage( 'Review submitted!' );
@@ -138,7 +138,7 @@ export const RecipeReviews = ({ recipeId }) => {
 
   return (
     <div className="recipe-review">
-      { profile !== null &&
+      { profile &&
       <NewReview
         recipeId={recipeId}
         handleClick={(e) => createReview(e)}
@@ -165,8 +165,8 @@ export const RecipeReviews = ({ recipeId }) => {
         successMessage={successMessage}
       />
       }
-      {reviews && <h3>Reviews</h3>}
-      {reviews &&
+      <h3 className="recipe-review__title">Reviews</h3>
+      {reviews.length !== 0 ?
         reviews.map((r, index) => {
           return (
             <Review
@@ -178,7 +178,9 @@ export const RecipeReviews = ({ recipeId }) => {
               name={r.username}
             />
           );
-        })}
+        }) :
+        <p>Be the first to review this recipe!</p>
+      }
     </div>
   );
 };
