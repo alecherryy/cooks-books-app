@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
+import { AuthProvider } from '../../../Auth';
 import '../../../scss/styles.scss';
 import { Account } from './Account';
 
@@ -14,7 +15,9 @@ export default {
 const Template = (args) => {
   return (
     <MemoryRouter initialEntries={['/account/information']}>
-      <Account {...args} />
+      <AuthProvider>
+        <Account {...args} />
+      </AuthProvider>
     </MemoryRouter>
   );
 };
