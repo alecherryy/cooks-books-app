@@ -2,14 +2,14 @@ import './styles.scss';
 
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { AuthContext } from '../../../Auth';
+// import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 // import { useHistory } from 'react-router-dom';
 
 import { Review } from '../Review/Review';
 import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
-
-import database from '../../../services/firestore-service';
+import { USERS } from '../../../services/user-service';
 // import recipeService from '../../../services/recipe-service';
 import reviewService from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
@@ -33,6 +33,7 @@ export const RecipeReviews = ({ recipeId }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [reviews, setReviews] = useState(null);
   const [review, setReview] = useState({
+    // userId: currentUser.uid,
     recipeId,
     title: '',
     content: '',
@@ -46,7 +47,7 @@ export const RecipeReviews = ({ recipeId }) => {
     setSuccessMessage('');
     // get profiles username to attach to reviews
     if (currentUser) {
-      database.getProfile(currentUser.uid)
+      USERS.findUser(currentUser.uid)
         .then((doc) => {
           setProfile(doc.data());
         })
@@ -107,7 +108,12 @@ export const RecipeReviews = ({ recipeId }) => {
     // everything is non empty, so clear values, and submit review
     } else {
       // this gets around the setReview being async
-      const reviewToAdd = { ...review, username: profile.username };
+      const reviewToAdd =
+      {
+        ...review,
+        username: profile.username,
+        uid: currentUser.uid,
+      };
       // submit to firebase, when successfull regrab all reviews
       reviewService.createReview(reviewToAdd)
         .then((docRef) => {
