@@ -35,7 +35,7 @@ export const Search = () => {
    *   promises that have to resolve.
    * @param {string} searchTerms Terms to search.
    */
-  const doubleCallbackHell = (searchTerms) => {
+  const findAggregateSearchResults = (searchTerms) => {
     // call spoonacular first, save results
     API.findRecipesByKeywords(searchTerms)
       .then((theResults) => {
@@ -61,7 +61,7 @@ export const Search = () => {
     setSearchBar(searchTerms);
 
     if (searchTerms) {
-      doubleCallbackHell(searchTerms);
+      findAggregateSearchResults(searchTerms);
     }
   }, [searchTerms]);
 
