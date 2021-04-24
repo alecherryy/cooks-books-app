@@ -2,14 +2,16 @@ import './styles.scss';
 
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { AuthContext } from '../../../Auth';
-import { useHistory } from 'react-router-dom';
+// import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../AuthProvider/AuthProvider';
+// import { useHistory } from 'react-router-dom';
 
 import { Review } from '../Review/Review';
 import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
-
-import database from '../../../services/firestore-service';
+import { USERS } from '../../../services/user-service';
+// import recipeService from '../../../services/recipe-service';
+import { REVIEWS } from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
 
 /**
@@ -25,13 +27,14 @@ export const RecipeReviews = ({ recipeId }) => {
   // to leave username as part of review
   const { currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
-  const history = useHistory();
+  // const history = useHistory();
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState({
-    // recipeId,
+    // userId: currentUser.uid,
+    recipeId,
     title: '',
     content: '',
     rating: '',
@@ -44,7 +47,7 @@ export const RecipeReviews = ({ recipeId }) => {
     setSuccessMessage('');
     // get profiles username to attach to reviews
     if (currentUser) {
-      database.getProfile(currentUser.uid)
+      USERS.findUser(currentUser.uid)
         .then((doc) => {
           setProfile(doc.data());
         })
@@ -54,7 +57,7 @@ export const RecipeReviews = ({ recipeId }) => {
     }
 
     // this call is purely to make document discoverable in future
-    database.setRecipe(recipeId);
+    // recipeService.createRecipeFromSpoonId(recipeId);
     // this one actually gets data
     setReviewsFromDB();
   }, [currentUser]);
@@ -66,7 +69,7 @@ export const RecipeReviews = ({ recipeId }) => {
    */
   const setReviewsFromDB = () => {
     setReviews([]);
-    database.getReviewsForRecipe(recipeId)
+    REVIEWS.findReviewsForRecipeId(recipeId)
       .then((collection) => {
         const theReviews = [];
         collection.forEach((doc) => {
@@ -81,9 +84,11 @@ export const RecipeReviews = ({ recipeId }) => {
    *   submits the current review to the database, clears
    *   the fields, and then re-grabs all the reviews for the
    *   current recipe
-   * Redirects to login if no current user.
+   * @param {object} e passed from button event, to clear form
    */
-  const checkAndSubmitReviewToDB = () => {
+  const checkAndSubmitReviewToDB = (e) => {
+  // TODO: History push? or only show if theres a current user.
+
     setErrorMessage('');
     setSuccessMessage('');
 
@@ -103,49 +108,40 @@ export const RecipeReviews = ({ recipeId }) => {
     // everything is non empty, so clear values, and submit review
     } else {
       // this gets around the setReview being async
-      const reviewToAdd = { ...review, username: profile.username };
+      const reviewToAdd =
+      {
+        ...review,
+        username: profile.username,
+        uid: currentUser.uid,
+      };
       // submit to firebase, when successfull regrab all reviews
-      database.addReviewToRecipe(recipeId, reviewToAdd)
+      REVIEWS.createReview(reviewToAdd)
         .then((docRef) => {
           setReviewsFromDB();
           setSuccessMessage( 'Review submitted!' );
+          e.target.parentNode.reset();
         });
-
-      clearRecipeFormFields();
     };
   };
 
 
   /**
-   * TODO: Without a major rework of the form component, I can't
-   *   think of a clean solution for this right now.
-   */
-  const clearRecipeFormFields = () => {
-    // TODO: I can't think of a good way to do this
-  };
-
-  /**
    * Submit the review to the database, using the values of the fields.
    * @param {event} e event from the button
    */
-  const submitNewReview = (e) => {
+  const createReview = (e) => {
     e.preventDefault();
 
-    // if no user, send to login
-    if (!currentUser) {
-      history.push(`/login`);
-
-    // otherwise, submit review to db, and repopulate reviews from DB
-    } else {
-      checkAndSubmitReviewToDB();
-    }
+    // passing e so it can reset only if successful
+    checkAndSubmitReviewToDB(e);
   };
 
   return (
     <div className="recipe-review">
+      { profile &&
       <NewReview
         recipeId={recipeId}
-        handleClick={(e) => submitNewReview(e)}
+        handleClick={(e) => createReview(e)}
         addReviewTitle={(e) =>
           setReview({
             ...review,
@@ -168,8 +164,9 @@ export const RecipeReviews = ({ recipeId }) => {
         errorMessage={errorMessage}
         successMessage={successMessage}
       />
-      {reviews && <h3>Reviews</h3>}
-      {reviews &&
+      }
+      <h3 className="recipe-review__title">Reviews</h3>
+      {reviews.length !== 0 ?
         reviews.map((r, index) => {
           return (
             <Review
@@ -181,7 +178,9 @@ export const RecipeReviews = ({ recipeId }) => {
               name={r.username}
             />
           );
-        })}
+        }) :
+        <p>Be the first to review this recipe!</p>
+      }
     </div>
   );
 };

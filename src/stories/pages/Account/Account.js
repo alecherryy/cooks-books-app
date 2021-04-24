@@ -57,7 +57,7 @@ export const Account = () => {
             </p>
             <Route exact path="/account/information">
               {profile &&
-                <UserInfo user={profile} />
+                <UserInfo id={currentUser.uid} user={profile} />
               }
             </Route>
           </div>
