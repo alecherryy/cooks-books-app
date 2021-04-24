@@ -14,7 +14,7 @@ const convertScore = (num) => {
 /**
  * Convert date to string.
  *
- * @name convertScore
+ * @name convertDateToString
  * @param {Date} date of the score
  * @return {string} date in a string
  */
@@ -27,8 +27,39 @@ const convertDateToString = (date) => {
   // });
 };
 
+/**
+ * Find if the recipe is listed in
+ * Spoonacular.
+ *
+ * @name isSpoonRecipeId
+ * @param {String} recipeId id of the recipe
+ * @return {boolean} if recipe in spoonacular
+ */
 const isSpoonRecipeId = (recipeId) => {
   return ! isNaN( parseInt(recipeId) );
+};
+
+/**
+ * Get recipe's image URL for custom dimensions.
+ *
+ * Note: API supports the following dimensions only:
+ * 90 x 90
+ * 240 x 150
+ * 312 x 150
+ * 312 x 231
+ * 480 x 360
+ * 556 x 370
+ * 636 x 393
+ *
+ * @name getRecipeImgURL
+ * @param {String} recipeId id of the recipe
+ * @param {Number} imgLength length of the image
+ * @param {Number} imgWidth width of the image
+ * @return {string} URL of the image
+ */
+export const getRecipeImgURL = (recipeId, imgLength, imgWidth) => {
+  return `https://spoonacular.com` +
+    `/recipeImages/${recipeId}-${imgLength}x${imgWidth}.jpg`;
 };
 
 /**
@@ -38,4 +69,5 @@ export const UTILS = {
   convertScore,
   convertDateToString,
   isSpoonRecipeId,
+  getRecipeImgURL,
 };
