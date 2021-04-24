@@ -1,4 +1,4 @@
-# Self-Image Experiment
+# CooksBooks
 [![Build Status](https://travis-ci.com/neu-self-image-experiments/sie-firebase.svg?branch=master)](https://github.com/neu-self-image-experiments/sie-firebase)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
