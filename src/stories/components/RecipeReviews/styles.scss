@@ -7,6 +7,19 @@
   padding: $spacing-3 0 0;
 }
 
+.recipe-review__title {
+  @include svg-background(icon-cookbook);
+
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding: $spacing-2 0 $spacing-2 $spacing-8;
+
+  @include bp-max-tablet {
+    background-size: 50px;
+    padding: $spacing-2 0 $spacing-2 $spacing-6;
+  }
+}
+
 .review__recipe {
   font-size: $font-size-sm;
   font-family: $header-font-family;
