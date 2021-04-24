@@ -45,7 +45,6 @@ export const Home = () => {
     API.findRandomRecipes(8)
       .then((response) => {
         setPopularRecipes(response.recipes);
-        // setRecipeOfTheDay(response.recipes[0]);
       });
 
     HOME.findHomeVariable('ROTD')
@@ -135,46 +134,6 @@ export const Home = () => {
       .catch((error) => {
         // setError(error);
       });
-
-    // Leaving this here to test without making calls to Spoonacular
-    // setPopularRecipes([
-    //   {
-    //     dishTypes: ['morning meal'],
-    //     id: 715497,
-    //     image: 'https://spoonacular.com/recipeImages/715497-556x370.jpg',
-    //     readyInMinutes: 5,
-    //     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-    //       'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
-    //       'aliquam neque rhoncus.',
-    //     servings: 1,
-    //     spoonacularScore: 99,
-    //     title: 'Berry Banana Breakfast Smoothie',
-    //   },
-    //   {
-    //     dishTypes: ['lunch'],
-    //     id: 1070648,
-    //     image: 'https://spoonacular.com/recipeImages/1070648-556x370.jpg',
-    //     readyInMinutes: 30,
-    //     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-    //       'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
-    //       'aliquam neque rhoncus.',
-    //     servings: 6,
-    //     spoonacularScore: 65,
-    //     title: 'Easy Tomato Basil Chicken – One Pot Meal',
-    //   },
-    // ]);
-    // setRecipeOfTheDay({
-    //   dishTypes: ['morning meal'],
-    //   id: 715497,
-    //   image: 'https://spoonacular.com/recipeImages/715497-556x370.jpg',
-    //   readyInMinutes: 5,
-    //   summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-    //     'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
-    //     'aliquam neque rhoncus.',
-    //   servings: 1,
-    //   spoonacularScore: 99,
-    //   title: 'Berry Banana Breakfast Smoothie',
-    // });
   }, []);
 
   useEffect(() => {
@@ -214,7 +173,7 @@ export const Home = () => {
           paragraph='Get the best recipe every day of the week
             with our daily picks'/>
         <FeaturedCard
-          image={getRecipeImgURL(recipeOfTheDay.id, 636, 393)}
+          image={UTILS.getRecipeImgURL(recipeOfTheDay.id, 636, 393)}
           url={`/recipes/${recipeOfTheDay.id}`}
           title={recipeOfTheDay.title}
           eyebrow={
@@ -237,7 +196,7 @@ export const Home = () => {
               isFavorite: profile && profile.favoriteRecipes &&
                 profile.favoriteRecipes.includes(recipe.id),
               url: `/recipes/${recipe.id}`,
-              image: getRecipeImgURL(recipe.id, 636, 393),
+              image: UTILS.getRecipeImgURL(recipe.id, 636, 393),
               title: recipe.title,
               description: recipe.summary,
               portions: recipe.servings,
@@ -265,7 +224,7 @@ export const Home = () => {
                 isFavorite={profile && profile.favoriteRecipes &&
                 profile.favoriteRecipes.includes(recipe.id)}
                 url={`/recipes/${recipe.id}`}
-                image={getRecipeImgURL(recipe.id, 636, 393)}
+                image={UTILS.getRecipeImgURL(recipe.id, 636, 393)}
                 title={recipe.title}
                 description={`${recipe.summary.toString().split('. ')[0]}.`}
                 portions={parseInt(recipe.servings)}
@@ -287,15 +246,4 @@ export const Home = () => {
   );
 };
 
-export const getRecipeImgURL = (recipeId, imgLength, imgWidth) => {
-  // Note: The API supports the following dimensions:-
-  // 90 x 90
-  // 240 x 150
-  // 312 x 150
-  // 312 x 231
-  // 480 x 360
-  // 556 x 370
-  // 636 x 393
-  return `https://spoonacular.com` +
-    `/recipeImages/${recipeId}-${imgLength}x${imgWidth}.jpg`;
-};
+

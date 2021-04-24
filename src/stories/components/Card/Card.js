@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import firebase from 'firebase/app';
 import { USERS } from '../../../services/user-service';
+import { HOME } from '../../../services/home-service';
 
 // import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
@@ -53,15 +54,55 @@ export const Card = (
 
   const toggleFavorite = () => {
     if (currentUser) {
-      if (!favorite) {
-        USERS.updateUser(currentUser.uid, {
-          favoriteRecipes: firebase.firestore.FieldValue.arrayUnion(id),
-        }).then(() => setFavorite(!favorite));
-      } else {
-        USERS.updateUser(currentUser.uid, {
-          favoriteRecipes: firebase.firestore.FieldValue.arrayRemove(id),
-        }).then(() => setFavorite(!favorite));
-      }
+      USERS.findUser(currentUser.uid)
+        .then((response) => {
+          const isChef = response.data().userType === 'Chef';
+
+          if (!favorite) {
+            USERS.updateUser(currentUser.uid, {
+              favoriteRecipes: firebase.firestore.FieldValue.arrayUnion(id),
+            }).then(() => {
+              if (isChef) {
+                HOME.findHomeVariable('TWTP')
+                  .then((response) => {
+                    const topRecipes = response.data().topRecipes;
+                    const index = topRecipes.findIndex((recipe) =>
+                      recipe.recipeId === id,
+                    );
+                    if (index > -1) topRecipes[index].tagCount += 1;
+                    else topRecipes.push({ recipeId: id, tagCount: 1 });
+
+                    HOME.setHomeVariable('TWTP', { topRecipes });
+                  });
+              }
+              setFavorite(!favorite);
+            });
+          } else {
+            USERS.updateUser(currentUser.uid, {
+              favoriteRecipes: firebase.firestore.FieldValue.arrayRemove(id),
+            }).then(() => {
+              if (isChef) {
+                HOME.findHomeVariable('TWTP')
+                  .then((response) => {
+                    const topRecipes = response.data().topRecipes;
+                    const index = topRecipes.findIndex((recipe) =>
+                      recipe.recipeId === id,
+                    );
+                    if (index > -1) {
+                      if (topRecipes[index].tagCount === 1) {
+                        topRecipes.splice(index, 1);
+                      } else {
+                        topRecipes[index].tagCount -= 1;
+                      }
+                    }
+
+                    HOME.setHomeVariable('TWTP', { topRecipes });
+                  });
+              }
+              setFavorite(!favorite);
+            });
+          }
+        });
     } else {
       history.push(`/login`);
     }
