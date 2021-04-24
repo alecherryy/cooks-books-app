@@ -15,7 +15,9 @@ import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 import { AuthContext } from '../../../Auth';
 import database from '../../../services/firestore-service';
+import { HOME } from '../../../services/home-service';
 import { UTILS } from '../../../utils/utils';
+import firebase from 'firebase/app';
 
 /**
  * Component for Home page.
@@ -27,16 +29,112 @@ import { UTILS } from '../../../utils/utils';
  */
 export const Home = () => {
   const [popularRecipes, setPopularRecipes] = useState([]);
+  const [topPicks, setTopPicks] = useState([]);
   const [recipeOfTheDay, setRecipeOfTheDay] = useState({});
   const { currentUser } = useContext(AuthContext);
   // const [error, setError] = useState('');
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    API.findRandomRecipes(8).then((response) => {
-      setPopularRecipes(response.recipes);
-      setRecipeOfTheDay(response.recipes[0]);
-    });
+    // setError('');
+    const today = new Date();
+    setTopPicks([]);
+    setPopularRecipes([]);
+    setRecipeOfTheDay({});
+
+    API.findRandomRecipes(8)
+      .then((response) => {
+        setPopularRecipes(response.recipes);
+        // setRecipeOfTheDay(response.recipes[0]);
+      });
+
+    HOME.findHomeVariable('ROTD')
+      .then((document) => {
+        const day = today.getDate();
+        if (!document.exists ||
+          (document.exists && document.data().day !== day)) {
+          API.findRandomRecipes(1)
+            .then((response) => {
+              HOME.setHomeVariable('ROTD', {
+                day,
+                recipe: response.recipes[0],
+              })
+                .then(() => {
+                  setRecipeOfTheDay(response.recipes[0]);
+                });
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        } else {
+          HOME.findHomeVariable('ROTD')
+            .then((response) => {
+              setRecipeOfTheDay(response.data().recipe);
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        }
+      })
+      .catch((error) => {
+        // setError(error);
+      });
+
+    HOME.findHomeVariable('TWTP')
+      .then((document) => {
+        const week = Math.ceil((today.getDate() - today.getDay() + 1) / 7);
+        if (!document.exists ||
+          (document.exists && document.data().week !== week)) {
+          API.findRandomRecipes(8)
+            .then((response) => {
+              HOME.setHomeVariable('TWTP', {
+                topRecipes: firebase.firestore.FieldValue.delete(),
+              })
+                .then(() => {
+                  const topRecipes = response.recipes.map((recipe) =>
+                    ({
+                      recipeId: recipe.id,
+                      tagCount: 0,
+                    }),
+                  );
+                  HOME.setHomeVariable('TWTP', {
+                    week,
+                    topRecipes,
+                  })
+                    .then(() => {
+                      setTopPicks(response.recipes);
+                    });
+                });
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        } else {
+          HOME.findHomeVariable('TWTP')
+            .then((response) => {
+              const sortedRecipes = response.data().topRecipes
+                .sort((firstEl, secondEl) =>
+                  secondEl.tagCount - firstEl.tagCount,
+                )
+                .filter((recipe, index) => index < 8);
+              sortedRecipes.forEach((recipe) => {
+                API.findRecipeById(recipe.recipeId)
+                  .then((response) => {
+                    setTopPicks((prevState) => ([
+                      ...prevState,
+                      response,
+                    ]));
+                  });
+              });
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        }
+      })
+      .catch((error) => {
+        // setError(error);
+      });
 
     // Leaving this here to test without making calls to Spoonacular
     // setPopularRecipes([
@@ -160,7 +258,7 @@ export const Home = () => {
             by our top Cooks'/>
         <Grid numColumns={4}>
           {
-            popularRecipes.map((recipe, index) =>
+            topPicks.map((recipe, index) =>
               <Card
                 key={index}
                 id={recipe.id}
