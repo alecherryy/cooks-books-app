@@ -54,7 +54,7 @@ export const Account = () => {
           <div className="sidebar__main">
             <h1>My Account</h1>
             <p>In this page, you will find all information related
-              to your account, favorite recipes, reviews you have posted
+              to your account, favorite recipes, reviews you published
               and much more.
             </p>
             <Route exact path="/account/information">

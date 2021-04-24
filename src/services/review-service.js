@@ -23,8 +23,19 @@ const findReviewsForRecipeId = ( recipeId ) => {
   return ALL_REVIEWS.where( 'recipeId', '==', recipeId ).get();
 };
 
+/**
+ * Finds all the recipes with the associated user ID.
+ *
+ * @param {string} userId the id of the usere.
+ * @return {object} a promise.
+ */
+const findReviewsForUserId = ( userId ) => {
+  return ALL_REVIEWS.where( 'uid', '==', userId ).get();
+};
+
 
 export const REVIEWS = {
   createReview,
   findReviewsForRecipeId,
+  findReviewsForUserId,
 };

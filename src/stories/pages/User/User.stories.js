@@ -1,26 +1,28 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router';
-import { AuthProvider } from '../../../Auth';
 import '../../../scss/styles.scss';
-import { Account } from './Account';
+
+import React from 'react';
+
+import { AuthProvider } from '../../components/AuthProvider/AuthProvider';
+import { MemoryRouter } from 'react-router';
+import { User } from './User';
 
 /**
- * Example Component: Account
+ * Example Component: User
  */
 export default {
-  title: 'Example/Account',
-  component: Account,
+  title: 'Example/User',
+  component: User,
 };
 
 const Template = (args) => {
   return (
     <MemoryRouter initialEntries={['/account/information']}>
       <AuthProvider>
-        <Account {...args} />
+        <User {...args} />
       </AuthProvider>
     </MemoryRouter>
   );
 };
 
-// Default Account
+// Default User
 export const Default = Template.bind({});

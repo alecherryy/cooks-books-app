@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { MemoryRouter } from 'react-router';
-import { AuthProvider } from '../../../Auth';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
+import { AuthProvider } from '../AuthProvider/AuthProvider';
 import { AccountMenu } from './AccountMenu';
 
 /**
