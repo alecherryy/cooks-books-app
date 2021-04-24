@@ -8,10 +8,13 @@
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba( 03, 03, 03, 0.1);
   font-size: $font-size-sm;
+  margin-bottom: $spacing-3;
   max-width: rem(300px);
-  margin-left: auto;
-  margin-right: auto;
   padding: $spacing-3;
+
+  @include bp-tablet-lg {
+    margin-bottom: 0;
+  }
 }
 
 .account-menu__welcome {

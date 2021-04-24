@@ -15,8 +15,12 @@ import { Home } from './stories/pages/Home/Home';
 import { Signup } from './stories/pages/Signup/Signup';
 import { Search } from './stories/pages/Search/Search';
 import { Account } from './stories/pages/Account/Account';
+import { useContext } from 'react';
+import { AuthContext } from './stories/components/AuthProvider/AuthProvider';
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <Router>
       <Header rightContent={<MainMenu />} />
@@ -41,7 +45,7 @@ function App() {
             `/account/reviews`,
             `/account/people`,
           ]}>
-            <Account />
+            <Account user={user} />
           </Route>
           <Route path="/">
             <Home />

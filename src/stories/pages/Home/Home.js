@@ -13,10 +13,10 @@ import ArtVegetables from '../../../images/artwork-vegetables.svg';
 import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
-import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import { HOME } from '../../../services/home-service';
 import { UTILS } from '../../../utils/utils';
+import { USERS } from '../../../services/user-service';
 import firebase from 'firebase/app';
 
 /**
@@ -179,7 +179,7 @@ export const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      database.getProfileUpdates(currentUser.uid, setProfile);
+      USERS.getUserUpdates(currentUser.uid, setProfile);
     } else {
       setProfile(null);
     }

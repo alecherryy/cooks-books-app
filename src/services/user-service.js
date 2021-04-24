@@ -1,17 +1,17 @@
 import firebase from '../firebase';
 
 const USERS_COLLECTION = 'users';
+const ALL_USERS = firebase.firestore().collection(USERS_COLLECTION);
 
 /**
  * Create/Update a profile
  *
  * @param {string} userId id of the user
- * @param {object} fields an object with fields and their values
+ * @param {object} user an object with fields and their values
  * @return {object} a promise
  */
-const setProfile = (userId, ...fields) => {
-  return firebase.firestore().collection(USERS_COLLECTION).doc(userId).set(
-    ...fields, { merge: true });
+const updateUser = (userId, ...user) => {
+  return ALL_USERS.doc(userId).set(...user, { merge: true });
 };
 
 /**
@@ -20,8 +20,8 @@ const setProfile = (userId, ...fields) => {
  * @param {string} userId id of the user
  * @return {object} a promise
  */
-const getProfile = (userId) => {
-  return firebase.firestore().collection(USERS_COLLECTION).doc(userId).get();
+const findUser = (userId) => {
+  return ALL_USERS.doc(userId).get();
 };
 
 /**
@@ -30,17 +30,15 @@ const getProfile = (userId) => {
  * @param {string} userId id of the user
  * @param {function} setProfile function to set the returned profile
  */
-const getProfileUpdates = (userId, setProfile) => {
-  firebase.firestore().collection(USERS_COLLECTION).doc(userId)
+const getUserUpdates = (userId, setProfile) => {
+  ALL_USERS.doc(userId)
     .onSnapshot((doc) => {
       setProfile(doc.data());
     });
 };
 
-const api = {
-  setProfile,
-  getProfile,
-  getProfileUpdates,
+export const USERS = {
+  findUser,
+  updateUser,
+  getUserUpdates,
 };
-
-export default api;

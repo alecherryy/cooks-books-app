@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Route } from 'react-router';
 import { useHistory } from 'react-router-dom';
 
 import { AccountMenu } from '../../components/AccountMenu/AccountMenu';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import { Constrain } from '../../layouts/Constrain/Constrain';
+import { USERS } from '../../../services/user-service';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
 
 /**
  * Component for Account page.
@@ -15,7 +18,19 @@ import { Constrain } from '../../layouts/Constrain/Constrain';
  */
 
 export const Account = () => {
+  const { currentUser } = useContext(AuthContext);
+  const [profile, setProfile] = useState(null);
   const history = useHistory();
+
+  useEffect(() => {
+    if (currentUser) {
+      USERS.findUser(currentUser.uid).then((res) => {
+        setProfile(res.data());
+      }).catch((error) => {
+        // setError(error);
+      });
+    }
+  }, [currentUser]);
 
   useEffect(()=> {
     history.push('/account/information');
@@ -26,11 +41,24 @@ export const Account = () => {
       <Constrain>
         <div className="sidebar">
           <div className="sidebar__aside">
-            <AccountMenu username='Placeholder' message="Lorem Ipsum for now" />
+            { profile &&
+              <AccountMenu username={profile.username ?
+                profile.username :
+                'Friend'
+              }
+              message="Lorem Ipsum for now" />
+            }
           </div>
           <div className="sidebar__main">
+            <h1>My Account</h1>
+            <p>In this page, you will find all information related
+              to your account, favorite recipes, reviews you have posted
+              and much more.
+            </p>
             <Route exact path="/account/information">
-              Your account information.
+              {profile &&
+                <UserInfo id={currentUser.uid} user={profile} />
+              }
             </Route>
           </div>
         </div>

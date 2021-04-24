@@ -13,7 +13,7 @@ import { UTILS } from '../../../utils/utils';
  * @param {string} modifierClasses Class modifiers of the Review component.
  * @param {string} title Title for the Review component.
  * @param {number} rating Rating in stars of the Review component.
- * @param {date} date Date of creation of the Review component.
+ * @param {string} date Date of creation of the Review component, as a string.
  * @param {string} name Name of user who wrote the review.
  * @param {string} profUrl URL to profile of author of component.
  * @param {string} content Content of the review component.
@@ -53,7 +53,8 @@ export const Review = ({
                 className="review__icon review__icon--star"></i>)}
           </span>
           <span className="review__sub-header-item">
-            {UTILS.convertDateToString(date)}
+            {/* {UTILS.convertDateToString(date)} */}
+            {date}
           </span>
           {!isUserVariant && <span className="review__sub-header-item">
             By: <a href={profUrl}>@{name}</a>
@@ -100,9 +101,9 @@ Review.propTypes = {
   rating: PropTypes.number,
 
   /**
-   * Review's date.
+   * Review's date, as a string
    */
-  date: PropTypes.date,
+  date: PropTypes.string,
   /**
    * Review's name.
    */
@@ -134,7 +135,7 @@ Review.defaultProps = {
   modifierClasses: '',
   title: 'Review Title',
   rating: 4,
-  date: new Date(),
+  date: UTILS.convertDateToString(new Date()),
   name: 'Reviewer',
   profUrl: '#',
   content: 'Lorem ipsum dolor sit amet, errem postulant' +

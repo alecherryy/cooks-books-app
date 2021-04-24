@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import firebase from './firebase';
+import firebase from '../../../firebase';
 
 /**
  * A context to be used by components in the tree, holds

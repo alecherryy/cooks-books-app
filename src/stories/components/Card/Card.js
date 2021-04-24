@@ -3,9 +3,9 @@ import './styles.scss';
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
-import { AuthContext } from '../../../Auth';
-import database from '../../../services/firestore-service';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 import firebase from 'firebase/app';
+import { USERS } from '../../../services/user-service';
 
 // import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
@@ -54,11 +54,11 @@ export const Card = (
   const toggleFavorite = () => {
     if (currentUser) {
       if (!favorite) {
-        database.setProfile(currentUser.uid, {
+        USERS.updateUser(currentUser.uid, {
           favoriteRecipes: firebase.firestore.FieldValue.arrayUnion(id),
         }).then(() => setFavorite(!favorite));
       } else {
-        database.setProfile(currentUser.uid, {
+        USERS.updateUser(currentUser.uid, {
           favoriteRecipes: firebase.firestore.FieldValue.arrayRemove(id),
         }).then(() => setFavorite(!favorite));
       }
