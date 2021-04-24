@@ -12,7 +12,7 @@ const ALL_INSTRUCTIONS = firebase.firestore()
  * @param {string} recipeId the recipeId to associate with the instruction
  * @return {object} a promise from the firestore
  */
-const createInstruction = (instruction, recipeId) => {
+const createInstruction = (instruction) => {
   return ALL_INSTRUCTIONS.add(instruction);
 };
 
@@ -22,9 +22,9 @@ const createInstruction = (instruction, recipeId) => {
  * @param {object} instructionsArray an array of instructions
  * @param {string} recipeId the recipeId to associate with the instructions
  */
-const createAllInstructions = (instructionsArray, recipeId ) => {
-  instructionsArray.map( (ingredient) => {
-    createIngredient( ingredient, recipeId );
+const createAllInstructions = (instructionsArray ) => {
+  instructionsArray.map( (instruction) => {
+    createInstruction( instruction );
   });
 };
 
@@ -40,10 +40,8 @@ const findAllInstructionsForId = (recipeId) => {
 };
 
 
-const api = {
+export const INSTRUCTIONS = {
   createInstruction,
   createAllInstructions,
   findAllInstructionsForId,
 };
-
-export default api;

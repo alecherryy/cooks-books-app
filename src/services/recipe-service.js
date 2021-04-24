@@ -34,10 +34,8 @@ const findRecipesByTitle = (recipeTitle) => {
   return ALL_RECIPES.where( 'title', '==', recipeTitle ).get();
 };
 
-const api = {
+export const RECIPES = {
   createRecipe,
   findRecipeById,
   findRecipesByTitle,
 };
-
-export default api;
