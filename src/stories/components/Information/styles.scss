@@ -1,0 +1,52 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// AccountMenu
+
+.information {
+  background-color: $white;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba( 03, 03, 03, 0.1);
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-3;
+  max-width: rem(300px);
+  padding: $spacing-3;
+  text-align: center;
+
+  @include bp-tablet-lg {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    margin: 0;
+  }
+}
+
+.information__img {
+  max-width: 80%;
+}
+
+.information__bottom {
+  margin: $spacing-3 0 0;
+  text-align: left;
+
+
+  h6 {
+    color: $gray-5;
+    font-size: $font-size-xs;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  a {
+    color: $blue;
+
+    &:visited {
+      color: $blue;
+    }
+  }
+
+  @include bp-tablet-lg {
+    margin: $spacing-5 0 0;
+  }
+}

@@ -5,6 +5,7 @@ import { Constrain } from '../../layouts/Constrain/Constrain';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { USERS } from '../../../services/user-service';
 import { UserReviews } from '../../components/UserReviews/UserReviews';
+import { Information } from '../../components/Information/Information';
 
 /**
  * Component for User page.
@@ -33,8 +34,9 @@ export const User = () => {
   return (
     <div className="user">
       <Constrain>
-        {profile && profile.username}
-        <Sidebar mainContent={<Content />} />
+        <Sidebar
+          asideContent={<Information user={profile} />}
+          mainContent={<Content />} />
       </Constrain>
     </div>
   );
