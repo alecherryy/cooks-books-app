@@ -29,7 +29,7 @@ const findReviewsForRecipeId = ( recipeId ) => {
  * @param {string} userId the id of the usere.
  * @return {object} a promise.
  */
-const findReviewsForUserId = ( userId ) => {
+const findReviewsForUserId = (userId) => {
   return ALL_REVIEWS.where( 'uid', '==', userId ).get();
 };
 

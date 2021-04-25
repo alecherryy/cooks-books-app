@@ -37,7 +37,7 @@ export const RecipeReviews = ({ recipeId }) => {
     recipeId,
     title: '',
     content: '',
-    rating: '',
+    rating: null,
     username: '',
     date: UTILS.convertDateToString(new Date()),
   });

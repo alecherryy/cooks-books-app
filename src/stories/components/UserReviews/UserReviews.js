@@ -6,46 +6,58 @@ import PropTypes from 'prop-types';
 import { Review } from '../Review/Review';
 import { REVIEWS } from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
+// import { API } from '../../../services/spoonacular-service';
 
 /**
  * Component for UserReviews element.
  *
  * @component
- * @param {string} userId Title for the UserReviews component.
+ * @param {string} id Title for the UserReviews component.
  * @return {object} (
- *  <UserReviews userId={userId} />
+ *  <UserReviews id={id} />
  * )
  */
-export const UserReviews = ({ userId }) => {
-  const [reviews, setReviews] = useState([]);
+export const UserReviews = ({ id }) => {
+  const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
-    REVIEWS.findReviewsForRecipeId(recipeId).then((collection) => {
-      const theReviews = [];
-      collection.forEach((doc) => {
-        theReviews.push(doc.data());
+    const theReviews = [];
+    if (!reviews) {
+      REVIEWS.findReviewsForUserId(id).then((collection) => {
+        collection.forEach((doc) => {
+          theReviews.push(doc.data());
+        });
       });
-      setReviews(theReviews);
-    });
-  });
+    }
+    setReviews(theReviews);
+  }, []);
+
+  // get recipe title
+  const getRecipeTitle = (id) => {
+    // return API.findRecipeById(id).then((res) => {
+    //   return res;
+    // });
+  };
 
   return (
-    <div className="recipe-review">
-      <h3 className="recipe-review__title">Reviews</h3>
-      {reviews.length !== 0 ?
-        reviews.map((r, index) => {
-          return (
-            <Review
-              key={index}
-              title={r.title}
-              content={r.content}
-              date={UTILS.convertDateToString(r.date)}
-              rating={r.rating}
-              name={r.username}
-            />
-          );
-        }) :
-        <p>{r.username} has not reviewed any recipe yet.</p>
+    <div className="user-review">
+      <h3 className="user-review__title">Reviews</h3>
+      {reviews ? reviews.map((r, index) => {
+        return (
+          <Review
+            key={index}
+            isUserVariant={true}
+            recipeId={r.recipeId}
+            recipeTitle={getRecipeTitle(r.recipeId)}
+            title={r.title}
+            content={r.content}
+            date={UTILS.convertDateToString(new Date(r.date))}
+            rating={parseInt(r.rating)}
+            name={r.username}
+          />
+        );
+      }) :
+        <p>This user has not published any reviews yet.</p>
       }
     </div>
   );
@@ -53,11 +65,11 @@ export const UserReviews = ({ userId }) => {
 
 UserReviews.propTypes = {
   /**
-   * UserReviews's recipeId.
+   * UserReviews's id.
    */
-  userId: PropTypes.string,
+  id: PropTypes.string,
 };
 
 UserReviews.defaultProps = {
-  userId: '609262',
+  id: '609262',
 };

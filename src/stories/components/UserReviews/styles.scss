@@ -1,13 +1,9 @@
 @import '../../../scss/variables.scss';
 
 // @file
-// Review
+// User Reviews
 
-.add-review {
-  padding: $spacing-3 0 0;
-}
-
-.recipe-review__title {
+.user-review__title {
   @include svg-background(icon-cookbook);
 
   background-position: left center;

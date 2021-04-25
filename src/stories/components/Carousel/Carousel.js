@@ -101,7 +101,7 @@ Carousel.defaultProps = {
       description: 'Lorem ipsum dolor sit amet',
       portions: '4',
       time: '20',
-      rating: '3.5',
+      rating: 3.5,
     },
   ],
 };

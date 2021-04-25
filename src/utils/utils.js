@@ -19,12 +19,11 @@ const convertScore = (num) => {
  * @return {string} date in a string
  */
 const convertDateToString = (date) => {
-  return date.toLocaleDateString();
-  // return date.toLocaleDateString('default', {
-  //   month: 'long',
-  //   day: 'numeric',
-  //   year: 'numeric',
-  // });
+  return date.toLocaleDateString('default', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
 };
 
 const isSpoonRecipeId = (recipeId) => {

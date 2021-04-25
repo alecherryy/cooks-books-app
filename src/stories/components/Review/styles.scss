@@ -51,7 +51,33 @@
   vertical-align: middle;
 
   a {
+    line-height: 40px;
+    padding-right: $spacing-4;
+    position: relative;
     text-decoration: none;
+
+    &::before {
+      @include image-replace(30px, 30px);
+      @include svg-background(icon-review-arrow);
+
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 30px;
+      content: '';
+      height: 100%;
+      overflow: hidden;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all 0.4s ease-in-out;
+    }
+
+    &:hover,
+    &:focus {
+      &::before {
+        transform: translateX(25%);
+      }
+    }
   }
 }
 
@@ -70,12 +96,6 @@
   &.review__icon--star {
     &::before {
       @include svg-background(icon-review-star);
-    }
-  }
-
-  &.review__icon--arrow {
-    &::before {
-      @include svg-background(icon-review-arrow);
     }
   }
 }
