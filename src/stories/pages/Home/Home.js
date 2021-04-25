@@ -14,8 +14,10 @@ import ArtChicken from '../../../images/artwork-chicken.svg';
 import ArtDessert from '../../../images/artwork-dessert.svg';
 import { SplitSection } from '../../layouts/SplitSection/SplitSection';
 import { AuthContext } from '../../components/AuthProvider/AuthProvider';
+import { HOME } from '../../../services/home-service';
 import { UTILS } from '../../../utils/utils';
 import { USERS } from '../../../services/user-service';
+import firebase from 'firebase/app';
 
 /**
  * Component for Home page.
@@ -27,56 +29,111 @@ import { USERS } from '../../../services/user-service';
  */
 export const Home = () => {
   const [popularRecipes, setPopularRecipes] = useState([]);
+  const [topPicks, setTopPicks] = useState([]);
   const [recipeOfTheDay, setRecipeOfTheDay] = useState({});
   const { currentUser } = useContext(AuthContext);
   // const [error, setError] = useState('');
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    API.findRandomRecipes(8).then((response) => {
-      setPopularRecipes(response.recipes);
-      setRecipeOfTheDay(response.recipes[0]);
-    });
+    // setError('');
+    const today = new Date();
+    setTopPicks([]);
+    setPopularRecipes([]);
+    setRecipeOfTheDay({});
 
-    // Leaving this here to test without making calls to Spoonacular
-    // setPopularRecipes([
-    //   {
-    //     dishTypes: ['morning meal'],
-    //     id: 715497,
-    //     image: 'https://spoonacular.com/recipeImages/715497-556x370.jpg',
-    //     readyInMinutes: 5,
-    //     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-    //       'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
-    //       'aliquam neque rhoncus.',
-    //     servings: 1,
-    //     spoonacularScore: 99,
-    //     title: 'Berry Banana Breakfast Smoothie',
-    //   },
-    //   {
-    //     dishTypes: ['lunch'],
-    //     id: 1070648,
-    //     image: 'https://spoonacular.com/recipeImages/1070648-556x370.jpg',
-    //     readyInMinutes: 30,
-    //     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-    //       'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
-    //       'aliquam neque rhoncus.',
-    //     servings: 6,
-    //     spoonacularScore: 65,
-    //     title: 'Easy Tomato Basil Chicken – One Pot Meal',
-    //   },
-    // ]);
-    // setRecipeOfTheDay({
-    //   dishTypes: ['morning meal'],
-    //   id: 715497,
-    //   image: 'https://spoonacular.com/recipeImages/715497-556x370.jpg',
-    //   readyInMinutes: 5,
-    //   summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-    //     'elit.Vestibulum scelerisque tortor in nunc efficitur, sed ' +
-    //     'aliquam neque rhoncus.',
-    //   servings: 1,
-    //   spoonacularScore: 99,
-    //   title: 'Berry Banana Breakfast Smoothie',
-    // });
+    API.findRandomRecipes(8)
+      .then((response) => {
+        setPopularRecipes(response.recipes);
+      });
+
+    HOME.findHomeVariable('ROTD')
+      .then((document) => {
+        const day = today.getDate();
+        if (!document.exists ||
+          (document.exists && document.data().day !== day)) {
+          API.findRandomRecipes(1)
+            .then((response) => {
+              HOME.setHomeVariable('ROTD', {
+                day,
+                recipe: response.recipes[0],
+              })
+                .then(() => {
+                  setRecipeOfTheDay(response.recipes[0]);
+                });
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        } else {
+          HOME.findHomeVariable('ROTD')
+            .then((response) => {
+              setRecipeOfTheDay(response.data().recipe);
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        }
+      })
+      .catch((error) => {
+        // setError(error);
+      });
+
+    HOME.findHomeVariable('TWTP')
+      .then((document) => {
+        const week = Math.ceil((today.getDate() - today.getDay() + 1) / 7);
+        if (!document.exists ||
+          (document.exists && document.data().week !== week)) {
+          API.findRandomRecipes(8)
+            .then((response) => {
+              HOME.setHomeVariable('TWTP', {
+                topRecipes: firebase.firestore.FieldValue.delete(),
+              })
+                .then(() => {
+                  const topRecipes = response.recipes.map((recipe) =>
+                    ({
+                      recipeId: recipe.id,
+                      tagCount: 0,
+                    }),
+                  );
+                  HOME.setHomeVariable('TWTP', {
+                    week,
+                    topRecipes,
+                  })
+                    .then(() => {
+                      setTopPicks(response.recipes);
+                    });
+                });
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        } else {
+          HOME.findHomeVariable('TWTP')
+            .then((response) => {
+              const sortedRecipes = response.data().topRecipes
+                .sort((firstEl, secondEl) =>
+                  secondEl.tagCount - firstEl.tagCount,
+                )
+                .filter((recipe, index) => index < 8);
+              sortedRecipes.forEach((recipe) => {
+                API.findRecipeById(recipe.recipeId)
+                  .then((response) => {
+                    setTopPicks((prevState) => ([
+                      ...prevState,
+                      response,
+                    ]));
+                  });
+              });
+            })
+            .catch((error) => {
+              // setError(error);
+            });
+        }
+      })
+      .catch((error) => {
+        // setError(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -116,7 +173,7 @@ export const Home = () => {
           paragraph='Get the best recipe every day of the week
             with our daily picks'/>
         <FeaturedCard
-          image={getRecipeImgURL(recipeOfTheDay.id, 636, 393)}
+          image={UTILS.getRecipeImgURL(recipeOfTheDay.id, 636, 393)}
           url={`/recipes/${recipeOfTheDay.id}`}
           title={recipeOfTheDay.title}
           eyebrow={
@@ -139,7 +196,7 @@ export const Home = () => {
               isFavorite: profile && profile.favoriteRecipes &&
                 profile.favoriteRecipes.includes(recipe.id),
               url: `/recipes/${recipe.id}`,
-              image: getRecipeImgURL(recipe.id, 636, 393),
+              image: UTILS.getRecipeImgURL(recipe.id, 636, 393),
               title: recipe.title,
               description: recipe.summary,
               portions: recipe.servings,
@@ -160,14 +217,14 @@ export const Home = () => {
             by our top Cooks'/>
         <Grid numColumns={4}>
           {
-            popularRecipes.map((recipe, index) =>
+            topPicks.map((recipe, index) =>
               <Card
                 key={index}
                 id={recipe.id}
                 isFavorite={profile && profile.favoriteRecipes &&
                 profile.favoriteRecipes.includes(recipe.id)}
                 url={`/recipes/${recipe.id}`}
-                image={getRecipeImgURL(recipe.id, 636, 393)}
+                image={UTILS.getRecipeImgURL(recipe.id, 636, 393)}
                 title={recipe.title}
                 description={`${recipe.summary.toString().split('. ')[0]}.`}
                 portions={parseInt(recipe.servings)}
@@ -189,15 +246,4 @@ export const Home = () => {
   );
 };
 
-export const getRecipeImgURL = (recipeId, imgLength, imgWidth) => {
-  // Note: The API supports the following dimensions:-
-  // 90 x 90
-  // 240 x 150
-  // 312 x 150
-  // 312 x 231
-  // 480 x 360
-  // 556 x 370
-  // 636 x 393
-  return `https://spoonacular.com` +
-    `/recipeImages/${recipeId}-${imgLength}x${imgWidth}.jpg`;
-};
+
