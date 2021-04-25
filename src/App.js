@@ -17,6 +17,7 @@ import { Search } from './stories/pages/Search/Search';
 import { Account } from './stories/pages/Account/Account';
 import { useContext } from 'react';
 import { AuthContext } from './stories/components/AuthProvider/AuthProvider';
+import { User } from './stories/pages/User/User';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/recipes/:recipeId">
             <Recipe />
+          </Route>
+          <Route exact path="/user/:userId">
+            <User />
           </Route>
           <Route exact path={[
             `/account`,

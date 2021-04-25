@@ -39,10 +39,7 @@ export const MainMenu = () => {
       { currentUser ?
         <li className="main-menu__item">
           Welcome back,&nbsp;
-          <strong>{profile && profile.username ?
-            profile.username :
-            'Friend'
-          }</strong>!
+          <strong>{profile && profile.username}</strong>!
         </li> :
         <li className="main-menu__item">
           Hello there,&nbsp;

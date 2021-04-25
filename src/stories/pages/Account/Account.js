@@ -19,13 +19,17 @@ import { UserInfo } from '../../components/UserInfo/UserInfo';
 
 export const Account = () => {
   const { currentUser } = useContext(AuthContext);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState();
   const history = useHistory();
 
   useEffect(() => {
     if (currentUser) {
       USERS.findUser(currentUser.uid).then((res) => {
-        setProfile(res.data());
+        const data = res.data();
+        setProfile({
+          _id: currentUser.uid,
+          data,
+        });
       }).catch((error) => {
         // setError(error);
       });
@@ -42,22 +46,20 @@ export const Account = () => {
         <div className="sidebar">
           <div className="sidebar__aside">
             { profile &&
-              <AccountMenu username={profile.username ?
-                profile.username :
-                'Friend'
-              }
+              <AccountMenu username={profile.username &&
+                profile.username}
               message="Lorem Ipsum for now" />
             }
           </div>
           <div className="sidebar__main">
             <h1>My Account</h1>
             <p>In this page, you will find all information related
-              to your account, favorite recipes, reviews you have posted
+              to your account, favorite recipes, reviews you published
               and much more.
             </p>
             <Route exact path="/account/information">
               {profile &&
-                <UserInfo id={currentUser.uid} user={profile} />
+                <UserInfo user={profile} />
               }
             </Route>
           </div>

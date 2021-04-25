@@ -37,7 +37,7 @@ export const RecipeReviews = ({ recipeId }) => {
     recipeId,
     title: '',
     content: '',
-    rating: '',
+    rating: null,
     username: '',
     date: UTILS.convertDateToString(new Date()),
   });
@@ -59,7 +59,7 @@ export const RecipeReviews = ({ recipeId }) => {
     // this call is purely to make document discoverable in future
     // recipeService.createRecipeFromSpoonId(recipeId);
     // this one actually gets data
-    setReviewsFromDB();
+    getReviewsFromDB();
   }, [currentUser]);
 
 
@@ -67,7 +67,7 @@ export const RecipeReviews = ({ recipeId }) => {
    * Makes call to Firestore, grabs all reviews for this recipe
    *   and saves them to the local state variable 'reviews'
    */
-  const setReviewsFromDB = () => {
+  const getReviewsFromDB = () => {
     setReviews([]);
     REVIEWS.findReviewsForRecipeId(recipeId)
       .then((collection) => {
@@ -117,7 +117,7 @@ export const RecipeReviews = ({ recipeId }) => {
       // submit to firebase, when successfull regrab all reviews
       REVIEWS.createReview(reviewToAdd)
         .then((docRef) => {
-          setReviewsFromDB();
+          getReviewsFromDB();
           setSuccessMessage( 'Review submitted!' );
           e.target.parentNode.reset();
         });

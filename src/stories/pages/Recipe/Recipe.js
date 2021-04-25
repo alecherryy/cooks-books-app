@@ -34,7 +34,6 @@ export const Recipe = () => {
   const [instructions, setInstructions] = useState([]);
   const [intro, setIntro] = useState([]);
 
-
   /**
    * Makes calls to spoonacular to set state.
    *

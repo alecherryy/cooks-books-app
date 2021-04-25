@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { UTILS } from '../../../utils/utils';
+import { Link } from 'react-router-dom';
 
 /**
  * Component for Review element.
@@ -18,16 +19,16 @@ import { UTILS } from '../../../utils/utils';
  * @param {string} profUrl URL to profile of author of component.
  * @param {string} content Content of the review component.
  * @param {string} recipeTitle Title of the recipe referenced by component.
- * @param {string} recipeLink Link to the recipe referenced by component.
+ * @param {string} recipeId Link to the recipe referenced by component.
  * @return {object} (
  *  <Review modifierClasses={modifierClasses} title={title}
  *    rating={rating} date={date} name={name} profUrl={profUrl}
- *    content={content} recipeTitle={recipeTitle} recipeLink={recipeLink}/>
+ *    content={content} recipeTitle={recipeTitle} recipeId={recipeId}/>
  * )
  */
 export const Review = ({
   isUserVariant, modifierClasses, title, rating, date, name,
-  profUrl, content, recipeTitle, recipeLink,
+  profUrl, content, recipeTitle, recipeId,
 }) => {
   const classes = ['review', `${modifierClasses}`].join(' ').trim();
 
@@ -67,11 +68,7 @@ export const Review = ({
 
         {isUserVariant &&
           <div className="review__view-recipe">
-            <br />
-            <a href={recipeLink}>
-              View Recipe
-              <i className="review__icon review__icon--arrow pad-left"></i>
-            </a>
+            <Link to={`./recipes/${recipeId}`}>View Recipe</Link>
           </div>}
       </div>
     </Fragment>
@@ -125,9 +122,9 @@ Review.propTypes = {
   recipeTitle: PropTypes.string,
 
   /**
-   * Review's recipeLink.
+   * Review's recipeId.
    */
-  recipeLink: PropTypes.string,
+  recipeId: PropTypes.string,
 };
 
 Review.defaultProps = {
@@ -141,5 +138,5 @@ Review.defaultProps = {
   content: 'Lorem ipsum dolor sit amet, errem postulant' +
     ' ei sea, an brute ocurreret sed.',
   recipeTitle: 'Recipe Title',
-  recipeLink: 'Recipe Link',
+  recipeId: 'Recipe Link',
 };
