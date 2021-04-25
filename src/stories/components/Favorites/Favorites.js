@@ -22,7 +22,7 @@ export const Favorites = ({ user }) => {
 
   useEffect(() => {
     findFavoriteRecipes();
-  }, [favorites]);
+  }, [user]);
 
   // get nodes to be rendered
   const findFavoriteRecipes = async () => {
