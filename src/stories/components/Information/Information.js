@@ -9,7 +9,7 @@ import { AuthContext } from '../AuthProvider/AuthProvider';
 
 /**
  * Functional Component for user Information
- * @param {string} user of the user
+ * @param {object} user of the user
  * @component
  * @return {object} (
  *  <Information user={user} />
@@ -33,13 +33,18 @@ export const Information = ({ user }) => {
             {user.data.userType === 'Chef' &&
               <>
                 <h6>Restaurant</h6>
-                <p>{user.data.restaurant}</p>
+                <p>{user.data.restaurant ? user.data.restaurant :
+                  'Sorry, there is nothing here.'
+                }</p>
               </>
             }
             <h6>Website</h6>
-            <a href={user.data.website} target="_blank" rel="noreferrer">
-              {user.data.website}
-            </a>
+            { user.data.website ?
+              <a href={user.data.website} target="_blank" rel="noreferrer">
+                {user.data.website}
+              </a> :
+              <p>Sorry, there is nothing here.</p>
+            }
           </div>
         </div>
       }
@@ -56,11 +61,11 @@ Information.propTypes = {
   /**
    * Information's user.
    */
-  user: PropTypes.string,
+  user: PropTypes.object,
 };
 
 Information.defaultProps = {
-  user: 'Username',
+  user: null,
 };
 
 /**

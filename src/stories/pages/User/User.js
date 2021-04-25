@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import PropTypes from 'prop-types';
 
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { USERS } from '../../../services/user-service';
 import { UserReviews } from '../../components/UserReviews/UserReviews';
 import { Information } from '../../components/Information/Information';
+import { Favorites } from '../../components/Favorites/Favorites';
+import { Fragment } from 'react';
 
 /**
  * Component for User page.
@@ -36,7 +39,7 @@ export const User = () => {
       <Constrain>
         <Sidebar
           asideContent={<Information user={profile} />}
-          mainContent={<Content />} />
+          mainContent={<Content user={profile} />} />
       </Constrain>
     </div>
   );
@@ -50,10 +53,25 @@ export const User = () => {
  *   <Content />
  * )
  */
-const Content = () => {
+const Content = ({ user }) => {
   const { userId } = useParams();
 
   return (
-    <UserReviews id={userId} />
+    <Fragment>
+      <Favorites user={user} />
+      <UserReviews id={userId} />
+    </Fragment>
   );
+};
+
+
+Content.propTypes = {
+  /**
+   * Favorites's user.
+   */
+  user: PropTypes.object,
+};
+
+Content.defaultProps = {
+  user: null,
 };
