@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
 import { API } from '../../../services/spoonacular-service';
-import recipeService from '../../../services/recipe-service';
-import ingredientsService from '../../../services/ingredients-service';
-import instructionsService from '../../../services/instructions-service';
+import { RECIPES } from '../../../services/recipe-service';
+import { INGREDIENTS } from '../../../services/ingredients-service';
+import { INSTRUCTIONS } from '../../../services/instructions-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { FeaturedImage } from '../../components/FeaturedImage/FeaturedImage';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
@@ -59,7 +59,7 @@ export const Recipe = () => {
   const setStateFromFirebase = (id) => {
     // set recipe, summary, with one call
     // call service to get promise, forEach through result
-    recipeService.findRecipeById( id ).then((snapshot) => {
+    RECIPES.findRecipeById( id ).then((snapshot) => {
       snapshot.forEach((doc) => {
         const recipe = doc.data();
         setRecipe(recipe);
@@ -70,7 +70,7 @@ export const Recipe = () => {
     // loop through return from ingredientsService
     const newIngredients = [];
     // call service to get promise, forEach through result
-    ingredientsService.findAllIngredientsForId( id )
+    INGREDIENTS.findAllIngredientsForId( id )
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           newIngredients.push(doc.data());
@@ -81,7 +81,7 @@ export const Recipe = () => {
     // loop through return from instructionsService
     const newInstructions = [];
     // call service to get promise, forEach through result
-    instructionsService.findAllInstructionsForId( id )
+    INSTRUCTIONS.findAllInstructionsForId( id )
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           newInstructions.push(doc.data());

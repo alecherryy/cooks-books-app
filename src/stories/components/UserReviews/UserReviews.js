@@ -43,7 +43,6 @@ export const UserReviews = ({ id }) => {
     <div className="user-review">
       <h3 className="user-review__title">Reviews</h3>
       {reviews ? reviews.map((r, index) => {
-        console.log(r); // eslint-disable-line no-console
         return (
           <Review
             key={index}

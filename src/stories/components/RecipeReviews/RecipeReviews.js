@@ -234,8 +234,6 @@ const NewReview = ({
         Tell other users what you think of this recipes,including tips, changes
         and anything you have done to make it your own. Happy cooking!
       </p>
-      {/* <p className="text-bold text-user-warning">
-      Reviewer: {username}</p> */}
       <p className="text-bold text-user-warning">{errorMessage}</p>
       <p className="text-bold text-user-success">{successMessage}</p>
       <Form

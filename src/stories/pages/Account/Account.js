@@ -48,9 +48,9 @@ export const Account = () => {
         <div className="sidebar">
           <div className="sidebar__aside">
             { profile &&
-              <AccountMenu username={profile.username &&
-                profile.username}
-              message="Lorem Ipsum for now" />
+              <AccountMenu username={profile && profile.data.username}
+                message={'Welcome back. This is your account' +
+                'page with all the information you need.'} />
             }
           </div>
           <div className="sidebar__main">

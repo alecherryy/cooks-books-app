@@ -21,15 +21,22 @@ export const Ingredients = ({ ingredients }) => {
         {ingredients.map((ing, index) => {
           // added this, nesting objects in firestore is a pain
           //   and I think this is a cleaner solution
-          let meas = '';
+          // let meas = '';
           if ( ing.hasOwnProperty('recipeId') ) {
-            meas = ing.usUnitLong;
+            // meas = ing.usUnitLong;
+            return <li key={index}>
+              {ing.fullDescription}
+            </li>;
           } else {
-            meas = ing.measures.us.unitLong;
+            // meas = ing.measures.us.unitLong;
+            return <li key={ing.id + index}>
+              {Math.round(ing.amount * 10) / 10}
+              { } {ing.measures.us.unitLong} {ing.name}
+            </li>;
           }
-          return <li key={ing.id + index}>
-            {Math.round(ing.amount * 10) / 10} {meas} {ing.name}
-          </li>;
+          // return <li key={ing.id + index}>
+          //   {Math.round(ing.amount * 10) / 10} {meas} {ing.name}
+          // </li>;
         })}
       </ul>
     </div>
