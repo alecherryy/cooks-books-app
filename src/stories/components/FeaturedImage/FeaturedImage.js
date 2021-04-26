@@ -8,6 +8,7 @@ import firebase from 'firebase/app';
 import { USERS } from '../../../services/user-service';
 import { HOME } from '../../../services/home-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
+import { useHistory } from 'react-router-dom';
 
 /**
  * Component for Featured Hero element.
@@ -30,6 +31,7 @@ export const FeaturedImage = ({
 }) => {
   const { currentUser } = useContext(AuthContext);
   const [favorite, setFavorite] = useState(isFavorite);
+  const history = useHistory();
 
   useEffect(() => {
     window.onscroll = function() {
