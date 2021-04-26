@@ -103,7 +103,6 @@ export const Search = () => {
                   portions={r.servings}
                   rating={UTILS.convertScore(r.spoonacularScore)}
                   excerpt={`${r.summary.toString().split('. ')[0]}.`}
-                  // excerpt={`${r.title} from ${r.sourceName}`}
                   url={`/recipes/${r.id}`} />
               </div>
             );

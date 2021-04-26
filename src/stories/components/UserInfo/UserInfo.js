@@ -4,27 +4,35 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
 import { USERS } from '../../../services/user-service';
+import { useHistory } from 'react-router';
 
 /**
  * Component for account info element.
  *
  * @component
  * @param {object} user information.
- * @param {string} id of the user.
  * @return {object} (
  *   <UserInfo user={user} />
  * )
  */
-export const UserInfo = ({ id, user }) => {
-  const [cachedUser, setCachedUser] = useState(user);
+export const UserInfo = ({ user }) => {
+  const [cachedUser, setCachedUser] = useState(user.data);
   const [editing, setEditing] = useState(false);
-
+  const history = useHistory();
 
   const updateUser = () => {
-    USERS.updateUser(id, cachedUser).then((res) => {
-      USERS.findUser(id).then((doc) => {
+    USERS.updateUser(user._id, cachedUser).then((res) => {
+      USERS.findUser(user._id).then((doc) => {
         setCachedUser(doc.data());
       });
+    });
+  };
+
+  const deleteUserProfile = () => {
+    USERS.deleteUser(user._id).then((res) => {
+      if (res === 200) {
+        history.pushState('/');
+      }
     });
   };
 
@@ -111,7 +119,7 @@ export const UserInfo = ({ id, user }) => {
             website: e.target.value,
           })} />
       </div>
-      <DeleteUser handleClick={null} />
+      <DeleteUser handleClick={deleteUserProfile} />
     </div>
   );
 };
@@ -121,15 +129,10 @@ UserInfo.propTypes = {
    * UserInfo's user
    */
   user: PropTypes.object,
-  /**
-   * UserInfo's id
-   */
-  id: PropTypes.id,
 };
 
 UserInfo.defaultProps = {
   user: {},
-  id: '',
 };
 
 /**

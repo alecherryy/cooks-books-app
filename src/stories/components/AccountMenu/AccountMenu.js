@@ -19,12 +19,13 @@ export const AccountMenu = ({ username }) => {
   const { logout } = useContext(AuthContext);
   const history = useHistory();
 
+  console.log(username); // eslint-disable-line no-console
+
   // define menu items
   const menu = [
     { path: 'information', title: 'Your Information' },
     { path: 'favorites', title: 'Favorites' },
     { path: 'reviews', title: 'Reviews' },
-    { path: 'people', title: 'People' },
   ];
 
   const handleLogout = () => {

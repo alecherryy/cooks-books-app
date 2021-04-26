@@ -34,7 +34,6 @@ export const Recipe = () => {
   const [instructions, setInstructions] = useState([]);
   const [intro, setIntro] = useState([]);
 
-
   /**
    * Makes calls to spoonacular to set state.
    *
@@ -120,7 +119,8 @@ export const Recipe = () => {
           instructions={instructions}
         />} />
         <Sidebar asideContent=''
-          mainContent={<RecipeReviews recipeId={recipeId} />} />
+          mainContent={<RecipeReviews recipeId={recipeId}
+            recipeTitle={recipe.title} />} />
       </Constrain>
     </div>
   );

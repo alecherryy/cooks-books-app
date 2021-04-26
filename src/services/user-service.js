@@ -37,8 +37,23 @@ const getUserUpdates = (userId, setProfile) => {
     });
 };
 
+/**
+ * Delete user from
+ *
+ * @param {string} userId id of the user
+ * @return {number} code
+ */
+const deleteUser = (userId) => {
+  return ALL_USERS.doc(userId).delete().then(() => {
+    return 200;
+  }).catch((error) => {
+    // do something
+  });
+};
+
 export const USERS = {
   findUser,
   updateUser,
   getUserUpdates,
+  deleteUser,
 };

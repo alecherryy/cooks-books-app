@@ -1,29 +1,28 @@
 import React from 'react';
 
 import { MemoryRouter } from 'react-router';
-import { AuthProvider } from '../AuthProvider/AuthProvider';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
 import { AuthProvider } from '../AuthProvider/AuthProvider';
-import { AccountMenu } from './AccountMenu';
+import { Information } from './Information';
 
 /**
  * Example Component: Account Menu
  */
 export default {
-  title: 'Example/AccountMenu',
-  component: AccountMenu,
+  title: 'Example/Information',
+  component: Information,
 };
 
 const Template = (args) => <MemoryRouter>
   <AuthProvider>
     <Sidebar
-      asideContent={<AccountMenu {...args} />}
+      asideContent={<Information {...args} />}
       mainContent='Main content goes here'
     />
   </AuthProvider>
 </MemoryRouter>;
 
-// Default AccountMenu
+// Default Information
 export const Default = Template.bind({});
 Default.args = {
   username: 'Alessia',
