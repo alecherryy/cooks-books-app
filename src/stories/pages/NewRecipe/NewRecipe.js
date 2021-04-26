@@ -150,7 +150,7 @@ export const NewRecipe = () => {
             handleChange={(e) => {
               setRecipe({
                 ...recipe,
-                readyInMinutes: e.target.value,
+                readyInMinutes: e.target.value * 1,
               });
             }}
           />
@@ -165,7 +165,7 @@ export const NewRecipe = () => {
             handleChange={(e) => {
               setRecipe({
                 ...recipe,
-                servings: e.target.value,
+                servings: e.target.value * 1,
               });
             }}
           />
