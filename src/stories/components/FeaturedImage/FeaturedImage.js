@@ -1,15 +1,21 @@
 import './styles.scss';
 
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { AuthContext } from '../AuthProvider/AuthProvider';
+import firebase from 'firebase/app';
+import { USERS } from '../../../services/user-service';
+import { HOME } from '../../../services/home-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
-import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 /**
  * Component for Featured Hero element.
  *
  * @component
+ * @param {number} recipeId of the component.
+ * @param {boolean} isFavorite of the component.
  * @param {boolean} image of the component.
  * @param {string} title of the component.
  * @param {string} excerpt of the component.
@@ -21,8 +27,12 @@ import { useEffect } from 'react';
  * )
  */
 export const FeaturedImage = ({
-  image, title, excerpt, portions, time, rating,
+  recipeId, isFavorite, image, title, excerpt, portions, time, rating,
 }) => {
+  const { currentUser } = useContext(AuthContext);
+  const [favorite, setFavorite] = useState(isFavorite);
+  const history = useHistory();
+
   useEffect(() => {
     window.onscroll = function() {
       handleScroll();
@@ -42,8 +52,76 @@ export const FeaturedImage = ({
     }
   };
 
+  const toggleFavorite = () => {
+    if (currentUser) {
+      USERS.findUser(currentUser.uid)
+        .then((response) => {
+          const isChef = response.data().userType === 'Chef';
+
+          if (!favorite) {
+            USERS.updateUser(currentUser.uid, {
+              favoriteRecipes: firebase.firestore
+                .FieldValue.arrayUnion(recipeId),
+            }).then(() => {
+              if (isChef) {
+                HOME.findHomeVariable('TWTP')
+                  .then((response) => {
+                    const topRecipes = response.data().topRecipes;
+                    const index = topRecipes.findIndex((recipe) =>
+                      recipe.recipeId === recipeId,
+                    );
+                    if (index > -1) topRecipes[index].tagCount += 1;
+                    else topRecipes.push({ recipeId, tagCount: 1 });
+
+                    HOME.setHomeVariable('TWTP', { topRecipes });
+                  });
+              }
+              setFavorite(!favorite);
+            });
+          } else {
+            USERS.updateUser(currentUser.uid, {
+              favoriteRecipes: firebase.firestore
+                .FieldValue.arrayRemove(recipeId),
+            }).then(() => {
+              if (isChef) {
+                HOME.findHomeVariable('TWTP')
+                  .then((response) => {
+                    const topRecipes = response.data().topRecipes;
+                    const index = topRecipes.findIndex((recipe) =>
+                      recipe.recipeId === recipeId,
+                    );
+                    if (index > -1) {
+                      if (topRecipes[index].tagCount === 1) {
+                        topRecipes.splice(index, 1);
+                      } else {
+                        topRecipes[index].tagCount -= 1;
+                      }
+                    }
+
+                    HOME.setHomeVariable('TWTP', { topRecipes });
+                  });
+              }
+              setFavorite(!favorite);
+            });
+          }
+        });
+    } else {
+      history.push(`/login`);
+    }
+  };
+
   return (
-    <div className="featured-image">
+    <div className={[
+      'featured-image',
+      `${isFavorite ? 'featured-image--favorite' : ''}`].join(' ').trim()
+    }>
+      <button className="featured-image__favorite" onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFavorite();
+      }} >
+        {favorite ? 'Remove from' : 'Add to'} favorites
+      </button>
       <div className="featured-image__image" style={
         { backgroundImage: `url('${image}')` }
       } aria-label={title} ref={bgImage}></div>
@@ -75,6 +153,14 @@ export const FeaturedImage = ({
 
 FeaturedImage.propTypes = {
   /**
+   * FeaturedImage's recipeId
+   */
+  recipeId: PropTypes.number,
+  /**
+   * FeaturedImage's isFavorite
+   */
+  isFavorite: PropTypes.bool,
+  /**
    * FeaturedImage's image
    */
   image: PropTypes.string,
@@ -101,6 +187,8 @@ FeaturedImage.propTypes = {
 };
 
 FeaturedImage.defaultProps = {
+  recipeId: null,
+  isFavorite: false,
   image: '',
   title: 'Steamed Mussels in White Wine',
   excerpt: '',

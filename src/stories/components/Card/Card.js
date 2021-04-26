@@ -120,7 +120,7 @@ export const Card = (
           e.preventDefault();
           e.stopPropagation();
           toggleFavorite();
-        }}/>
+        }} />
     </Link>
   );
 };

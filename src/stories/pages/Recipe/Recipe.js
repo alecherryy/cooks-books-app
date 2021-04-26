@@ -1,6 +1,6 @@
 import '../../../scss/utility.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
@@ -17,6 +17,8 @@ import { Instructions } from '../../components/Instructions/Instructions';
 import { Ingredients } from '../../components/Ingredients/Ingredients';
 import { RecipeReviews } from '../../components/RecipeReviews/RecipeReviews';
 import { UTILS } from '../../../utils/utils';
+import { AuthContext } from '../../components/AuthProvider/AuthProvider';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Component for Recipe page.
@@ -28,11 +30,13 @@ import { UTILS } from '../../../utils/utils';
  */
 
 export const Recipe = () => {
+  const { currentUser } = useContext(AuthContext);
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   const [intro, setIntro] = useState([]);
+  const [profile, setProfile] = useState(null);
 
   /**
    * Makes calls to spoonacular to set state.
@@ -91,7 +95,6 @@ export const Recipe = () => {
       });
   };
 
-
   useEffect(() => {
     const id = recipeId ? recipeId : '609262'; // default sample recipe id
     const isSpoonId = UTILS.isSpoonRecipeId(id);
@@ -105,12 +108,23 @@ export const Recipe = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (currentUser) {
+      USERS.getUserUpdates(currentUser.uid, setProfile);
+    } else {
+      setProfile(null);
+    }
+  }, [currentUser]);
+
   return (
     <div className="recipe">
       <Constrain>
-        <FeaturedImage title={recipe.title} image={recipe.image}
-          time={recipe.readyInMinutes} portions={recipe.servings}
-          rating={UTILS.convertScore(recipe.spoonacularScore)}
+        <FeaturedImage recipeId={recipeId * 1} isFavorite={profile &&
+            profile.favoriteRecipes &&
+            profile.favoriteRecipes.includes(recipeId * 1)}
+        title={recipe.title} image={recipe.image}
+        time={recipe.readyInMinutes} portions={recipe.servings}
+        rating={UTILS.convertScore(recipe.spoonacularScore)}
         />
         <Sidebar asideContent={
           <StickyContent>
