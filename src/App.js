@@ -15,6 +15,7 @@ import { Home } from './stories/pages/Home/Home';
 import { Signup } from './stories/pages/Signup/Signup';
 import { Search } from './stories/pages/Search/Search';
 import { Account } from './stories/pages/Account/Account';
+import { NewRecipe } from './stories/pages/NewRecipe/NewRecipe';
 import { useContext } from 'react';
 import { AuthContext } from './stories/components/AuthProvider/AuthProvider';
 import { User } from './stories/pages/User/User';
@@ -39,8 +40,8 @@ function App() {
           <Route exact path="/recipes/:recipeId">
             <Recipe />
           </Route>
-          <Route exact path="/user/:userId">
-            <User />
+          <Route exact path="/add-recipe">
+            <NewRecipe />
           </Route>
           <Route exact path={[
             `/account`,

@@ -9,7 +9,7 @@ import { Teaser } from '../../components/Teaser/Teaser';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { API } from '../../../services/spoonacular-service';
-import recipeService from '../../../services/recipe-service';
+import { RECIPES } from '../../../services/recipe-service';
 import Artwork from '../../../images/artwork-4.svg';
 import { UTILS } from '../../../utils/utils';
 
@@ -26,7 +26,7 @@ export const Search = () => {
   const { searchTerms } = useParams();
   const [searchBar, setSearchBar] = useState('');
   const [resultJSON, setResultJSON] = useState(
-    { totalResults: 0, results: [], number: 0 });
+    { totalResults: 10, results: [], number: 0 });
   const history = useHistory();
 
   /**
@@ -42,7 +42,7 @@ export const Search = () => {
         const spoonJson = theResults;
 
         // when promise resolves, call firebase
-        recipeService.findRecipesByTitle(searchTerms)
+        RECIPES.findRecipesByTitle(searchTerms)
           .then((snapshot) => {
             // iterate over all returned elements, add to spoonjson
             snapshot.forEach((doc) => {

@@ -10,6 +10,7 @@ import Artwork from '../../../images/artwork-3.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { AuthContext } from '../../components/AuthProvider/AuthProvider';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Component for Signup page.

@@ -8,12 +8,13 @@
 }
 
 .main-menu__item {
+  margin: 0;
 
   @include bp-tablet {
     padding-left: $spacing-4 !important;
   }
 
-  @include bp-max-tablet-lg {
+  @include bp-max-desktop {
     &:first-child {
       display: none;
     }
@@ -30,6 +31,20 @@
     background-repeat: no-repeat;
     font-weight: 400;
     padding: $spacing-1 0 $spacing-1 $spacing-3;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  &.main-menu__link--add {
+    @include svg-background(icon-add-post);
+
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-weight: 400;
+    padding: $spacing-1 0  $spacing-1 $spacing-3;
 
     &:hover,
     &:focus {
