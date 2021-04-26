@@ -10,7 +10,7 @@ const ALL_INGREDIENTS = firebase.firestore().collection(INGREDIENTS_COLLECTION);
  * @param {string} recipeId the recipeId to associate with the ingredient
  * @return {object} a promise from the firestore
  */
-const createIngredient = (ingredient, recipeId) => {
+const createIngredient = (ingredient) => {
   return ALL_INGREDIENTS.add(ingredient);
 };
 
@@ -20,9 +20,9 @@ const createIngredient = (ingredient, recipeId) => {
  * @param {object} ingredientsArray an array of ingredients
  * @param {string} recipeId the recipeId to associate with the ingredients
  */
-const createAllIngredients = (ingredientsArray, recipeId ) => {
+const createAllIngredients = (ingredientsArray ) => {
   ingredientsArray.map( (ingredient) => {
-    createIngredient( ingredient, recipeId );
+    createIngredient( ingredient );
   });
 };
 
@@ -37,10 +37,8 @@ const findAllIngredientsForId = (recipeId) => {
   return ALL_INGREDIENTS.where( 'recipeId', '==', recipeId ).get();
 };
 
-const api = {
+export const INGREDIENTS = {
   createIngredient,
   createAllIngredients,
   findAllIngredientsForId,
 };
-
-export default api;

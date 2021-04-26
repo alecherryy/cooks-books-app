@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { AuthProvider } from '../../../Auth';
+import { AuthProvider } from '../../components/AuthProvider/AuthProvider';
 import '../../../scss/styles.scss';
 import { Account } from './Account';
 
