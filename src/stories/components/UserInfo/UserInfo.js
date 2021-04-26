@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
 import { USERS } from '../../../services/user-service';
+import { useHistory } from 'react-router';
 
 /**
  * Component for account info element.
@@ -17,13 +18,21 @@ import { USERS } from '../../../services/user-service';
 export const UserInfo = ({ user }) => {
   const [cachedUser, setCachedUser] = useState(user.data);
   const [editing, setEditing] = useState(false);
-
+  const history = useHistory();
 
   const updateUser = () => {
     USERS.updateUser(user._id, cachedUser).then((res) => {
       USERS.findUser(user._id).then((doc) => {
         setCachedUser(doc.data());
       });
+    });
+  };
+
+  const deleteUserProfile = () => {
+    USERS.deleteUser(user._id).then((res) => {
+      if (res === 200) {
+        history.pushState('/');
+      }
     });
   };
 
@@ -110,7 +119,7 @@ export const UserInfo = ({ user }) => {
             website: e.target.value,
           })} />
       </div>
-      <DeleteUser handleClick={null} />
+      <DeleteUser handleClick={deleteUserProfile} />
     </div>
   );
 };

@@ -40,6 +40,9 @@ function App() {
           <Route exact path="/recipes/:recipeId">
             <Recipe />
           </Route>
+          <Route exact path="/user/:userId">
+            <User />
+          </Route>
           <Route exact path="/add-recipe">
             <NewRecipe />
           </Route>

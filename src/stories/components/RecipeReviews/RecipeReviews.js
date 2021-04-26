@@ -2,15 +2,12 @@ import './styles.scss';
 
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-// import { AuthContext } from '../../../Auth';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-// import { useHistory } from 'react-router-dom';
 
 import { Review } from '../Review/Review';
 import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
 import { USERS } from '../../../services/user-service';
-// import recipeService from '../../../services/recipe-service';
 import { REVIEWS } from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
 
@@ -23,7 +20,7 @@ import { UTILS } from '../../../utils/utils';
  *  <RecipeReviews recipeId={recipeId} />
  * )
  */
-export const RecipeReviews = ({ recipeId }) => {
+export const RecipeReviews = ({ recipeId, recipeTitle }) => {
   // to leave username as part of review
   const { currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
@@ -40,7 +37,9 @@ export const RecipeReviews = ({ recipeId }) => {
     rating: null,
     username: '',
     date: UTILS.convertDateToString(new Date()),
+    recipeTitle,
   });
+
 
   useEffect(() => {
     setErrorMessage('');
@@ -170,6 +169,7 @@ export const RecipeReviews = ({ recipeId }) => {
         reviews.map((r, index) => {
           return (
             <Review
+              profUrl={r.uid}
               key={index}
               title={r.title}
               content={r.content}
@@ -190,6 +190,10 @@ RecipeReviews.propTypes = {
    * RecipeReviews's recipeId.
    */
   recipeId: PropTypes.string,
+  /**
+   * RecipeReview's recipeTitle.
+   */
+  recipeTitle: PropTypes.string,
 };
 
 RecipeReviews.defaultProps = {

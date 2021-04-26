@@ -32,7 +32,7 @@ export const User = () => {
     }).catch((error) => {
       // setError(error);
     });
-  });
+  }, []);
 
   return (
     <div className="user">

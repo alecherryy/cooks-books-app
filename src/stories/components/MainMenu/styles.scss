@@ -5,12 +5,20 @@
 
 .main-menu {
   @include list-inline();
+
+  @include bp-max-tablet-lg {
+    font-size: $font-size-sm !important;
+  }
 }
 
 .main-menu__item {
   margin: 0;
 
   @include bp-tablet {
+    padding-left: $spacing-2 !important;
+  }
+
+  @include bp-desktop-lg {
     padding-left: $spacing-4 !important;
   }
 

@@ -26,6 +26,80 @@
   }
 }
 
+.featured-image__favorite {
+  @include button-clear();
+  @include image-replace(34px, 34px);
+
+  position: absolute;
+  right: $spacing-2;
+  top: $spacing-2;
+  z-index: 2;
+
+  &:hover {
+    &::before {
+      transform: scale(1.45);
+    }
+
+    .featured-image--favorite & {
+      &::after {
+        transform: scale(1.45);
+      }
+    }
+  }
+
+  &::before,
+  &::after {
+    @include image-replace(34px, 34px);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 34px;
+    content: '';
+    display: block;
+    position: absolute !important;
+    transition: all 0.1s ease-in;
+    right: 0;
+    top: 0;
+  }
+
+  &::before {
+    @include svg-background(icon-heart-empty);
+
+    opacity: 1;
+  }
+
+  &::after {
+    @include svg-background(icon-heart);
+
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  @include bp-tablet {
+    right: $spacing-4;
+    top: $spacing-4;
+
+    &::before,
+    &::after {
+      @include image-replace(44px, 44px);
+
+      background-size: 44px;
+    }
+  }
+
+  .featured-image--favorite & {
+    &::before {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    &::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
 .featured-image__image {
   background-position: center;
   background-repeat: no-repeat;
