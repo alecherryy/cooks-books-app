@@ -96,6 +96,8 @@ export const Recipe = () => {
     const id = recipeId ? recipeId : '609262'; // default sample recipe id
     const isSpoonId = UTILS.isSpoonRecipeId(id);
 
+    UTILS.scrollToTop();
+
     if ( isSpoonId ) {
       setStateFromSpoonacular(id);
     } else {

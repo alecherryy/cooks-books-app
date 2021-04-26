@@ -1,9 +1,11 @@
 import './styles.scss';
 
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SpinningImages } from '../SpinningImages/SpinningImages';
+import { AuthContext } from '../AuthProvider/AuthProvider';
+import { USERS } from '../../../services/user-service';
 
 /**
  * Component for Featured Hero element.
@@ -13,7 +15,28 @@ import { SpinningImages } from '../SpinningImages/SpinningImages';
  *   <FeaturedHero />
  * )
  */
-export const FeaturedHero = ({}) => {
+export const FeaturedHero = () => {
+  const { user } = useContext(AuthContext);
+  const [url, setUrl] = useState('login');
+
+  useEffect(() => {
+    if (user) {
+      USERS.findUser(user.uid)
+        .then((doc) => {
+          const isChef = response.data().userType === 'Chef';
+
+          if (isChef) {
+            setUrl('add-recipe');
+          } else {
+            setUrl('account/information');
+          }
+        })
+        .catch((error) => {
+          // setError(error);
+        });
+    }
+  }, []);
+
   return (
     <div className="featured-hero">
       <div className="featured-hero__text is-first">
@@ -31,7 +54,7 @@ export const FeaturedHero = ({}) => {
         <h1 className="featured-hero__title">Create
           <span className="featured-hero__light"> new ones</span><br />
         </h1>
-        <Link className="featured-hero__link" to="/login">Add a recipe</Link>
+        <Link className="featured-hero__link" to={`/${url}`}>Add a recipe</Link>
       </div>
     </div>
   );

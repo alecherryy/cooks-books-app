@@ -33,9 +33,20 @@ const findReviewsForUserId = (userId) => {
   return ALL_REVIEWS.where( 'uid', '==', userId ).get();
 };
 
+/**
+ * Find all reviews
+ *
+ * @return {number} code
+ */
+const findAllReviews = () => {
+  return ALL_REVIEWS.get().then((snapshot) => {
+    return snapshot;
+  });
+};
 
 export const REVIEWS = {
   createReview,
   findReviewsForRecipeId,
   findReviewsForUserId,
+  findAllReviews,
 };

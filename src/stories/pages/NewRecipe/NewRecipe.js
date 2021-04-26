@@ -8,6 +8,7 @@ import { INGREDIENTS } from '../../../services/ingredients-service';
 import { INSTRUCTIONS } from '../../../services/instructions-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import Artwork from '../../../images/artwork-4.svg';
+import { UTILS } from '../../../utils/utils';
 
 export const NewRecipe = () => {
   const [recipe, setRecipe] = useState({
@@ -60,6 +61,10 @@ export const NewRecipe = () => {
         });
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    UTILS.scrollToTop();
+  }, []);
 
   /**
    * Creates the recipe, prevents default then calls helper.

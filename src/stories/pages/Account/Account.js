@@ -9,6 +9,7 @@ import { USERS } from '../../../services/user-service';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { Favorites } from '../../components/Favorites/Favorites';
 import { UserReviews } from '../../components/UserReviews/UserReviews';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Account page.
@@ -25,6 +26,8 @@ export const Account = () => {
   const history = useHistory();
 
   useEffect(() => {
+    UTILS.scrollToTop();
+
     if (currentUser) {
       USERS.findUser(currentUser.uid).then((res) => {
         const data = res.data();
