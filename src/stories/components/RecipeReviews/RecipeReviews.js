@@ -2,18 +2,14 @@ import './styles.scss';
 
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-// import { AuthContext } from '../../../Auth';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-// import { useHistory } from 'react-router-dom';
 
 import { Review } from '../Review/Review';
 import { Form } from '../Form/Form';
 import { FormItem } from '../FormItem/FormItem';
 import { USERS } from '../../../services/user-service';
-// import recipeService from '../../../services/recipe-service';
 import { REVIEWS } from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
-// import { API } from '../../../services/spoonacular-service';
 
 /**
  * Component for RecipeReviews element.

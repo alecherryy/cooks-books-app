@@ -23,8 +23,6 @@ export const UserReviews = ({ id }) => {
   useEffect(() => {
     setReviews([]);
     if (!reviews) {
-      /* eslint-disable-next-line no-console */
-      console.log('whaat');
       REVIEWS.findReviewsForUserId(id)
         .then((collection) => {
           const theReviews = [];
@@ -34,15 +32,7 @@ export const UserReviews = ({ id }) => {
           setReviews(theReviews);
         });
     }
-    // setReviews(theReviews);
   }, []);
-
-  // get recipe title
-  // const getRecipeTitle = (id) => {
-  // return API.findRecipeById(id).then((res) => {
-  //   return res.data().title;
-  // });
-  // };
 
   return (
     <div className="user-review">
