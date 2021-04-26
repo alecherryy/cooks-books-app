@@ -77,13 +77,13 @@
   }
 
   &::before {
-    @include svg-background(icon-star-empty);
+    @include svg-background(icon-heart-empty);
 
     opacity: 1;
   }
 
   &::after {
-    @include svg-background(icon-star);
+    @include svg-background(icon-heart);
 
     opacity: 0;
     transform: scale(0);
