@@ -119,7 +119,8 @@ export const Recipe = () => {
           instructions={instructions}
         />} />
         <Sidebar asideContent=''
-          mainContent={<RecipeReviews recipeId={recipeId} />} />
+          mainContent={<RecipeReviews recipeId={recipeId}
+            recipeTitle={recipe.title} />} />
       </Constrain>
     </div>
   );

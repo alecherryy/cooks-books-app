@@ -13,6 +13,7 @@ import { USERS } from '../../../services/user-service';
 // import recipeService from '../../../services/recipe-service';
 import { REVIEWS } from '../../../services/review-service';
 import { UTILS } from '../../../utils/utils';
+// import { API } from '../../../services/spoonacular-service';
 
 /**
  * Component for RecipeReviews element.
@@ -23,7 +24,7 @@ import { UTILS } from '../../../utils/utils';
  *  <RecipeReviews recipeId={recipeId} />
  * )
  */
-export const RecipeReviews = ({ recipeId }) => {
+export const RecipeReviews = ({ recipeId, recipeTitle }) => {
   // to leave username as part of review
   const { currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
@@ -40,7 +41,9 @@ export const RecipeReviews = ({ recipeId }) => {
     rating: null,
     username: '',
     date: UTILS.convertDateToString(new Date()),
+    recipeTitle,
   });
+
 
   useEffect(() => {
     setErrorMessage('');
@@ -191,6 +194,10 @@ RecipeReviews.propTypes = {
    * RecipeReviews's recipeId.
    */
   recipeId: PropTypes.string,
+  /**
+   * RecipeReview's recipeTitle.
+   */
+  recipeTitle: PropTypes.string,
 };
 
 RecipeReviews.defaultProps = {
