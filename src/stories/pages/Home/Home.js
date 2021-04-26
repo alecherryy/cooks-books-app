@@ -37,6 +37,8 @@ export const Home = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
+    UTILS.scrollToTop();
+
     // setError('');
     const today = new Date();
     setTopPicks([]);

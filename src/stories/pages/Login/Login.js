@@ -1,6 +1,6 @@
 import '../../../scss/utility.scss';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Constrain } from '../../layouts/Constrain/Constrain';
@@ -10,6 +10,7 @@ import Artwork from '../../../images/artwork-4.svg';
 import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { AuthContext } from '../../components/AuthProvider/AuthProvider';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Login page.
@@ -21,12 +22,20 @@ import { AuthContext } from '../../components/AuthProvider/AuthProvider';
  */
 
 export const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, currentUser } = useContext(AuthContext);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   // const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    UTILS.scrollToTop();
+
+    if (currentUser) {
+      history.push('/account/information');
+    }
+  });
 
   const handleLogin = () => {
     // setError('');

@@ -58,6 +58,7 @@ export const Search = () => {
 
   // listen for changes in url, search based on that
   useEffect(() => {
+    UTILS.scrollToTop();
     setSearchBar(searchTerms);
 
     if (searchTerms) {

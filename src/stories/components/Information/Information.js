@@ -46,6 +46,12 @@ export const Information = ({ user }) => {
               <p>Sorry, there is nothing here.</p>
             }
           </div>
+          {currentUser.uid === user._id &&
+            <NavLink className="spaced-30-top button button--small"
+              to="/account/information">
+              Edit Account
+            </NavLink>
+          }
         </div>
       }
       { !currentUser &&
