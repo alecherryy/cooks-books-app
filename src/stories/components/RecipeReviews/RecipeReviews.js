@@ -37,7 +37,6 @@ export const RecipeReviews = ({ recipeId, recipeTitle }) => {
     rating: null,
     username: '',
     date: UTILS.convertDateToString(new Date()),
-    recipeTitle,
   });
 
 
@@ -112,6 +111,7 @@ export const RecipeReviews = ({ recipeId, recipeTitle }) => {
         ...review,
         username: profile.username,
         uid: currentUser.uid,
+        recipeTitle,
       };
       // submit to firebase, when successfull regrab all reviews
       REVIEWS.createReview(reviewToAdd)
