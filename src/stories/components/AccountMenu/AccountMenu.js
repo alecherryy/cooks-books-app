@@ -24,7 +24,6 @@ export const AccountMenu = ({ username }) => {
     { path: 'information', title: 'Your Information' },
     { path: 'favorites', title: 'Favorites' },
     { path: 'reviews', title: 'Reviews' },
-    { path: 'people', title: 'People' },
   ];
 
   const handleLogout = () => {

@@ -170,6 +170,7 @@ export const RecipeReviews = ({ recipeId }) => {
         reviews.map((r, index) => {
           return (
             <Review
+              profUrl={r.uid}
               key={index}
               title={r.title}
               content={r.content}

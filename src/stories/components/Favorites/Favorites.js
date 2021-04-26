@@ -27,7 +27,7 @@ export const Favorites = ({ user }) => {
   // get nodes to be rendered
   const findFavoriteRecipes = async () => {
     const recipes = [];
-    if (user) {
+    if (user && user.data.favoriteRecipes) {
       await Promise.all(user.data.favoriteRecipes.map((fav) =>
         findRecipe(fav, recipes)),
       );
@@ -62,7 +62,7 @@ export const Favorites = ({ user }) => {
               url={`/recipes/${r.id}`} />
           );
         }) :
-          <p>This user has not published any reviews yet.</p>
+          <p>Not favorite recipes yet.</p>
         }
       </Grid>
     </div>

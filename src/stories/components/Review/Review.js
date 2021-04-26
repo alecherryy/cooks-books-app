@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { UTILS } from '../../../utils/utils';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 /**
  * Component for Review element.
@@ -58,7 +58,7 @@ export const Review = ({
             {date}
           </span>
           {!isUserVariant && <span className="review__sub-header-item">
-            By: <a href={profUrl}>@{name}</a>
+            By: <NavLink to={`/user/${profUrl}`}>@{name}</NavLink>
           </span>}
         </div>
 
@@ -68,7 +68,7 @@ export const Review = ({
 
         {isUserVariant &&
           <div className="review__view-recipe">
-            <Link to={`./recipes/${recipeId}`}>View Recipe</Link>
+            <Link to={`/recipes/${recipeId}`}>View Recipe</Link>
           </div>}
       </div>
     </Fragment>

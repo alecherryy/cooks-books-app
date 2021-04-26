@@ -7,6 +7,8 @@ import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import { Constrain } from '../../layouts/Constrain/Constrain';
 import { USERS } from '../../../services/user-service';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
+import { Favorites } from '../../components/Favorites/Favorites';
+import { UserReviews } from '../../components/UserReviews/UserReviews';
 
 /**
  * Component for Account page.
@@ -60,6 +62,16 @@ export const Account = () => {
             <Route exact path="/account/information">
               {profile &&
                 <UserInfo user={profile} />
+              }
+            </Route>
+            <Route exact path="/account/favorites">
+              {profile &&
+                <Favorites user={profile} />
+              }
+            </Route>
+            <Route exact path="/account/reviews">
+              {profile &&
+                <UserReviews id={profile._id} />
               }
             </Route>
           </div>
