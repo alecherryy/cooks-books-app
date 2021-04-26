@@ -17,7 +17,7 @@ export default {
 const Template = (args) => {
   return (
     <MemoryRouter initialEntries={[
-      '/user/SmoxSEx4H0d4nX1vK075BewfZmC3'
+      '/user/SmoxSEx4H0d4nX1vK075BewfZmC3',
     ]}>
       <AuthProvider>
         <User {...args} />

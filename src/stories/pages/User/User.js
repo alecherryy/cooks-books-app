@@ -9,6 +9,7 @@ import { UserReviews } from '../../components/UserReviews/UserReviews';
 import { Information } from '../../components/Information/Information';
 import { Favorites } from '../../components/Favorites/Favorites';
 import { Fragment } from 'react';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for User page.
@@ -23,6 +24,8 @@ export const User = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
+    UTILS.scrollToTop();
+
     USERS.findUser(userId).then((res) => {
       const data = res.data();
       setProfile({

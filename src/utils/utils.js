@@ -39,6 +39,21 @@ const isSpoonRecipeId = (recipeId) => {
 };
 
 /**
+ * Scroll to top of page
+ *
+ * @name scrollToTop
+ */
+const scrollToTop = () => {
+  window.setTimeout(function() {
+    window.scrollTo({
+      top: 0,
+      // left: 0,
+      behavior: 'smooth',
+    });
+  });
+};
+
+/**
  * Get recipe's image URL for custom dimensions.
  *
  * Note: API supports the following dimensions only:
@@ -65,6 +80,7 @@ export const getRecipeImgURL = (recipeId, imgLength, imgWidth) => {
  * Export utiliy functions
  */
 export const UTILS = {
+  scrollToTop,
   convertScore,
   convertDateToString,
   isSpoonRecipeId,

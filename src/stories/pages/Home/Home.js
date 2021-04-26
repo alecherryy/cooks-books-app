@@ -18,6 +18,7 @@ import { HOME } from '../../../services/home-service';
 import { UTILS } from '../../../utils/utils';
 import { USERS } from '../../../services/user-service';
 import firebase from 'firebase/app';
+import { Stats } from '../../components/Stats/Stats';
 
 /**
  * Component for Home page.
@@ -36,6 +37,8 @@ export const Home = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
+    UTILS.scrollToTop();
+
     // setError('');
     const today = new Date();
     setTopPicks([]);
@@ -148,23 +151,8 @@ export const Home = () => {
     <div className='home'>
       <Constrain>
         <FeaturedHero/>
+        <Stats />
       </Constrain>
-      <Grid
-        numColumns={4}
-        modifierClasses='spaced-80-top spaced-20-bottom'>
-        <div className='grid__item grid__tem--x-center'>
-          RECIPES
-        </div>
-        <div className='grid__item grid__tem--x-center'>
-          WORLD CUISINES
-        </div>
-        <div className='grid__item grid__tem--x-center'>
-          USER REVIEWS
-        </div>
-        <div className='grid__item grid__tem--x-center'>
-          CURATED MEAL PLANS
-        </div>
-      </Grid>
       <SplitSection modifierClasses="split-section--reverse">
         <SectionTitle
           title='Recipe of the day'

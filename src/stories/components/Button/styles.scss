@@ -35,6 +35,10 @@
   }
 }
 
+.button--small {
+  font-size: $font-size-sm;
+}
+
 // Arrow button common styles
 $size-mobile: 148px;
 $size-desktop: 178px;

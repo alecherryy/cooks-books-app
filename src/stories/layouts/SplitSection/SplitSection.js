@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 export const SplitSection = ({ children, modifierClasses }) => {
   return (
     <div className={['split-section', modifierClasses]
-      .join(' ').trim()}>
+      .join(' ').trim()} >
       {children}
     </div>
   );
