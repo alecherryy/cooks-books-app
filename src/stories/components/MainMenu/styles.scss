@@ -8,12 +8,13 @@
 }
 
 .main-menu__item {
+  margin: 0;
 
   @include bp-tablet {
     padding-left: $spacing-4 !important;
   }
 
-  @include bp-max-tablet-lg {
+  @include bp-max-desktop {
     &:first-child {
       display: none;
     }

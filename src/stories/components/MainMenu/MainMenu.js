@@ -56,8 +56,8 @@ export const MainMenu = () => {
         currentUser && profile && profile.userType === 'Chef' &&
         <li className="main-menu__item">
 
-          <Link to="/add_recipe"
-            className="main-menu__link main-menu__link--add">Add</Link>
+          <Link to="/add-recipe"
+            className="main-menu__link main-menu__link--add">Add a Recipe</Link>
         </li>
       }
       <li className="main-menu__item">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthProvider } from '../../components/AuthProvider/AuthProvider';
 import { NewRecipe } from './NewRecipe';
 
 /**
@@ -9,7 +10,10 @@ export default {
   component: NewRecipe,
 };
 
-const Template = (args) => <NewRecipe />;
+const Template = (args) =>
+  <AuthProvider>
+    <NewRecipe />
+  </AuthProvider>;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -29,9 +29,7 @@ export const Header = ({ modifierClasses, rightContent }) => {
         <div className='header__inner'>
           <div className='header__left'>
             <Link to="/">
-              <img className='section-title__img'
-                src={Logo}
-                alt='logo-img'/>
+              <img src={Logo} alt='CooksBooks Logo'/>
             </Link>
           </div>
           <div className='header__right'>

@@ -7,7 +7,7 @@ import { RECIPES } from '../../../services/recipe-service';
 import { INGREDIENTS } from '../../../services/ingredients-service';
 import { INSTRUCTIONS } from '../../../services/instructions-service';
 import { Constrain } from '../../layouts/Constrain/Constrain';
-
+import Artwork from '../../../images/artwork-4.svg';
 
 export const NewRecipe = () => {
   const [recipe, setRecipe] = useState({
@@ -27,8 +27,6 @@ export const NewRecipe = () => {
 
   // dropdown options
   // I opted to make lots of these dropdowns for simplicity
-  const preptimeDropdown = ['Time to prepare', 10, 20, 30, 45, 60, 90];
-  const servingsDropdown = ['Number of servings', 1, 2, 3, 4, 5, 6, 7, 8];
   const ratingsDropdown = ['Rating out of 5', 1, 2, 3, 4, 5];
   const ingredientsDropdown = ['Number of ingredients', 1, 2, 3, 4, 5, 6, 7, 8];
   const instructionsDropdown = ['Number of instructions', 1, 2, 3, 4, 5, 6, 7];
@@ -102,7 +100,8 @@ export const NewRecipe = () => {
   // big ol' chonker getting returned
   return (
     <div className="add-recipe">
-      <Constrain>
+      <Constrain modifierClasses="constrain--narrow">
+        <img src={Artwork} alt="Decorative Graphics" />
         <h3>
           Have a recipe?
           <span className="text-regular"> Let the world know!</span>
@@ -132,7 +131,7 @@ export const NewRecipe = () => {
           />
           {/*  image-url input */}
           <FormItem
-            placeholder="image url"
+            placeholder="Image url"
             handleChange={(e) => {
               setRecipe({
                 ...recipe,
@@ -144,14 +143,14 @@ export const NewRecipe = () => {
           {/*  preptime input */}
           <FormItem
             modifierClasses="special-margins"
-            type="select"
+            type="number"
             showLabel={true}
-            label="How long does this recipe take in minutes?"
-            options={preptimeDropdown}
+            placeholder="Time in minutes"
+            label="How many minutes des this recipe take?"
             handleChange={(e) => {
               setRecipe({
                 ...recipe,
-                readyInMinutes: e.target.value * 1,
+                readyInMinutes: e.target.value,
               });
             }}
           />
@@ -159,14 +158,14 @@ export const NewRecipe = () => {
           {/*  servings input */}
           <FormItem
             modifierClasses="special-margins"
-            type="select"
+            type="number"
+            placeholder="Number of servings"
             showLabel={true}
-            label="How many servings does this prepare?"
-            options={servingsDropdown}
+            label="How many servings does this recipe yield?"
             handleChange={(e) => {
               setRecipe({
                 ...recipe,
-                servings: e.target.value * 1,
+                servings: e.target.value,
               });
             }}
           />
@@ -176,7 +175,7 @@ export const NewRecipe = () => {
             modifierClasses="special-margins"
             type="select"
             showLabel={true}
-            label="How would you rate this out of 5?"
+            label="How would you rate this recipe from 1 through 5?"
             options={ratingsDropdown}
             handleChange={(e) => {
               setRecipe({

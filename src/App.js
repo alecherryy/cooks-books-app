@@ -39,7 +39,7 @@ function App() {
           <Route exact path="/recipes/:recipeId">
             <Recipe />
           </Route>
-          <Route exact path="/add_recipe">
+          <Route exact path="/add-recipe">
             <NewRecipe />
           </Route>
           <Route exact path={[
