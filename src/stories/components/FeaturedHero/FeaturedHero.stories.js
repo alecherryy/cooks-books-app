@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { FeaturedHero } from './FeaturedHero';
 import { Constrain } from '../../layouts/Constrain/Constrain';
+import { AuthProvider } from '../AuthProvider/AuthProvider';
 
 /**
  * Sample FeaturedHero component.
@@ -14,11 +15,13 @@ export default {
 
 const Template = (args) => {
   return (
-    <MemoryRouter>
-      <Constrain>
-        <FeaturedHero {...args} />
-      </Constrain>
-    </MemoryRouter>
+    <AuthProvider>
+      <MemoryRouter>
+        <Constrain>
+          <FeaturedHero {...args} />
+        </Constrain>
+      </MemoryRouter>
+    </AuthProvider>
   );
 };
 

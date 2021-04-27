@@ -3,7 +3,6 @@ import React from 'react';
 import { MemoryRouter } from 'react-router';
 import { AuthProvider } from '../AuthProvider/AuthProvider';
 import { Sidebar } from '../../layouts/Sidebar/Sidebar';
-import { AuthProvider } from '../AuthProvider/AuthProvider';
 import { AccountMenu } from './AccountMenu';
 
 /**

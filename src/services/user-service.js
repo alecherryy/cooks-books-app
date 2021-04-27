@@ -38,7 +38,7 @@ const getUserUpdates = (userId, setProfile) => {
 };
 
 /**
- * Delete user from
+ * Delete user from the database
  *
  * @param {string} userId id of the user
  * @return {number} code
@@ -51,7 +51,19 @@ const deleteUser = (userId) => {
   });
 };
 
+/**
+ * Find all users
+ *
+ * @return {number} code
+ */
+const findAllUsers = () => {
+  return ALL_USERS.get().then((snapshot) => {
+    return snapshot;
+  });
+};
+
 export const USERS = {
+  findAllUsers,
   findUser,
   updateUser,
   getUserUpdates,

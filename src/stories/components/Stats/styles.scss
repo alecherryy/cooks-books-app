@@ -1,0 +1,37 @@
+@import '../../../scss/variables.scss';
+
+// @file
+// Stats
+
+.stats {
+  margin: $spacing-8 0 $spacing-5;
+
+  @include bp-tablet {
+    margin: $spacing-10 0 $spacing-7;
+  }
+}
+
+.stats__item {
+  color: $gray-4;
+  font-size: $font-size-xs;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.stats__image {
+  display: inline-block;
+}
+
+.stats__num {
+  color: $black;
+  display: block;
+  font-size: rem(60px);
+  line-height: 1;
+  margin: $spacing-1 0 $spacing-2;
+
+  @include bp-tablet {
+    font-size: rem(72px);
+  }
+}

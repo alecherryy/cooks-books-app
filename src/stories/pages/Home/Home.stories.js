@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Home } from './Home';
 import { MemoryRouter } from 'react-router-dom';
+import { AuthProvider } from '../../components/AuthProvider/AuthProvider';
 
 /**
  * Example Component: Home
@@ -13,9 +14,11 @@ export default {
 
 const Template = (args) => {
   return (
-    <MemoryRouter>
-      <Home {...args} />
-    </MemoryRouter>
+    <AuthProvider>
+      <MemoryRouter>
+        <Home {...args} />
+      </MemoryRouter>
+    </AuthProvider>
   );
 };
 

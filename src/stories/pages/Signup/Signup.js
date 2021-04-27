@@ -1,6 +1,6 @@
 import '../../../scss/utility.scss';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Constrain } from '../../layouts/Constrain/Constrain';
@@ -11,6 +11,7 @@ import { Form } from '../../components/Form/Form';
 import { FormItem } from '../../components/FormItem/FormItem';
 import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import { USERS } from '../../../services/user-service';
+import { UTILS } from '../../../utils/utils';
 
 /**
  * Component for Signup page.
@@ -29,8 +30,16 @@ export const Signup = () => {
   const [userType, setUserType] = useState(null);
   // const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signup } = useContext(AuthContext);
+  const { signup, currentUser } = useContext(AuthContext);
   const history = useHistory();
+
+  useEffect(() => {
+    UTILS.scrollToTop();
+
+    if (currentUser) {
+      history.push('/account/information');
+    }
+  });
 
   const handleSignup = () => {
     // setError('');
@@ -45,7 +54,7 @@ export const Signup = () => {
       })
       .then(() => {
         setLoading(false);
-        history.push(`/`);
+        history.push(`/login`);
       })
       .catch((error) => {
         // setError(error);

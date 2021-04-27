@@ -108,9 +108,11 @@ $units: 10, 20, 30, 40, 50, 60, 70, 80;
 
 // pages
 .home,
+.add-recipe,
 .search,
 .login,
 .signup,
+.account,
 .recipe {
   @include fade-in-up();
 }
