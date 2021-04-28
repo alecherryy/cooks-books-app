@@ -63,13 +63,13 @@
   }
 
   &::before {
-    @include svg-background(icon-heart-empty);
+    @include svg-background(icon-heart-empty-white);
 
     opacity: 1;
   }
 
   &::after {
-    @include svg-background(icon-heart);
+    @include svg-background(icon-heart-white);
 
     opacity: 0;
     transform: scale(0);

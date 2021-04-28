@@ -16,13 +16,13 @@ import { USERS } from '../../../services/user-service';
  * )
  */
 export const FeaturedHero = () => {
-  const { user } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [url, setUrl] = useState('login');
 
   useEffect(() => {
-    if (user) {
-      USERS.findUser(user.uid)
-        .then((doc) => {
+    if (currentUser) {
+      USERS.findUser(currentUser.uid)
+        .then((response) => {
           const isChef = response.data().userType === 'Chef';
 
           if (isChef) {
@@ -35,7 +35,7 @@ export const FeaturedHero = () => {
           // setError(error);
         });
     }
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className="featured-hero">
